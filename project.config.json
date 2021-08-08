@@ -13,7 +13,7 @@
     "minified": true,
     "newFeature": false,
     "coverView": true,
-    "nodeModules": false,
+    "nodeModules": true,
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
@@ -34,11 +34,15 @@
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./"
+      }
+    ],
     "minifyWXSS": true
   },
-  "compileType": "miniprogram",
   "libVersion": "2.16.1",
   "appid": "wx3fd36bdfc8021cf3",
   "projectname": "%E6%A0%A1%E5%9B%AD%E6%89%93%E5%8D%A1%E9%A9%BF%E7%AB%99demo",
