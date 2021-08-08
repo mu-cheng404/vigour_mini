@@ -1,0 +1,29 @@
+<view class="page">
+  <view class="punchCategoryArray">
+    <block wx:for="{{punchCategoryArray}}" wx:for-index="idx" wx:for-item="categoryItem" wx:key="id">
+      <view id="{{categoryItem.categoryText}}" class="categoryBox" bindtap="_handerTap">
+        <view class="box_image">
+          <image src="{{categoryItem.pictureSrc}}"></image>
+        </view>
+        <view class="categoryText">{{categoryItem.categoryText}}</view>
+      </view>
+    </block>
+    <view class="categoryBox" bindtap="_handlerMore">
+        <view class="box_image">
+          <image src="{{imageURL}}more.png"></image>
+        </view>
+        <view class="categoryText">更多打卡</view>
+      </view>
+  </view>
+  <view class="supervise_interact">
+    <view class="text1">我监督的</view>
+    <view class="text2">不显示私密小组打卡记录</view>
+    <view class="superviseIcons" >
+      <image src="{{imageURL}}user.png" bindtap="_hander_superviseList"></image>
+      <image src="{{imageURL}}share.png" bindtap="onShareAppMessage"></image>
+      <image src="{{imageURL}}fangda.png" bindtap="_handlerSearch"></image>
+    </view>
+  </view>
+  <view class="textDisplay">暂时没有监督任何人哦~</view>
+
+</view>

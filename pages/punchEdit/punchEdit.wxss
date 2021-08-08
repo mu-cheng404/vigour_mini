@@ -1,0 +1,179 @@
+.page {
+    width: 100%;
+    height: 100vh;
+}
+
+.punchTips {
+    width: 690rpx;
+    height: 50rpx;
+    /* background-color: turquoise; */
+    margin: 30rpx;
+    color: red;
+    font-size: 30rpx;
+    line-height: 50rpx;
+}
+
+.punchDayNumber {
+    width: 690rpx;
+    height: 80rpx;
+    /* background-color: rgb(55, 167, 155); */
+    margin: 30rpx;
+    display: flex;
+    align-items: center;
+}
+
+.punchDayNumber image {
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 20rpx;
+}
+
+.punchDayNumber text {
+    height: 60rpx;
+    font-size: 35rpx;
+    line-height: 60rpx;
+}
+
+.type {
+    height: 40rpx;
+    padding: 5rpx;
+    font-size: 30rpx;
+    line-height: 40rpx;
+    background-color: rgb(171, 245, 202);
+    border-radius: 10rpx;
+    margin-left: 20rpx;
+    color: white;
+}
+
+.punchTitle {
+    width: 690rpx;
+    height: 120rpx;
+    /* background-color: rgb(93, 194, 184); */
+    margin: 30rpx;
+    font-size: 45rpx;
+    border-top: 1px solid white;
+    border-bottom: 1px solid rgb(171, 245, 202);
+    position: relative;
+    display: flex;
+}
+
+.punchTitle text {
+    position: absolute;
+    right: 0rpx;
+    font-size: 45rpx;
+    line-height: 120rpx;
+    color: rgb(206, 211, 216);
+}
+
+.punchTitle input {
+    width: 600rpx;
+    height: 70rpx;
+    margin-top: 25rpx;
+}
+
+.punchContent {
+    width: 690rpx;
+    line-height: 120rpx;
+    height: 300rpx;
+    /* background-color: rgb(178, 228, 223); */
+    margin: 30rpx;
+}
+
+.punchContent textarea {
+    font-size: 40rpx;
+    line-height: 20rpx;
+}
+
+.punchAccessory {
+    width: 690rpx;
+    height: 180rpx;
+    /* background-color: antiquewhite; */
+    margin: 30rpx;
+    display: flex;
+    align-items: center;
+}
+
+.Accessory_image {
+    width: 140rpx;
+    height: 140rpx;
+    margin-right: 15rpx;
+    border: 1rpx solid rgb(146, 140, 140);
+    border-radius: 20rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1rpx 1rpx 1rpx rgb(211, 201, 201);
+}
+
+.punchAccessory image {
+    height: 70rpx;
+}
+
+.punchLocation,
+.punchViewPermission {
+    width: 690rpx;
+    height: 100rpx;
+    /* background-color: antiquewhite; */
+    margin: 30rpx;
+    border: 1rpx solid white;
+    display: flex;
+    line-height: 100rpx;
+    color: rgb(146, 140, 140);
+    position: relative;
+}
+
+.punchLocation text,
+.punchViewPermission text {
+    position: absolute;
+    right: 0rpx;
+}
+
+.Location_image,
+.permission_image {
+    width: 70rpx;
+    height: 100rpx;
+    /* background-color: aqua; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.Location_image image,
+.permission_image image {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.punchButton button {
+    color: white;
+    background-color: rgb(171, 245, 202);
+    width: 500rpx;
+    margin-bottom: 30rpx;
+}
+
+.selectPShow {
+    display: flex;
+}
+.pShow {
+    width: 140rpx;
+    height: 140rpx;
+    margin-left: 30rpx;
+    background-color: khaki;
+    border-radius: 10rpx;
+    position:relative;
+}
+#deleteIcon{
+    
+    width: 50rpx;
+    height: 50rpx;
+    position: absolute;
+    right: 2rpx;
+    top: 5rpx;
+    z-index: 99;
+}
+.pShow image {
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 10rpx;
+
+}

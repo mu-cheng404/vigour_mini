@@ -1,0 +1,65 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "main",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "我的",
+          "pathName": "pages/personalCenter/personalCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "打卡",
+          "pathName": "pages/punchCard/punchCard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "punchEdit",
+          "pathName": "pages/punchEdit/punchEdit",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/punchEdit/punchEdit",
+          "pathName": "pages/punchCard/punchCard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "监督列表",
+          "pathName": "pages/superviseList/suoerviseList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "打卡记录",
+          "pathName": "pages/record/record",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "basicsDisplay",
+          "pathName": "pages/basicsDisplay/basicsDisplay",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

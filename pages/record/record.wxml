@@ -1,0 +1,24 @@
+<!--pages/record/record.wxml-->
+
+<view class="tip">
+  <image class="sun" src="/images/sun.png" style="width:128rpx;height:128rpx;"></image>
+  <view class="line"></view>
+  <view class="l">
+    已完成的打卡
+  </view>
+</view>
+<block wx:for="{{punchMessageArrays}}" wx:for-index="idx" wx:for-item="punchItem" wx:key="id">
+  <view class="punchBoxDisplay">
+    <view class="avator"><image src="{{punchItem.avatorSrc}}"></image></view>
+    <view class="rightOption">
+      <view class="nickName">{{punchItem.nickName}} <text>-{{punchItem.category}}</text></view>
+      <view class="date">
+        <view class="date-year">{{punchItem.date_year}}</view>
+        <view class="date-month">{{punchItem.date_month}}</view>
+        
+      </view>
+      <view class="content"><text class="content" rendonly>{{punchItem.textContent}}</text></view>
+    </view>
+  </view>
+</block>
+<view class="footer">已经到底了~</view>

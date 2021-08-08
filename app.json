@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/homePage/homePage",
+    "pages/personalCenter/personalCenter",
+    "pages/punchCard/punchCard",
+    "pages/punchRecordDisplay/punchRecordDisplay",
+    "pages/basicsDisplay/basicsDisplay",
+    "pages/advise/advise",
+    "pages/punchEdit/punchEdit",
+    "pages/remarks/remarks",
+    "pages/superviseList/suoerviseList",
+    "pages/opinion/opinion",
+    "pages/record/record",
+    "pages/search/search",
+    "pages/moreSignIn/moreSignIn"
+
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "校园打卡驿站",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "list": [
+
+      {
+        "pagePath": "pages/homePage/homePage",
+        "text": "主页",
+        "iconPath": "image/home-page.png",
+        "selectedIconPath": "image/homepage-selected.png"
+      },
+      {
+        "pagePath": "pages/punchCard/punchCard",
+        "text": "打卡",
+        "iconPath": "image/punchCard.png",
+        "selectedIconPath": "image/punchCard-Selected.png"
+      },
+      {
+        "pagePath": "pages/personalCenter/personalCenter",
+        "text": "我的",
+        "iconPath": "image/personal.png",
+        "selectedIconPath": "image/personal-selected.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

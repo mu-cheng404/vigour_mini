@@ -1,0 +1,70 @@
+<view class="font">
+  <view class="basic">
+    <image src="/images/home-page.png" class="icon"></image>
+    基本资料
+  </view>
+</view>
+<view class="background">
+  <view class="first">
+    <view class="center">
+      头像
+    <image src="/images/avator.jpg" class="tx"></image>
+    </view>
+</view>
+
+
+<view class="two">
+    <view class="center">
+      昵称
+    <view class="right">
+      木木
+    </view>
+    </view>
+</view>
+
+<view class="two">
+  <view class="center">
+    id
+  <view class="right"> 
+    1234556
+  </view>
+  </view>
+</view>
+<view class="two">
+  <view class="center">
+    <view class="sex"> 
+    性别
+    <view class="right">
+      男
+    </view>
+  </view>
+</view>
+
+<view class="two">
+  <view class="center">
+    <view>
+      所在地区
+      <view class="right">
+      济南市
+      </view>
+    </view>
+  </view>
+</view>
+<view class="two">
+  <view class="center">
+    学历
+    <view class="right">
+      本科
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+</view>
+</view>
+
+

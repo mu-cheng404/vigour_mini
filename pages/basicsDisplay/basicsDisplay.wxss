@@ -1,0 +1,50 @@
+/* pages/basicsDisplay/basicsDisplay.wxss */
+.font{
+  color: #999;
+  height: 50rpx;
+  font-style: unset;
+}
+.icon{
+  height: 50rpx;
+  width: 50rpx;
+}
+.basic{
+  margin: 5px;
+  line-height: 80rpx;
+}
+.background{
+  background-color: whitesmoke;
+}
+.center{
+  line-height: 100rpx;
+  margin: 5px;
+}
+.first{
+  border-color: aqua;
+  height: 100rpx;
+  width: 325px;
+ 
+  background-color: white;
+  
+}
+.tx{
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 100%;
+  float: right;
+  
+}
+.right{
+  float: right;
+  color: dimgrey;
+}
+.two{
+  height: 100rpx;
+  background-color: white;
+}
+
+
+.sex{
+  height: 100rpx;
+}
+

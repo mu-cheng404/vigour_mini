@@ -1,0 +1,21 @@
+<view class="page">
+<view class="avator">
+  <image src="{{userInfo.avatarUrl}}" wx:if="{{hasUserInfo}}"></image>
+  <image src="{{imageURL}}add.png" wx:else="{{hasUserInfo}}"></image>
+</view>
+<view class="nickname" >
+  <image src="/images/point.png"></image>
+  <view wx:if="{{hasUserInfo}}"> {{userInfo.nickName}}</view>
+  <view wx:else="{{hasUserInfo}}" bindtap="_getUserProfile"> 点击登录</view>
+</view>
+
+<view class="punchRecord baseStyle" bindtap="_handler_punchRecord">
+  打卡记录
+</view>
+<view class="basics baseStyle" bindtap="_handler_basics">
+  基本资料
+</view>
+<view class="advise baseStyle" bindtap="_handler_advise">
+  意见反馈
+</view>
+</view>

@@ -1,0 +1,75 @@
+/* pages/opinion/opinion.wxss */
+.img{
+  width:150rpx;
+  height:150rpx;
+  position: absolute;
+  top: 45rpx;
+  left: 300rpx;
+}
+
+.txt{
+  color: #555555;
+  font-size: 32rpx;
+  position: absolute;
+  top: 190rpx;
+  left: 275rpx;
+  text-align: center;
+}
+
+.men{
+  color: #BBBBBB;
+  font-size: 30rpx;
+  position: absolute;
+  top: 245rpx;
+  left: 210rpx;
+ 
+}
+
+.line{
+  width: 500rpx;
+  height: 20rpx;
+  position: absolute;
+  top: 300rpx;
+  left: 125rpx;
+}
+
+.a{
+  font-size: 30rpx;
+  color: #555555;
+  margin-top: 20rpx;
+}
+
+
+
+.img1{
+  position: absolute;
+  top: 650rpx;
+  left: 250rpx;
+  width: 250rpx;
+  height: 250rpx;
+  margin-top: 50rpx;
+}
+
+.txt1{
+  position: absolute;
+  top: 910rpx;
+  left: 235rpx;
+  font-size: 24rpx;
+  color: #BBBBBB;
+  margin-top: 40rpx;
+}
+
+
+.tal-left{
+  position: absolute;
+  top: 1030rpx;
+  right: 142rpx;
+  color: #888;
+  font-size: 28rpx;
+}
+
+.area{
+  margin: 380rpx auto 0 auto;
+  width: 750rpx;
+  text-align: center;
+}
