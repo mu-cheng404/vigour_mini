@@ -1,6 +1,7 @@
 //imageURL:  cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/
 App({
-    
+  
+  
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */

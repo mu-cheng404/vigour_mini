@@ -24,7 +24,7 @@
     <block wx:else>
       <icon class=" iconfont icon-like1" bindtap="handleLike">{{attendance.praise}}</icon>
     </block>
-    <icon class=" iconfont icon-comment"></icon>
+    <icon class=" iconfont icon-comment" bindtap="handleComment"></icon>
     <icon class="iconfont icon-share"></icon>
   </view>
   <view class="part4">

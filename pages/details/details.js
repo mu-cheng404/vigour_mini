@@ -123,7 +123,7 @@ Page({
       DB.collection("like") //在like表中删除数据
         .where({
           _openid: "ohRLL5KG6AXpEKs-ptzsPSOBGpF4",
-          liked_id:data._id
+          liked_id: data._id
         })
         .remove({
           success: (res) => {
@@ -169,7 +169,12 @@ Page({
       })
 
   },
-
+  //点击评论图标跳转
+  handleComment:function(){
+    this.setData({
+      show:true
+    })
+  },
   //处理评论
   comment_input: function (evt) { //获取评论内容
     let value = evt.detail.value
@@ -230,8 +235,7 @@ Page({
   //下拉刷新
   onPullDownRefresh: function () {
     console.log("正在下拉刷新！")
-    // wx.showNavigationBarLoading() //在标题栏中显示加载
-
+    wx.showNavigationBarLoading() //在标题栏中显示加载
     // setTimeout(() => {
     //   _comment //通过被评论的id寻找
     //     .where({
@@ -252,7 +256,7 @@ Page({
     //     })
 
     // }, 2000)
-this.onLoad()
+    this.onLoad()
   },
   /**
    * 页面的初始数据
@@ -271,18 +275,18 @@ this.onLoad()
     //获取用户打卡信息
     _att.doc(att_id)
       .get(
-      //   {
-      //   success:(res)=>{
-      //     console.log(res)
-      //   },
-      //   fail:(res)=>{
-      //     console.log(res)
-      //   }
-      // }
+        //   {
+        //   success:(res)=>{
+        //     console.log(res)
+        //   },
+        //   fail:(res)=>{
+        //     console.log(res)
+        //   }
+        // }
       )
       .then((res) => {
         console.log("云端获取该用户打卡信息成功！", res.data)
-        
+
         this.setData({
           attendance: res.data,
         })
@@ -296,10 +300,25 @@ this.onLoad()
             this.setData({
               commentList: res.data
             })
-            for (var key in res.data) {
-              this.setData({
-                ['isLike_comment[' + key + ']']: false//////////////////////////////////////////
+            for (var i = 0;i< res.data.length;i++) {
+              var commentLike
+              var commentID = res.data[i]._id
+              _like
+              .where({
+                liked_id: commentID,
+                _openid: "ohRLL5KG6AXpEKs-ptzsPSOBGpF4"
               })
+              .get()
+              .then((res) => {
+                console.log("查询成功！",i)
+                commentLike = res?true:false
+                console.log("第"+i+"个评论",commentLike)
+                this.setData({
+                  ['isLike_comment[' + i + ']']: commentLike //////////////////////////////////////////
+                })
+              })
+              .catch(console.log(err))
+              console.log(i)
             }
             console.log("云端获取评论信息成功", this.data.commentList)
           })
@@ -326,7 +345,7 @@ this.onLoad()
   },
   onReachBottom: function () {
     console.log("正在上拉刷新！")
-    // wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.showNavigationBarLoading() //在标题栏中显示加载
 
     // setTimeout(() => {
     //   _comment
