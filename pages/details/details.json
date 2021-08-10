@@ -1,4 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"打卡详情"
+  "navigationBarTitleText":"打卡详情",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark" 
 }

@@ -29,23 +29,50 @@
   </view>
   <view class="part4">
     <view class="title">评论 {{attendance.comment}}</view>
-    <view class="comment">
-      <view class="comment_avatar">
-        <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/avatar28_4.jpg">
-        </image>
+    <block wx:for="{{commentList}}" wx:for-index="idx" wx:for-item="commentItem">
+      <view class="comment">
+        <view class="comment_part1">
+          <view class="comment_avatar">
+            <image src="{{commentItem.avatarUrl}}">
+            </image>
+          </view>
+          <view class="comment_nickName">
+            <view class="comment_nickname_upper">{{commentItem.nickName}}</view>
+            <view class="comment_nickname_lower">{{commentItem.time}}</view>
+          </view>
+          <view class="comment_like">
 
+            <block wx:if="{{isLike_comment[idx]}}">
+              <icon id="{{idx}}" class="iconfont icon-like" bindtap="handleLike_comment">{{commentItem.likeNum}}</icon>
+            </block>
+            <block wx:else>
+              <icon id="{{idx}}" class="iconfont icon-like1" bindtap="handleLike_comment">{{commentItem.likeNum}}</icon>
+            </block>
+
+            
+          </view>
+        </view>
+        <view class="comment_part2">
+          <view class="comment_content">{{commentItem.content}}</view>
+        </view>
       </view>
-      <view class="comment_nickName">
-        <view class="comment_nickname_upper">mumu</view>
-        <view class="comment_nickname_lower">2021</view>
-        <view class="comment_like"></view>
-        <view class="comment_content">真棒！</view>
-      </view>
-    </view>
+    </block>
     <view class="input">
-      <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/avator.jpg"></image>
-      <input type="text" placeholder="发表评论" placeholder-class="placeholder">sdasd</input>
+      <image src="{{attendance.avatarUrl}}"></image>
+      <input type="text" bindtap="showPopup" placeholder="发表评论" placeholder-class="placeholder"
+        disabled="true">sdasd</input>
     </view>
-    <view class="buttom"></view>
+    <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
+      <wux-cell-group title="请输入评论">
+        <wux-cell hover-class="none">
+          <wux-textarea showConfirmBar="false" autoHeight="true" hasCount rows="12" cursorSpacing="80"
+            placeholder="评论在此..." bind:change="comment_input" />
+        </wux-cell>
+      </wux-cell-group>
+      <van-button class="van-button_comment" size="small" type="primary" bindtap="commment_submit">评论</van-button>
+      <view round class="buttom"></view>
+    </van-popup>
+    <view round class="buttom"></view>
   </view>
+  <van-dialog id="van-dialog" />
 </view>

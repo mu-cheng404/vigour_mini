@@ -1,11 +1,17 @@
 // pages/test/test.js
 Page({
+  showPopup() {
+    this.setData({ show: true });
+  },
 
+  onClose() {
+    this.setData({ show: false });
+  },
   /**
    * 页面的初始数据
    */
   data: {
-
+    show: false,
   },
 
   /**

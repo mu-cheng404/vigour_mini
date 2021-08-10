@@ -1,5 +1,5 @@
 page{
-  background-color: rgb(247, 247, 247);
+  background-color: #EFEFEF;
 }
 @font-face {
   font-family: 'iconfont';
@@ -41,5 +41,6 @@ page{
   content: "\e61d";
 }
 
-
-
+.gBackColor{
+  background-color: #EFEFEF;
+}

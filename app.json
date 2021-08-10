@@ -1,5 +1,4 @@
 {
-  
   "pages": [
     "pages/homePage/homePage",
     "pages/personalCenter/personalCenter",
@@ -16,19 +15,17 @@
     "pages/moreSignIn/moreSignIn",
     "pages/test/test",
     "pages/details/details"
-
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "Vigour",
     "backgroundColor": "#eeeeee",
-    "backgroundTextStyle": "light",
-    "enablePullDownRefresh": false
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "list": [
-
       {
         "pagePath": "pages/homePage/homePage",
         "text": "主页",
@@ -50,9 +47,15 @@
     ]
   },
   "usingComponents": {
-    "van-button":"@vant/weapp/button",
-    "wux-inout":"wux-weapp/input"
+    "van-button": "@vant/weapp/button",
+    "van-popup": "@vant/weapp/popup",
+    "van-cell": "@vant/weapp/cell",
+    "van-dialog": "@vant/weapp/dialog",
+    "wux-input": "wux-weapp/input",
+    "wux-cell-group": "wux-weapp/cell-group",
+    "wux-cell": "wux-weapp/cell",
+    "wux-textarea": "wux-weapp/textarea"
   },
   "sitemapLocation": "sitemap.json"
- 
+  
 }
