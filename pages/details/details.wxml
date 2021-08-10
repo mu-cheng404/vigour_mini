@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="part1">
+    <view class="avatar">
+      <image src="{{attendance.avatarUrl}}"></image>
+    </view>
+    <view class="nickname">
+      <view class="nickname_upper">{{attendance.nickName}}</view>
+      <view class="nickname_lower">{{attendance.date}}</view>
+    </view>
+    <view class="put_attention">关注</view>
+  </view>
+  <view class="part2">
+    <text rendonly>{{attendance.content}}</text>
+    <block wx:for="{{attendance.pictures}}" wx:for-index="idx" wx:for-item="picItem" wx:key="id">
+      <view class="_block" id="{{idx}}">
+        <image src="{{picItem}}" class="_image" bindtap="preivewImage"></image>
+      </view>
+    </block>
+  </view>
+  <view class="part3">
+    <block wx:if="{{isLike}}">
+      <icon class="iconfont icon-like" bindtap="handleLike">{{attendance.praise}}</icon>
+    </block>
+    <block wx:else>
+      <icon class=" iconfont icon-like1" bindtap="handleLike">{{attendance.praise}}</icon>
+    </block>
+    <icon class=" iconfont icon-comment"></icon>
+    <icon class="iconfont icon-share"></icon>
+  </view>
+  <view class="part4">
+    <view class="title">评论 {{attendance.comment}}</view>
+    <view class="comment">
+      <view class="comment_avatar">
+        <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/avatar28_4.jpg">
+        </image>
+
+      </view>
+      <view class="comment_nickName">
+        <view class="comment_nickname_upper">mumu</view>
+        <view class="comment_nickname_lower">2021</view>
+        <view class="comment_like"></view>
+        <view class="comment_content">真棒！</view>
+      </view>
+    </view>
+    <view class="input">
+      <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/avator.jpg"></image>
+      <input type="text" placeholder="发表评论" placeholder-class="placeholder">sdasd</input>
+    </view>
+    <view class="buttom"></view>
+  </view>
+</view>

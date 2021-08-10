@@ -3,8 +3,8 @@
     <view class="punchTips">打卡要求：打卡文字至少20字</view>
     <view class="punchDayNumber">
       <image src="{{imageURL}}punchCard.png"></image>
-      
-      <text>{{year}}.{{month}}  打卡第1天</text>
+
+      <text>{{year}}.{{month}} 打卡第1天</text>
       <view class="type">{{type}}</view>
     </view>
     <!-- <view class="punchTitle">
@@ -12,16 +12,22 @@
       <text>20</text>
     </view> -->
     <view class="punchSubtitle"></view>
-    <view class="punchContent">
-      <textarea name="content" id="" cols="30" rows="10" placeholder="请输入正文" auto-focus="true" bindinput="_contentInput"></textarea>
-    </view>
+    <!-- <view class="punchContent">
+      <textarea name="content" id="" cols="30" rows="10" placeholder="请输入正文" auto-focus="true"
+        bindinput="_contentInput"></textarea>
+    </view> -->
+    <wux-cell-group title="">
+      <wux-cell hover-class="none">
+        <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="请输入正文" bindinput="_contentInput"/>
+      </wux-cell>
+    </wux-cell-group>
     {{hint}}
     <view class="selectPShow">
       <!-- <video src="{{videoSrc}}"></video> -->
       <block wx:for="{{pictures}}" wx:for-item="sItem" wx:for-index="idx" wx:key="id">
-        <view id = "{{idx}}" class="pShow" >
-          <image src="{{sItem}}" alt="" class="" bindtap="preivewImage"/>
-          <image id = "deleteIcon"src = "{{imageURL}}delete.png" bindtap="deleteImage"></image>
+        <view id="{{idx}}" class="pShow">
+          <image src="{{sItem}}" alt="" class="" bindtap="preivewImage" />
+          <image id="deleteIcon" src="{{imageURL}}delete.png" bindtap="deleteImage"></image>
         </view>
       </block>
     </view>
@@ -30,14 +36,15 @@
         <image class="" src="{{imageURL}}shipin.png" mode="aspectFit" lazy-load="false" binderror="" bindload="" bindtap="_selectVideo"/>
       </view> -->
       <view class="Accessory_image">
-        <image class="" src="{{imageURL}}tupian.png" mode="aspectFit" lazy-load="false" binderror="" bindload="" bindtap="_selectImage"/>
+        <image class="" src="{{imageURL}}tupian.png" mode="aspectFit" lazy-load="false" binderror="" bindload=""
+          bindtap="_selectImage" />
       </view>
       <!-- <view class="Accessory_image">
         <image class="" src="{{imageURL}}yuyin.png" mode="aspectFit" lazy-load="false" binderror="" bindload="" bindtap="_selectVideo"/>
       </view> -->
-      
+
     </view>
-    
+
     <view class="punchLocation" bindtap="_chooseLocation">
       <view class="Location_image">
         <image src="{{imageURL}}location.png" mode="aspectFit"></image>
@@ -52,7 +59,7 @@
     </view>
     <view class="punchButton">
       <button form-type="submit">发表</button>
-      
+
     </view>
   </form>
 </view>

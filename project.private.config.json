@@ -65,6 +65,18 @@
           "pathName": "pages/test/test",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "主页",
+          "pathName": "pages/homePage/homePage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "详情",
+          "pathName": "pages/details/details",
+          "query": "",
+          "scene": null
         }
       ]
     }

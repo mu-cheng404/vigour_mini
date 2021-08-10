@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-cell-group": "../../miniprogram_npm/wux-weapp/cell-group",
+    "wux-cell": "../../miniprogram_npm/wux-weapp/cell",
+    "wux-textarea": "../../miniprogram_npm/wux-weapp/textarea"
+  }
 }

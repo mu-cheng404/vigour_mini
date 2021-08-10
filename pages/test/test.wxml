@@ -1,1 +1,6 @@
-<van-button type = "primary">按钮</van-button>
+<van-button type="primary">按钮</van-button>
+<wux-cell-group title="">
+  <wux-cell hover-class="none">
+    <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="请输入正文" />
+  </wux-cell>
+</wux-cell-group>
