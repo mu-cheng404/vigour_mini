@@ -54,7 +54,17 @@
     "wux-input": "wux-weapp/input",
     "wux-cell-group": "wux-weapp/cell-group",
     "wux-cell": "wux-weapp/cell",
-    "wux-textarea": "wux-weapp/textarea"
+    "wux-textarea": "wux-weapp/textarea",
+
+    "i-drawer": "dist/drawer/index",
+    "i-icon": "dist/icon/index",
+    "i-cell-group": "dist/cell-group/index",
+    "i-cell": "dist/cell/index",
+    "i-card": "dist/card/index"
+
+
+
+
   },
   "sitemapLocation": "sitemap.json"
   

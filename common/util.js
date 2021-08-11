@@ -14,7 +14,27 @@ function formatDate(inputTime) {
   return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
    
  };
+ function unLoadWarn(){
+  console.log("调用unLoadWarn成功！")
+ var temp = wx.getStorageSync("userBaseInfo")
+ if(!temp){
+   wx.showModal({
+     content:"您还未登录哦，是否前往登录？",
+     cancelColor: '#EFEFEF',
+     success(res){
+       if(res.confirm){
+         wx.navigateTo({
+           url: 'pages/personalCenter/personalCenter',
+         })
+       }
+     },
+   })
+ }
+};
  // 导出
  module.exports = {
-  formatDate: formatDate
+  formatDate: formatDate,
+  unLoadWarn:unLoadWarn
  }
+
+ 

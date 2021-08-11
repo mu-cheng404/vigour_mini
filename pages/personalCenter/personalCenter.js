@@ -1,8 +1,16 @@
-const DB = wx.cloud.database().collection("user")
-
+const DB = wx.cloud.database()
+const _user = DB.collection("user")
+const util = require('../../common/util.js')
+const _att = DB.collection("attendance")
 Page({
-  _getUserProfile(){
-    
+  //遮罩层
+  toggleLeft1: function () {
+    this.setData({
+      showLeft1: !this.data.showLeft1
+    });
+  },
+  //获取用户信息
+  _getUserProfile() {
     var _this = this
     //获取用户基本信息
     wx.getUserProfile({
@@ -14,14 +22,14 @@ Page({
           hasUserInfo: true
         })
         //存入缓存
-        try{
+        try {
           wx.setStorageSync('userBaseInfo', this.data.userInfo)
-        }catch(e){
+        } catch (e) {
           console.log(e)
         }
         //数据传入服务器中
-        DB.add({
-          data:{
+        _user.add({
+          data: {
             nickName: this.data.userInfo.nickName,
             avatarUrl: this.data.userInfo.avatarUrl,
             gender: this.data.userInfo.gender,
@@ -30,21 +38,18 @@ Page({
             city: this.data.userInfo.city,
             language: this.data.userInfo.language,
           },
-          success(res){
+          success(res) {
             console.log("success add!", res)
           },
-          fail(res){
+          fail(res) {
             console.log("fail add!", res)
           }
         })
       },
-      fail(res){
+      fail(res) {
         console.log("fail to get userInfo", res)
       }
     })
-    
-    
-    
   },
   //跳转->打卡记录页面
   _handler_punchRecord: function () {
@@ -69,9 +74,11 @@ Page({
    */
   data: {
     imageURL: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/",
-    userCode: '',//用户唯一标识符
-    userInfo: '',//用户个人信息
-    hasUserInfo: false //是否登录
+    userCode: '', //用户唯一标识符
+    userInfo: '', //用户个人信息
+    hasUserInfo: false, //是否登录
+    showLeft1: false,
+    att_list: [],
   },
 
   /**
@@ -81,7 +88,7 @@ Page({
     //读取缓存中的基本信息
     try {
       var info = wx.getStorageSync('userBaseInfo')
-      if (info) {//若存在，则复制给data
+      if (info) { //若存在，则复制给data
         // Do something with return value
         this.setData({
           userInfo: info,
@@ -91,8 +98,22 @@ Page({
     } catch (e) {
       // Do something when catch error
     }
-    
-   
+    //获取改用户的所有打卡信息
+
+    util.unLoadWarn()//全局提醒用户登录
+
+    _att
+    .where({
+      _openid: "ohRLL5KG6AXpEKs-ptzsPSOBGpF4"
+    })
+    .get()
+    .then((res)=>{
+      console.log("获取本用户打卡数据成功！",res.data)
+      this.setData({
+        att_list:res.data
+      })
+
+    })
   },
 
   /**
