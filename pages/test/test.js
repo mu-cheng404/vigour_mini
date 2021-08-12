@@ -1,5 +1,10 @@
 // pages/test/test.js
 Page({
+  _handleQR:function(){
+    wx.cloud.callFunction({
+      name: "normalQr"
+    }).then(console.log)
+  },
   showPopup() {
     this.setData({ show: true });
   },

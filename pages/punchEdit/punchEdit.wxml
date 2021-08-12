@@ -18,7 +18,7 @@
     </view> -->
     <wux-cell-group title="">
       <wux-cell hover-class="none">
-        <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="请输入正文" bindinput="_contentInput"/>
+        <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="请输入正文" bind:change="_contentInput" />
       </wux-cell>
     </wux-cell-group>
     {{hint}}
@@ -59,7 +59,6 @@
     </view>
     <view class="punchButton">
       <button form-type="submit">发表</button>
-
     </view>
   </form>
 </view>

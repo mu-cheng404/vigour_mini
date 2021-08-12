@@ -6,6 +6,7 @@ var video = '' //音频
 var content = '' //内容
 var location = '' //地点
 var praise = 0 //点赞数
+var userInfo//个人信息
 const DB = wx.cloud.database().collection("attendance")
 Page({
   //读取正文内容
@@ -23,7 +24,7 @@ Page({
             location: location
           })
         console.log("get location successfully!", res.name)
-        console.log
+        
       },
       fail(res) {
         console.log("get location unsuccessfully!", res)
@@ -160,10 +161,17 @@ Page({
             video: video,
             content: content,
             location: location,
-            praise: praise
+            praise: praise,
+            nickName: userInfo.nickName,
+            avatarUrl: userInfo.avatarUrl,
+            comment: 0,
+
           },
           success(res) {
             console.log("数据库添加成功!", res)
+            wx.switchTab({
+              url: '../homePage/homePage',
+            })
           },
           fail(res) {
             console.log("数据库添加失败!", res)
@@ -213,6 +221,9 @@ Page({
     topic = options.type
     console.log(options.type)
 
+    //从缓存中拿到个人信息
+    userInfo = wx.getStorageSync('userBaseInfo')
+    console.log("成功拿到个人信息！",userInfo)
   },
 
   /**

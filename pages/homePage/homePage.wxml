@@ -1,45 +1,51 @@
 <view class="page">
   <swiper class="swip" indicator-color="black" autoplay="true" interval="2000" circular="true">
     <swiper-item>
-      <image src="{{imageURL}}swipper28_1.jpg">
+      <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_1.jpg">
       </image>
     </swiper-item>
     <swiper-item>
-      <image src="{{imageURL}}swipper28_2.jpg">
+      <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_2.jpg">
       </image>
     </swiper-item>
     <swiper-item>
-      <image src="{{imageURL}}swipper28_3.jpg">
+      <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_3.jpg">
       </image>
     </swiper-item>
   </swiper>
-  <view class="hander_punch" bindtap="_handlerPunch">
-    <image src="{{imageURL}}add.png"></image>
+  <view class="hander_punch c_center" bindtap="_handlerPunch">
+    <i-icon type="add" size="50" />
   </view>
+
   <block wx:for="{{punchMessageArrays}}" wx:for-index="idx" wx:for-item="punchItem" wx:key="id">
-    <navigator url="../details/details">
+    <navigator url="../details/details?att_id={{punchItem._id}}">
       <view class="punchBoxDisplay">
         <view class="avator">
-          <image src="{{punchItem.avatorSrc}}"></image>
+          <image src="{{punchItem.avatarUrl}}"></image>
         </view>
         <view class="rightOption">
-          <view class="nickName">{{punchItem.nickName}} <image id="{{idx}}"
-              src="{{punchItem.isLike ? '{{imageURL}}like_selected.png':'{{imageURL}}like.png'}}"
-              bindtap="_handlerLike"></image>
+          <view class="nickName">{{punchItem.nickName}}
+            <view class="c_pos_right">
+              <i-icon size="25" type="{{punchItem.isLike? 'like':'like_fill'}}"></i-icon>
+              {{punchItem.praise}}
+            </view>
           </view>
-          <view class="date">
-            <view class="date-year">{{punchItem.date_year}}</view>
-            <view class="date-month">{{punchItem.date_month}}</view>
-            <view class="type">{{punchItem.type}}</view>
+          <view>
+            <view class="time">{{datearrays[idx]}}</view>
+            <view class="type">{{punchItem.topic}}</view>
           </view>
-          <!-- <text class="title" rendonly>{{punchItem.title}}\n</text> -->
-          <text class="content" rendonly>{{punchItem.textContent}}</text>
-          <view class="{{punchItem.pictureSrc?'accessImage':'accessImageNone'}}">
-            <image src="{{punchItem.pictureSrc}}" mode="aspectFill"></image>
+
+          <text class="content">{{punchItem.content}}</text>
+          <view class="accessImage">
+            <image src="{{punchItem.pictures}}"></image>
           </view>
-          <view class="comment" bindtap="_handleTap">0 评论 ></view>
+
+          <view class="comment" bindtap="_handleTap">{{punchItem.comment}} 评论 ></view>
         </view>
       </view>
     </navigator>
+
   </block>
+
+
 </view>

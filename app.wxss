@@ -53,3 +53,8 @@ page {
 .border_rad_20{ border-radius:20rpx}
 .border_rad_30{ border-radius:30rpx}
 .border_rad_40{ border-radius:40rpx}
+
+.c_center{display: flex;align-items: center;justify-items: center;}
+
+.c_pos_right{position: absolute;right: 0rpx;}
+.c_pos_left{position: absolute;left: 0rpx;}

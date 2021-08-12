@@ -5,7 +5,6 @@ const _ = DB.command
 const _att = DB.collection("attendance")
 const _like = DB.collection("like")
 const _comment = DB.collection("comment")
-var att_id = ""
 var comment = {
   avatarUrl: "",
   commented_id: "",
@@ -14,7 +13,9 @@ var comment = {
   nickName: "",
   time: "",
 }
-
+var att_id = "" //打卡条id
+var cur_openid //现在打卡条所属的openid
+var openid //当前用户的openid
 // pages/details/details.js
 Page({
   //处理弹出框
@@ -59,7 +60,7 @@ Page({
       console.log("取消点赞成功！", data.praise)
       DB.collection("like") //在like表中删除数据
         .where({
-          _openid: "ohRLL5KG6AXpEKs-ptzsPSOBGpF4",
+          _openid: openid,
           liked_id: att_id
         })
         .remove({
@@ -93,7 +94,7 @@ Page({
     var like = this.data.isLike
     DB.collection("attendance") //打卡信息表中点赞数修改
       .where({
-        _openid: "ohRLL5KG6AXpEKs-ptzsPSOBGpF4"
+        _openid: cur_openid
       })
       .update({
         data: {
@@ -122,7 +123,7 @@ Page({
       console.log("取消评论点赞成功！", data.praise)
       DB.collection("like") //在like表中删除数据
         .where({
-          _openid: "ohRLL5KG6AXpEKs-ptzsPSOBGpF4",
+          _openid: openid,
           liked_id: data._id
         })
         .remove({
@@ -170,9 +171,9 @@ Page({
 
   },
   //点击评论图标跳转
-  handleComment:function(){
+  handleComment: function () {
     this.setData({
-      show:true
+      show: true
     })
   },
   //处理评论
@@ -269,8 +270,13 @@ Page({
     commentList: []
   },
   onLoad: function (options) {
-    // _id = options.id
-    att_id = "8937eaa9610d11a902d4ce562d6ba8f1"
+    //获得跳转而来的打卡条id
+    if (wx.getStorageSync('temp_att_id')) {
+      att_id = wx.getStorageSync('temp_att_id')
+    } else {
+      att_id = options.att_id 
+      wx.setStorageSync('temp_att_id', options.att_id)
+    }
 
     //获取用户打卡信息
     _att.doc(att_id)
@@ -286,7 +292,7 @@ Page({
       )
       .then((res) => {
         console.log("云端获取该用户打卡信息成功！", res.data)
-
+        cur_openid = res.data._openid //获取本打卡条主人的openid
         this.setData({
           attendance: res.data,
         })
@@ -300,27 +306,37 @@ Page({
             this.setData({
               commentList: res.data
             })
-            for (var i = 0;i< res.data.length;i++) {
+            for (var i = 0; i < res.data.length; i++) {
               var commentLike
               var commentID = res.data[i]._id
               _like
-              .where({
-                liked_id: commentID,
-                _openid: "ohRLL5KG6AXpEKs-ptzsPSOBGpF4"
-              })
-              .get()
-              .then((res) => {
-                console.log("查询成功！",i)
-                commentLike = res?true:false
-                console.log("第"+i+"个评论",commentLike)
-                this.setData({
-                  ['isLike_comment[' + i + ']']: commentLike //////////////////////////////////////////
+                .where({
+                  liked_id: commentID,
+                  _openid: cur_openid
                 })
-              })
-              .catch(console.log(err))
+                .get()
+                .then((res) => {
+                  console.log("查询成功！", i)
+                  commentLike = res ? true : false
+                  console.log("第" + i + "个评论", commentLike)
+                  this.setData({
+                    ['isLike_comment[' + i + ']']: commentLike //////////////////////////////////////////
+                  })
+                })
+                .catch(console.log(err))
               console.log(i)
             }
             console.log("云端获取评论信息成功", this.data.commentList)
+
+            wx.cloud.callFunction({
+                name: "getOpenID"
+              })
+              .then((res) => {
+                console.log("成功执行openid云函数获取openid", res.result.openid)
+                openid = res.result.openid
+              })
+
+
           })
           .catch((error) => {
             console.log("云端获取评论信息失败", error)
@@ -338,10 +354,10 @@ Page({
 
   },
   onHide: function () {
-
   },
   onUnload: function () {
-
+    console.log("成功清除缓存！")
+    wx.removeStorageSync('temp_att_id')
   },
   onReachBottom: function () {
     console.log("正在上拉刷新！")

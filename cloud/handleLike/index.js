@@ -2,12 +2,12 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init()
+const DB = wx.cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
   console.log("123123213123123")
   const wxContext = cloud.getWXContext()
-  const DB = wx.cloud.database()
   const _ = DB.command
   var openid = wxContext.OPENID //用户openid
   var id = "123123" //被点赞的id

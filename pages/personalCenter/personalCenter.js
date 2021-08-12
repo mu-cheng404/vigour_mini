@@ -1,7 +1,8 @@
 const DB = wx.cloud.database()
 const _user = DB.collection("user")
-const util = require('../../common/util.js')
+const util = require('../../common/util.js')
 const _att = DB.collection("attendance")
+var openID //用户openid
 Page({
   //遮罩层
   toggleLeft1: function () {
@@ -85,35 +86,49 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //读取缓存中的基本信息
-    try {
-      var info = wx.getStorageSync('userBaseInfo')
-      if (info) { //若存在，则复制给data
-        // Do something with return value
-        this.setData({
-          userInfo: info,
-          hasUserInfo: true
-        })
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
-    //获取改用户的所有打卡信息
-
-    util.unLoadWarn()//全局提醒用户登录
-
-    _att
-    .where({
-      _openid: "ohRLL5KG6AXpEKs-ptzsPSOBGpF4"
-    })
-    .get()
-    .then((res)=>{
-      console.log("获取本用户打卡数据成功！",res.data)
-      this.setData({
-        att_list:res.data
+    //云函数获取openid
+    wx.cloud.callFunction({
+        name: "getOpenID"
       })
+      .then((res) => {
+        console.log("成功执行openid云函数获取openid", res.result.openid)
+        openID = res.result.openid
 
-    })
+        //读取缓存中的基本信息
+        try {
+          var info = wx.getStorageSync('userBaseInfo')
+          if (info) { //若存在，则复制给data
+            // Do something with return value
+            this.setData({
+              userInfo: info,
+              hasUserInfo: true
+            })
+          }
+        } catch (e) {
+          // Do something when catch error
+        }
+        //获取改用户的所有打卡信息
+
+        util.unLoadWarn() //全局提醒用户登录
+
+        _att
+          .where({
+            _openid: openID
+          })
+          .get()
+          .then((res) => {
+            console.log("获取本用户打卡数据成功！", res.data)
+            this.setData({
+              att_list: res.data
+            })
+
+          })
+
+      })
+      .catch(console.error)
+
+
+
   },
 
   /**

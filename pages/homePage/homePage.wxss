@@ -18,9 +18,10 @@
 .hander_punch {
   width: 150rpx;
   height: 150rpx;
-  border-radius: 60%;
+  border-radius: 50rpx;
   background-color: #abf5ca;
   text-align: center;
+
   margin: 30rpx;
   position: fixed;
   right: 0rpx;
@@ -100,13 +101,16 @@
 
 .type {
   height: 40rpx;
+  width: 80rpx;
   padding: 5rpx;
   font-size: 30rpx;
   line-height: 40rpx;
-  background-color: rgb(171, 245, 202);
+  background-color: rgb(36, 185, 190);
   border-radius: 10rpx;
-  margin-left: 20rpx;
-  color: white;
+  color: rgba(43, 39, 39, 0.925);
+}
+.time{
+  font-size: small;
 }
 .date {
   width: 300rpx;
@@ -170,3 +174,4 @@
 .accessImageNone{
   display: none;
 }
+
