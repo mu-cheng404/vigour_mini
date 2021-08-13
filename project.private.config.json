@@ -77,6 +77,12 @@
           "pathName": "pages/details/details",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "管理员",
+          "pathName": "pages/administrator/administrator",
+          "query": "",
+          "scene": null
         }
       ]
     }

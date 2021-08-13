@@ -14,7 +14,8 @@
     "pages/search/search",
     "pages/moreSignIn/moreSignIn",
     "pages/test/test",
-    "pages/details/details"
+    "pages/details/details",
+    "pages/administrator/administrator"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -51,10 +52,6 @@
     "van-popup": "@vant/weapp/popup",
     "van-cell": "@vant/weapp/cell",
     "van-dialog": "@vant/weapp/dialog",
-    "wux-input": "wux-weapp/wux-weapp/input",
-    "wux-cell-group": "wux-weapp/wux-weapp/cell-group",
-    "wux-cell": "wux-weapp/wux-weapp/cell",
-    "wux-textarea": "wux-weapp/wux-weapp/textarea",
 
     "i-drawer": "dist/drawer/index",
     "i-icon": "dist/icon/index",

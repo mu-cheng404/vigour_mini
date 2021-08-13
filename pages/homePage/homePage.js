@@ -55,11 +55,11 @@ Page({
       this.setData({
         punchMessageArrays: res.data.reverse()
       })
-      for (var i = 0; i < res.data.length; i++) {
-        this.setData({
-          ["datearrays[" + i + "]"]: res.data[i].date.toLocaleDateString() + res.data[i].date.toLocaleTimeString()
-        })
-      }
+      // for (var i = 0; i < res.data.length; i++) {
+      //   this.setData({
+      //     ["datearrays[" + i + "]"]: res.data[i].date.toLocaleDateString().concat(res.data[i].date.toLocaleTimeString())
+      //   })
+      // }
     })
 
 

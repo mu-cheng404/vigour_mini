@@ -202,21 +202,21 @@ Page({
    */
   onLoad: function (options) {
     //获取时间
-    date = new Date();
-    var Y = date.getFullYear(); //年
-    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1); //月
-    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(); //日
+    date = new Date().toLocaleDateString().concat(new Date().toLocaleTimeString());
+    // var Y = date.getFullYear(); //年
+    // var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1); //月
+    // var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(); //日
     //时
     // var h = date.getHours();
     // //分
     // var m = date.getMinutes();
     // //秒
     // var s = date.getSeconds();
-    this.setData({
-      'year': Y,
-      'month': M + '.' + D,
-      type: options.type
-    })
+    // this.setData({
+    //   'year': Y,
+    //   'month': M + '.' + D,
+    //   type: options.type
+    // })
     //赋值类型
     topic = options.type
     console.log(options.type)

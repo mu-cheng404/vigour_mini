@@ -12,15 +12,15 @@
       <text>20</text>
     </view> -->
     <view class="punchSubtitle"></view>
-    <!-- <view class="punchContent">
+    <view class="punchContent">
       <textarea name="content" id="" cols="30" rows="10" placeholder="请输入正文" auto-focus="true"
         bindinput="_contentInput"></textarea>
-    </view> -->
-    <wux-cell-group title="">
+    </view>
+    <!-- <wux-cell-group title="">
       <wux-cell hover-class="none">
         <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="请输入正文" bind:change="_contentInput" />
       </wux-cell>
-    </wux-cell-group>
+    </wux-cell-group> -->
     {{hint}}
     <view class="selectPShow">
       <!-- <video src="{{videoSrc}}"></video> -->
