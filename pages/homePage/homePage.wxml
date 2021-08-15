@@ -1,15 +1,15 @@
 <view class="page">
   <swiper class="swip" indicator-color="black" autoplay="true" interval="2000" circular="true">
     <swiper-item>
-      <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_1.jpg">
+      <image bindtap="preivewImage" src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_1.jpg">
       </image>
     </swiper-item>
     <swiper-item>
-      <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_2.jpg">
+      <image bindtap="preivewImage" src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_2.jpg">
       </image>
     </swiper-item>
     <swiper-item>
-      <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_3.jpg">
+      <image bindtap="preivewImage"src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_3.jpg">
       </image>
     </swiper-item>
   </swiper>
@@ -37,7 +37,7 @@
 
           <text class="content">{{punchItem.content}}</text>
           <view class="accessImage">
-            <image src="{{punchItem.pictures}}"></image>
+            <image src="{{punchItem.pictures[0]}}"></image>
           </view>
 
           <view class="comment" bindtap="_handleTap">{{punchItem.comment}} 评论 ></view>

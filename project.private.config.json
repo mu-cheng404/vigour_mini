@@ -75,7 +75,7 @@
         {
           "name": "详情",
           "pathName": "pages/details/details",
-          "query": "",
+          "query": "att_id=\"2d44d6c26115d5f904d8e924596817c9\"",
           "scene": null
         },
         {

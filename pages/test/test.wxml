@@ -5,7 +5,9 @@
   </wux-cell>
 </wux-cell-group> -->
 
-<van-cell title="展示弹出层" is-link bind:click="showPopup" />
+<!-- <van-cell title="展示弹出层" is-link bind:click="showPopup" />
 
 <van-popup show="{{ show }}" bind:close="onClose" position = "bottom">内容</van-popup>
-<button bindtap="_handleQR"></button>
+<button bindtap="_handleQR"></button> -->
+
+<button type="primary" bindtap="testasync">测试async</button> 

@@ -40,15 +40,15 @@ Page({
             language: this.data.userInfo.language,
           },
           success(res) {
-            console.log("success add!", res)
+            console.log("成功获取用户信息并存入！", res)
           },
           fail(res) {
-            console.log("fail add!", res)
+            console.log("用户信息存入云端失败！", res)
           }
         })
       },
       fail(res) {
-        console.log("fail to get userInfo", res)
+        console.log("获取用户信息失败！", res)
       }
     })
   },
@@ -69,6 +69,20 @@ Page({
     wx.navigateTo({
       url: '../basicsDisplay/basicsDisplay',
     })
+  },
+  //获取该用户所有打卡信息
+  getAllAttInfo: function () {
+    _att //获取该用户所有打卡信息并展示
+      .where({
+        _openid: openID
+      })
+      .get()
+      .then((res) => {
+        console.log("获取本用户打卡数据成功！", res.data)
+        this.setData({
+          att_list: res.data
+        })
+      })
   },
   /**
    * 页面的初始数据
@@ -92,43 +106,33 @@ Page({
       })
       .then((res) => {
         console.log("成功执行openid云函数获取openid", res.result.openid)
-        openID = res.result.openid
+        openID = res.result.openid //获取openid
 
-        //读取缓存中的基本信息
-        try {
-          var info = wx.getStorageSync('userBaseInfo')
-          if (info) { //若存在，则复制给data
-            // Do something with return value
-            this.setData({
-              userInfo: info,
-              hasUserInfo: true
-            })
-          }
-        } catch (e) {
-          // Do something when catch error
-        }
-        //获取改用户的所有打卡信息
-
-        util.unLoadWarn() //全局提醒用户登录
-
-        _att
+        _user
           .where({
             _openid: openID
           })
           .get()
           .then((res) => {
-            console.log("获取本用户打卡数据成功！", res.data)
-            this.setData({
-              att_list: res.data
-            })
-
+            var isload = res.data.length //查询在云端是否有登录记录
+            if (isload) { //若登录过
+              console.log("经查询有该用户信息")
+              try {
+                wx.setStorageSync('userBaseInfo', res.data[0]) //信息存入缓存
+                this.setData({
+                  userInfo: res.data[0],
+                  hasUserInfo: true
+                })
+              } catch (e) {
+                console.log(e)
+              }
+              this.getAllAttInfo()
+            } else {
+              console.log("没有查到该用户信息，需提示登录")
+            }
           })
-
       })
       .catch(console.error)
-
-
-
   },
 
   /**

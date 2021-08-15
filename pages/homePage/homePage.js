@@ -21,6 +21,22 @@ Page({
     })
 
   },
+  // //对图片进行操作
+  // preivewImage: function (evt) {
+  //   console.log(evt.currentTarget.id)
+  //   var id = evt.currentTarget.id
+  //   wx.previewImage({
+  //     showmenu: true,
+  //     urls: pictures,
+  //     current: pictures[id],
+  //     success(res) {
+  //       console.log("预览成功！", res)
+  //     },
+  //     fail(res) {
+  //       console.log("预览失败！", res)
+  //     }
+  //   })
+  // },
   /**
    * 页面的初始数据
    */

@@ -58,17 +58,15 @@
       </view>
     </block>
     <view class="input">
-      <image src="{{attendance.avatarUrl}}"></image>
+      <image src="{{userInfo.avatarUrl}}"></image>
       <input type="text" bindtap="showPopup" placeholder="发表评论" placeholder-class="placeholder"
         disabled="true">sdasd</input>
     </view>
     <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
-      <wux-cell-group title="请输入评论">
-        <wux-cell hover-class="none">
-          <wux-textarea showConfirmBar="false" autoHeight="true" hasCount rows="12" cursorSpacing="80"
-            placeholder="评论在此..." bind:change="comment_input" />
-        </wux-cell>
-      </wux-cell-group>
+      <view class="punchContent">
+      <textarea name="content" id="" cols="30" rows="10" placeholder="请输入评论" auto-focus="true"
+        bindinput="comment_input"></textarea>
+    </view>
       <van-button class="van-button_comment" size="small" type="primary" bindtap="commment_submit">评论</van-button>
       <view round class="buttom"></view>
     </van-popup>

@@ -31,25 +31,25 @@ Page({
     data: {
         imageURL: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/",
         punchCategoryArray: [{
-            pictureSrc: "../../images/zaoqi.png",
+            pictureSrc: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/zaoqi.png",
             categoryText: "早起",
         }, {
-            pictureSrc: "../../images/xuexi.png",
+            pictureSrc: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/xuexi.png",
             categoryText: "学习",
         }, {
-            pictureSrc: "../../images/yundong.png",
+            pictureSrc: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/yundong.png",
             categoryText: "运动",
         }, {
-            pictureSrc: "../../images/dushu.png",
+            pictureSrc: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/dushu.png",
             categoryText: "读书",
         }, {
-            pictureSrc: "../../images/zaoshui.png",
+            pictureSrc: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/zaoshui.png",
             categoryText: "早睡",
         }, {
-            pictureSrc: "../../images/jiankang.png",
+            pictureSrc: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/jiankang.png",
             categoryText: "健康",
         }, {
-            pictureSrc: "../../images/heshui.png",
+            pictureSrc: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/heshui.png",
             categoryText: "喝水",
         }]
     },

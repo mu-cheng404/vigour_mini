@@ -14,8 +14,9 @@ var comment = {
   time: "",
 }
 var att_id = "" //打卡条id
-var cur_openid //现在打卡条所属的openid
+var cur_openid //现在打卡条所属用户的openid
 var openid //当前用户的openid
+var user //用户信息
 // pages/details/details.js
 Page({
   //处理弹出框
@@ -49,6 +50,7 @@ Page({
       }
     })
   },
+  
   //处理打卡条点赞
   handleLike: function () {
     var data = this.data.attendance
@@ -92,22 +94,18 @@ Page({
     }
 
     var like = this.data.isLike
-    DB.collection("attendance") //打卡信息表中点赞数修改
-      .where({
-        _openid: cur_openid
-      })
-      .update({
-        data: {
-          praise: _.inc(like ? 1 : -1)
-        },
-        success: (res) => {
-          console.log("praise修改成功！", res)
-        },
-        fail: (res) => {
-          console.log("praise修改失败！", res)
+    _att.doc(att_id).update({ //打卡信息表中点赞数修改
+      data: {
+        praise: _.inc(like ? 1 : -1)
+      },
+      success: (res) => {
+        console.log("praise修改成功！", att_id)
+      },
+      fail: (res) => {
+        console.log("praise修改失败！", res)
 
-        }
-      })
+      }
+    })
 
   },
   //处理评论点赞
@@ -187,7 +185,7 @@ Page({
     var timestamp = Date.parse(new Date())
     timestamp = timestamp / 1000
     var Time = util.formatDate((timestamp * 1000)) //转换时间格式
-    var user = wx.getStorageSync("userBaseInfo")
+
     var att = this.data.attendance
     comment.avatarUrl = user.avatarUrl
     comment.commented_id = att._id
@@ -219,13 +217,15 @@ Page({
           show: false,
           ['attendance' + '.' + 'comment']: this.data.attendance.comment + 1
         })
-        _att.doc(id)
+        _att.doc(att_id)
           .update({
             data: {
-              comment: DB.command.inc(1)
+              comment: _.inc(1)
             }
           })
-          .then(console.log)
+          .then((res) => {
+            console.log("该打卡条评论数量修改成功！")
+          })
           .catch(console.error)
       })
       .catch((res) => {
@@ -259,6 +259,17 @@ Page({
     // }, 2000)
     this.onLoad()
   },
+  queryisLike: function (openid, likedid) {
+    _like
+      .where({
+        _openid: openid,
+        liked_id: likedid
+      })
+      .get()
+      .then((res) => {
+        return res.data.length
+      })
+  },
   /**
    * 页面的初始数据
    */
@@ -267,81 +278,87 @@ Page({
     attendance: [],
     isLike: false,
     isLike_comment: [],
-    commentList: []
+    commentList: [],
+    userInfo: ""
   },
   onLoad: function (options) {
+
+    wx.cloud.callFunction({ //获取本用户openid
+        name: "getOpenID"
+      })
+      .then((res) => {
+        console.log("成功执行openid云函数获取openid", res.result.openid)
+        openid = res.result.openid
+      })
+
+    user = wx.getStorageSync("userBaseInfo")
+    this.setData({
+      userInfo: user
+    })
     //获得跳转而来的打卡条id
     if (wx.getStorageSync('temp_att_id')) {
       att_id = wx.getStorageSync('temp_att_id')
     } else {
-      att_id = options.att_id 
+      att_id = options.att_id
       wx.setStorageSync('temp_att_id', options.att_id)
     }
 
     //获取用户打卡信息
     _att.doc(att_id)
-      .get(
-        //   {
-        //   success:(res)=>{
-        //     console.log(res)
-        //   },
-        //   fail:(res)=>{
-        //     console.log(res)
-        //   }
-        // }
-      )
-      .then((res) => {
+      .get()
+      .then(async (res) => {
         console.log("云端获取该用户打卡信息成功！", res.data)
         cur_openid = res.data._openid //获取本打卡条主人的openid
         this.setData({
           attendance: res.data,
         })
-        _comment
+
+        await _like
+          .where({
+            _openid: openid,
+            liked_id: att_id
+          }).get()
+          .then((res) => {
+            console.log("成功查询点赞信息", res.data.length)
+            this.setData({
+              isLike: res.data.length ? true : false
+            })
+          })
+
+        _comment //获取该打卡条所有评论信息
           .where({
             commented_id: att_id
           })
           .get()
-          .then((res) => {
+          .then(async (res) => {
             console.log(res)
             this.setData({
-              commentList: res.data
+              commentList: res.data.reverse()
             })
-            for (var i = 0; i < res.data.length; i++) {
-              var commentLike
-              var commentID = res.data[i]._id
-              _like
-                .where({
-                  liked_id: commentID,
-                  _openid: cur_openid
-                })
-                .get()
-                .then((res) => {
-                  console.log("查询成功！", i)
-                  commentLike = res ? true : false
-                  console.log("第" + i + "个评论", commentLike)
-                  this.setData({
-                    ['isLike_comment[' + i + ']']: commentLike //////////////////////////////////////////
-                  })
-                })
-                .catch(console.log(err))
-              console.log(i)
-            }
             console.log("云端获取评论信息成功", this.data.commentList)
 
-            wx.cloud.callFunction({
-                name: "getOpenID"
-              })
-              .then((res) => {
-                console.log("成功执行openid云函数获取openid", res.result.openid)
-                openid = res.result.openid
-              })
+            await wx.cloud.callFunction({ //查询页面初始点赞状态：用云函数突破20条限制
+              name: "queryCommentLikeState",
+              data: {
+                comData: res.data,
+                cur_openid: openid,
+                length: res.data.length
+              },
+              success: (res) => {
+                // console.log("这个云函数终于成功了！",res.result)
+                this.setData({
+                  isLike_comment: res.result
+                })
+
+              },
+              fail: (res) => {
+                console.log("这个云函数调用失败", res)
+              }
+            })
 
 
           })
-          .catch((error) => {
-            console.log("云端获取评论信息失败", error)
-          })
-
+          .catch(console.error)
       })
       .catch((res) => {
         console.log("云端获取该用户打卡信息失败！", res)
@@ -353,8 +370,7 @@ Page({
   onShow: function () {
 
   },
-  onHide: function () {
-  },
+  onHide: function () {},
   onUnload: function () {
     console.log("成功清除缓存！")
     wx.removeStorageSync('temp_att_id')

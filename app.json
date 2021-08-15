@@ -52,7 +52,7 @@
     "van-popup": "@vant/weapp/popup",
     "van-cell": "@vant/weapp/cell",
     "van-dialog": "@vant/weapp/dialog",
-
+ 
     "i-drawer": "dist/drawer/index",
     "i-icon": "dist/icon/index",
     "i-cell-group": "dist/cell-group/index",
