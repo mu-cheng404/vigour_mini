@@ -1,7 +1,23 @@
-// pages/homePage/homePage.js
+const util = require("../../common/util")
+var isLogIn
 const DB = wx.cloud.database()
 const _att = DB.collection("attendance")
+const _user = DB.collection("user")
+const _comment = DB.collection("comment")
 Page({
+  handleNav: async function (evt) {
+    var idx = evt.currentTarget.id
+    var att_id = this.data.punchMessageArrays[idx]._id
+    if (!isLogIn) {
+      const v2 = await util.getUserInfo()
+      this.onLoad()
+    } else {
+      wx.navigateTo({
+        url: '../details/details?att_id=' + att_id,
+      })
+    }
+
+  },
   _handlerLike: function (evt) {
     console.log(evt);
     let id = evt.target.id;
@@ -10,125 +26,73 @@ Page({
       ['punchMessageArrays[' + id + '].isLike']: !this.data.punchMessageArrays[id].isLike,
     })
   },
-  _handleTap: function () {
-    wx.navigateTo({
-      url: '../remarks/remarks',
-    })
-  },
-  _handlerPunch: function () {
+  _handlerPunch: async function () {
+
     wx.switchTab({
       url: '../punchCard/punchCard',
     })
 
   },
-  // //对图片进行操作
-  // preivewImage: function (evt) {
-  //   console.log(evt.currentTarget.id)
-  //   var id = evt.currentTarget.id
-  //   wx.previewImage({
-  //     showmenu: true,
-  //     urls: pictures,
-  //     current: pictures[id],
-  //     success(res) {
-  //       console.log("预览成功！", res)
-  //     },
-  //     fail(res) {
-  //       console.log("预览失败！", res)
-  //     }
-  //   })
-  // },
-  /**
-   * 页面的初始数据
-   */
   data: {
     punchMessageArrays: [],
-    datearrays: [],
-
+    datearrays: [], //时间数组
+    avatarArr: [], //打卡条的头像列表
+    nickNameArr: [], //打卡条的昵称列表
+    nickNameCom: [], //评论的昵称列表
+    commentList: []
   },
-
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-
-  onLoad: function (options) {
-
-
-    try {
-      var info = wx.getStorageSync('userBaseInfo')
-      if (info) { //若存在，则复制给data
-        // Do something with return value
-        this.setData({
-          userInfo: info,
-          hasUserInfo: true
-        })
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
-    _att.get().then(res => {
-      console.log("获取所有用户打卡数据成功",res)
+  onLoad: async function (options) {
+    isLogIn = await util.queryLogIn()
+    console.log(isLogIn)
+    await _att.get().then(res => {
+      console.log("获取所有用户打卡数据成功", res)
       this.setData({
         punchMessageArrays: res.data.reverse()
       })
-      // for (var i = 0; i < res.data.length; i++) {
-      //   this.setData({
-      //     ["datearrays[" + i + "]"]: res.data[i].date.toLocaleDateString().concat(res.data[i].date.toLocaleTimeString())
-      //   })
-      // }
     })
 
+    await wx.cloud.callFunction({
+        name: "queryName_avatar",
+        data: {
+          dataArr: this.data.punchMessageArrays
+        }
+      }).then((res) => {
+        console.log("获取昵称和头像成功！")
+        this.setData({
+          avatarArr: res.result.avatarArr,
+          nickNameArr: res.result.nickNameArr
+        })
+      })
+      .catch(console.error)
 
+    var commentList = [] //评论数据
+    var punchList = this.data.punchMessageArrays
 
-
-
+    for (var i = 0; i < punchList.length; i++) {
+      await _comment.where({
+        commented_id: punchList[i]._id
+      }).get().then((res) => {
+        commentList.push(res.data)
+      })
+    }
+    this.setData({
+      commentList: commentList
+    })
+    console.log(commentList)
+    for (var i = 0; i < commentList.length; i++)
+      for (var j = 0; j < commentList[i].length; j++) {
+        console.log(commentList[i][j]._openid)
+        await _user.where({
+          _openid: commentList[i][j]._openid
+        }).get().then((res) => {
+          console.log(res.data[0]._openid)
+          this.setData({
+            ['nickNameCom[' + i + '][' + j + ']']: res.data[0].nickName
+          })
+        })
+      }
   },
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     this.onLoad()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

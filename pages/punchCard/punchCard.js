@@ -1,3 +1,7 @@
+const util = require("../../common/util")
+var isLogIn
+
+
 // pages/punchCard/punchCard.js
 Page({
     _handlerMore: function () {
@@ -15,15 +19,18 @@ Page({
             url: '../superviseList/suoerviseList',
         })
     },
-    _handerTap: function (evt) {
-        wx.navigateTo({
-            url: '../punchEdit/punchEdit?type='+evt.currentTarget.id,
-            success: (result) => {
-
-            },
-            fail: () => {},
-            complete: () => {}
-        });
+    _handerTap: async function (evt) {
+        if (!isLogIn) {
+            const v2 = await util.getUserInfo()
+            this.onLoad()
+        } else {
+            wx.navigateTo({
+                url: '../punchEdit/punchEdit?type=' + evt.currentTarget.id,
+                success: (result) => {},
+                fail: () => {},
+                complete: () => {}
+            })
+        }
     },
     /**
      * 页面的初始数据
@@ -57,7 +64,8 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: async function (options) {
+        isLogIn = await util.queryLogIn()
 
     },
 

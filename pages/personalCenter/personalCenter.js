@@ -11,52 +11,12 @@ Page({
     });
   },
   //获取用户信息
-  _getUserProfile() {
-    var _this = this
-    //获取用户基本信息
-    wx.getUserProfile({
-      //用于显示给用户的提示信息
-      desc: '用于完善个人信息',
-      success: (res) => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-        //存入缓存
-        try {
-          wx.setStorageSync('userBaseInfo', this.data.userInfo)
-        } catch (e) {
-          console.log(e)
-        }
-        //数据传入服务器中
-        _user.add({
-          data: {
-            nickName: this.data.userInfo.nickName,
-            avatarUrl: this.data.userInfo.avatarUrl,
-            gender: this.data.userInfo.gender,
-            country: this.data.userInfo.country,
-            province: this.data.userInfo.province,
-            city: this.data.userInfo.city,
-            language: this.data.userInfo.language,
-          },
-          success(res) {
-            console.log("成功获取用户信息并存入！", res)
-          },
-          fail(res) {
-            console.log("用户信息存入云端失败！", res)
-          }
-        })
-      },
-      fail(res) {
-        console.log("获取用户信息失败！", res)
-      }
+  _getUserProfile: async function () {
+    await util.getUserInfo()
+    this.setData({
+      hasUserInfo: true
     })
-  },
-  //跳转->打卡记录页面
-  _handler_punchRecord: function () {
-    wx.navigateTo({
-      url: '../record/record',
-    })
+    this.onShow()
   },
   //跳转->意见反馈页面
   _handler_advise: function () {
@@ -70,25 +30,11 @@ Page({
       url: '../basicsDisplay/basicsDisplay',
     })
   },
-  //获取该用户所有打卡信息
-  getAllAttInfo: function () {
-    _att //获取该用户所有打卡信息并展示
-      .where({
-        _openid: openID
-      })
-      .get()
-      .then((res) => {
-        console.log("获取本用户打卡数据成功！", res.data)
-        this.setData({
-          att_list: res.data
-        })
-      })
-  },
+
   /**
    * 页面的初始数据
    */
   data: {
-    imageURL: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/",
     userCode: '', //用户唯一标识符
     userInfo: '', //用户个人信息
     hasUserInfo: false, //是否登录
@@ -99,53 +45,51 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    //云函数获取openid
-    wx.cloud.callFunction({
-        name: "getOpenID"
-      })
-      .then((res) => {
-        console.log("成功执行openid云函数获取openid", res.result.openid)
-        openID = res.result.openid //获取openid
+  onLoad: async function (options) {
 
-        _user
-          .where({
-            _openid: openID
-          })
-          .get()
-          .then((res) => {
-            var isload = res.data.length //查询在云端是否有登录记录
-            if (isload) { //若登录过
-              console.log("经查询有该用户信息")
-              try {
-                wx.setStorageSync('userBaseInfo', res.data[0]) //信息存入缓存
-                this.setData({
-                  userInfo: res.data[0],
-                  hasUserInfo: true
-                })
-              } catch (e) {
-                console.log(e)
-              }
-              this.getAllAttInfo()
-            } else {
-              console.log("没有查到该用户信息，需提示登录")
-            }
-          })
-      })
-      .catch(console.error)
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: async function () {
+    //云函数获取openid
+    wx.cloud.callFunction({
+        name: "getOpenID"
+      })
+      .then((res) => {
+        openID = res.result.openid //获取openid
+        _user.where({
+            _openid: openID
+          }).get()
+          .then((res) => {
+            this.setData({
+              userInfo: res.data[0],
+              hasUserInfo: res.data.length ? true : false
+            })
+            //获取该用户所有打卡信息并展示
+            _att.where({
+                _openid: openID
+              })
+              .get()
+              .then((res) => {
+                console.log("获取本用户打卡数据成功！", res.data)
+                this.setData({
+                  att_list: res.data.reverse()
+                })
+              })
+              .catch(console.error)
+          })
+          .catch(console.error)
+
+      })
+      .catch(console.error)
 
   },
 

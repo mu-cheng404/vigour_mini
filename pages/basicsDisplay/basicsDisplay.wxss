@@ -1,4 +1,10 @@
 /* pages/basicsDisplay/basicsDisplay.wxss */
+.title{
+  font-size: 32rpx;
+  color: #333333;
+  line-height: 48rpx;
+  margin: 10rpx;
+}
 .font{
   color: #999;
   height: 50rpx;

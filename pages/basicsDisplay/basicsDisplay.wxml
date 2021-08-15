@@ -1,70 +1,31 @@
-<view class="font">
-  <view class="basic">
-    <image src="/images/home-page.png" class="icon"></image>
-    基本资料
-  </view>
-</view>
-<view class="background">
-  <view class="first">
-    <view class="center">
-      头像
-    <image src="/images/avator.jpg" class="tx"></image>
-    </view>
-</view>
-
-
-<view class="two">
-    <view class="center">
-      昵称
-    <view class="right">
-      木木
-    </view>
-    </view>
-</view>
-
-<view class="two">
-  <view class="center">
-    id
-  <view class="right"> 
-    1234556
-  </view>
-  </view>
-</view>
-<view class="two">
-  <view class="center">
-    <view class="sex"> 
-    性别
-    <view class="right">
-      男
-    </view>
-  </view>
-</view>
-
-<view class="two">
-  <view class="center">
-    <view>
-      所在地区
-      <view class="right">
-      济南市
+<!-- <view class="title">点击“修改信息”</view> -->
+<form action="" bindsubmit="handleChange">
+  <i-cell-group>
+    <i-cell title="头像" is-link="{{!is_link}}">
+      <view slot="footer">
+        <i-avatar src="{{userInfo.avatarUrl}}" shape="circle" size="large" bindtap="{{is_link?'':'changeImage'}}"></i-avatar>
       </view>
-    </view>
-  </view>
-</view>
-<view class="two">
-  <view class="center">
-    学历
-    <view class="right">
-      本科
-    </view>
-  </view>
-</view>
-
-
-
-
-
-
-</view>
-</view>
-
-
+    </i-cell>
+    <i-cell title="昵称" is-link="{{!is_link}}">
+      <view slot="footer">
+        <i-input name = "nickName" value="{{userInfo.nickName}}" right="true" disabled="{{is_link}}"></i-input>
+      </view>
+    </i-cell>
+    <i-cell title="id" >
+      <view slot="footer">
+        <i-input  value="{{userInfo._id}}" right="true" disabled="true"></i-input>
+      </view>
+    </i-cell>
+    <i-cell title="性别" is-link="{{!is_link}}">
+      <view slot="footer">
+        <i-input name = "gender" value="{{userInfo.gender?'男':'女'}}" right="true" disabled="{{is_link}}"></i-input>
+      </view>
+    </i-cell>
+    <i-cell title="省份" is-link="{{!is_link}}">
+      <view slot="footer">
+        <i-input name = "province"value="{{userInfo.province}}" right="true" disabled="{{is_link}}"></i-input>
+      </view>
+    </i-cell>
+  </i-cell-group>
+  <i-button type="ghost" form-type>{{button_info?'修改信息':'确定修改'}}</i-button>
+</form>

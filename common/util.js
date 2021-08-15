@@ -1,3 +1,10 @@
+const DB = wx.cloud.database()
+const _att = DB.collection("attendance")
+const _user = DB.collection("user")
+const _comment = DB.collection("comment")
+const _like = DB.collection("like")
+
+
 function formatDate(inputTime) {
   var date = new Date(inputTime);
   var y = date.getFullYear();
@@ -12,29 +19,95 @@ function formatDate(inputTime) {
   minute = minute < 10 ? ('0' + minute) : minute;
   second = second < 10 ? ('0' + second) : second;
   return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
-   
- };
- function unLoadWarn(){
-  console.log("调用unLoadWarn成功！")
- var temp = wx.getStorageSync("userBaseInfo")
- if(!temp){
-   wx.showModal({
-     content:"您还未登录哦，是否前往登录？",
-     cancelColor: '#EFEFEF',
-     success(res){
-       if(res.confirm){
-         wx.navigateTo({
-           url: 'pages/personalCenter/personalCenter',
-         })
-       }
-     },
-   })
- }
-};
- // 导出
- module.exports = {
-  formatDate: formatDate,
-  unLoadWarn:unLoadWarn
- }
 
- 
+};
+
+function unLoadWarn() {
+  console.log("调用unLoadWarn成功！")
+  var temp = wx.getStorageSync("userBaseInfo")
+  if (!temp) {
+    wx.showModal({
+      content: "您还未登录哦，是否前往登录？",
+      cancelColor: '#EFEFEF',
+      success(res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: 'pages/personalCenter/personalCenter',
+          })
+        }
+      },
+    })
+  }
+};
+
+function queryLogIn() { //查询是否登录？通过查询user表
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+        name: "getOpenID",
+      })
+      .then((res) => {
+        var openid = res.result.openid
+        _user.where({
+            _openid: openid
+          }).get()
+          .then((res) => {
+            console.log(res.data[0])
+            if (res.data.length) {
+              console.log("该用户已登录！")
+              resolve(true)
+            } else {
+              console.log("该用户还未登录！")
+              resolve(false)
+            }
+          })
+          .catch((err) => {
+            resolve(err)
+          })
+      })
+      .catch((err) => {
+        resolve(err)
+      })
+  })
+}
+
+function getUserInfo() {
+  return new Promise((resolve, reject) => {
+    wx.getUserProfile({
+      desc: '用于完善个人信息',
+      success: (res) => {
+        var data = res.userInfo
+        //数据传入服务器中
+        _user.add({
+          data: {
+            nickName: data.nickName,
+            avatarUrl: data.avatarUrl,
+            gender: data.gender,
+            country: data.country,
+            province: data.province,
+            city: data.city,
+            language: data.language,
+          },
+          success(res) {
+            console.log("成功获取用户信息并存入！", res)
+            resolve()
+          },
+          fail(res) {
+            console.log("用户信息存入云端失败！", res)
+            reject()
+          }
+        })
+      },
+      fail(res) {
+        console.log("获取用户信息失败！", res)
+        reject()
+      }
+    })
+  })
+}
+// 导出
+module.exports = {
+  formatDate: formatDate,
+  unLoadWarn: unLoadWarn,
+  queryLogIn: queryLogIn,
+  getUserInfo: getUserInfo
+}

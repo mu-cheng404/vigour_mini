@@ -18,4 +18,5 @@
     binderror="binderror"
     plain="true"
     disabled="{{disabled}}"
+    form-type="submit"
 ><view class="i-btn-loading-inner" wx:if="{{loading}}"></view><slot></slot></button>

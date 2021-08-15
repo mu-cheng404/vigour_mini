@@ -33,11 +33,11 @@
       <view class="comment">
         <view class="comment_part1">
           <view class="comment_avatar">
-            <image src="{{commentItem.avatarUrl}}">
+            <image src="{{avatarArr[idx]}}">
             </image>
           </view>
           <view class="comment_nickName">
-            <view class="comment_nickname_upper">{{commentItem.nickName}}</view>
+            <view class="comment_nickname_upper">{{nickNameArr[idx]}}</view>
             <view class="comment_nickname_lower">{{commentItem.time}}</view>
           </view>
           <view class="comment_like">

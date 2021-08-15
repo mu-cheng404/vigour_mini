@@ -1,50 +1,55 @@
 <view class="page">
   <swiper class="swip" indicator-color="black" autoplay="true" interval="2000" circular="true">
     <swiper-item>
-      <image bindtap="preivewImage" src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_1.jpg">
+      <image bindtap="preivewImage"
+        src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_1.jpg">
       </image>
     </swiper-item>
     <swiper-item>
-      <image bindtap="preivewImage" src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_2.jpg">
+      <image bindtap="preivewImage"
+        src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_2.jpg">
       </image>
     </swiper-item>
     <swiper-item>
-      <image bindtap="preivewImage"src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_3.jpg">
+      <image bindtap="preivewImage"
+        src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_3.jpg">
       </image>
     </swiper-item>
   </swiper>
   <view class="hander_punch c_center" bindtap="_handlerPunch">
     <i-icon type="add" size="50" />
   </view>
-
   <block wx:for="{{punchMessageArrays}}" wx:for-index="idx" wx:for-item="punchItem" wx:key="id">
-    <navigator url="../details/details?att_id={{punchItem._id}}">
-      <view class="punchBoxDisplay">
-        <view class="avator">
-          <image src="{{punchItem.avatarUrl}}"></image>
-        </view>
-        <view class="rightOption">
-          <view class="nickName">{{punchItem.nickName}}
-            <view class="c_pos_right">
-              <i-icon size="25" type="{{punchItem.isLike? 'like':'like_fill'}}"></i-icon>
-              {{punchItem.praise}}
-            </view>
-          </view>
-          <view>
-            <view class="time">{{datearrays[idx]}}</view>
-            <view class="type">{{punchItem.topic}}</view>
-          </view>
-
-          <text class="content">{{punchItem.content}}</text>
-          <view class="accessImage">
-            <image src="{{punchItem.pictures[0]}}"></image>
-          </view>
-
-          <view class="comment" bindtap="_handleTap">{{punchItem.comment}} 评论 ></view>
-        </view>
+    <view id="{{idx}}" class="punchBoxDisplay" bindtap="handleNav">
+      <view class="avator">
+        <image src="{{avatarArr[idx]}}"></image>
       </view>
-    </navigator>
-
+      <view class="rightOption">
+        <view class="nickName">{{nickNameArr[idx]}}
+          <view class="c_pos_right">
+            <i-icon size="25" type="{{punchItem.isLike? 'like':'like_fill'}}"></i-icon>
+            {{punchItem.praise}}
+          </view>
+        </view>
+        <view>
+          <view class="time">{{datearrays[idx]}}</view>
+          <view class="type">{{punchItem.topic}}</view>
+        </view>
+        <text class="content">{{punchItem.content}}</text>
+        <view class="accessImage">
+          <block wx:for="{{punchItem.pictures}}" wx:for-item="pItem" wx:for-index="idx2" wx:key="key2">
+            <image src="{{pItem}}"></image>
+          </block>
+        </view>
+        <view class="comment" bindtap="_handleTap">{{punchItem.comment}} 评论 ></view>
+        <block wx:for="{{nickNameCom[idx]}}" wx:for-item = "ncItem" wx:for-index="idx2" wx-key = "key">
+          <view class="commentItem">
+            <view class="commentNickName">{{ncItem}}:</view>
+            <view class="commentContent">{{commentList[idx][idx2].content}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
   </block>
 
 

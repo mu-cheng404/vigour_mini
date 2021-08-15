@@ -57,7 +57,10 @@
     "i-icon": "dist/icon/index",
     "i-cell-group": "dist/cell-group/index",
     "i-cell": "dist/cell/index",
-    "i-card": "dist/card/index"
+    "i-card": "dist/card/index",
+    "i-button":"dist/button/index",
+    "i-avatar":"dist/avatar/index",
+    "i-input":"dist/input/index"
 
 
 

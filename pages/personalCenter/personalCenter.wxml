@@ -20,31 +20,21 @@
   </i-drawer>
   <view class="avator">
     <image src="{{userInfo.avatarUrl}}" wx:if="{{hasUserInfo}}"></image>
-    <image src="{{imageURL}}add.png" wx:else="{{hasUserInfo}}"></image>
+    <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png"
+      wx:else="{{hasUserInfo}}"></image>
   </view>
   <view class="nickname">
-    <image src="/images/point.png"></image>
     <view wx:if="{{hasUserInfo}}"> {{userInfo.nickName}}</view>
-    <view wx:else="{{hasUserInfo}}" bindtap="_getUserProfile"> 点击登录</view>
+    <i-button wx:else="{{hasUserInfo}}" bind:click="_getUserProfile" type="ghost"> 点击登录</i-button>
   </view>
 
-  <!-- <view class="punchRecord baseStyle" bindtap="_handler_punchRecord">
-  打卡记录
-</view>
-<view class="basics baseStyle" bindtap="_handler_basics">
-  基本资料
-</view>
-<view class="advise baseStyle" bindtap="_handler_advise">
-  意见反馈
-</view> -->
-
   <view class="part2">
-    <block wx:for="{{att_list}}" wx:for-item = "Item" wx:for-index = "idx">
+    <block wx:for="{{att_list}}" wx:for-item="Item" wx:for-index="idx" wx:key="key">
 
-      <i-card title="{{Item.nickName}}" extra="{{Item.praise}}" thumb="{{Item.avatarUrl}}" i-class="i_card">
-      <view slot="content">{{Item.content}}</view>
-      <view slot="footer">评论{{Item.comment}}</view>
-    </i-card>
+      <i-card title="{{userInfo.nickName}}" extra="{{Item.praise}}" thumb="{{userInfo.avatarUrl}}" i-class="i_card">
+        <view slot="content">{{Item.content}}</view>
+        <view slot="footer">评论{{Item.comment}}</view>
+      </i-card>
     </block>
 
   </view>

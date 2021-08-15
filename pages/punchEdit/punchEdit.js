@@ -7,12 +7,12 @@ var content = '' //内容
 var location = '' //地点
 var praise = 0 //点赞数
 var userInfo//个人信息
-const DB = wx.cloud.database().collection("attendance")
+const DB = wx.cloud.database()
+const _att = DB.collection("attendance")//打卡表
+const _user = DB.collection("user")//用户表
 Page({
   //读取正文内容
   _contentInput: function (evt) {
-
-    console.log(evt.detail.value)
     content = evt.detail.value
   },
   //选择地点
@@ -23,11 +23,10 @@ Page({
           this.setData({
             location: location
           })
-        console.log("get location successfully!", res.name)
-        
+        console.log("成功获取地点信息!")
       },
       fail(res) {
-        console.log("get location unsuccessfully!", res)
+        console.log("获取地点信息失败！")
       }
     })
   },
@@ -40,7 +39,6 @@ Page({
         icon: 'error',
         duration: 2000
       })
-
     } else {
       wx.chooseImage({
         count: 3, //最多可以选择的图片张数
@@ -51,10 +49,10 @@ Page({
           this.setData({
             pictures: pictures
           })
-          console.log("选择图片成功!", pictures)
+          console.log("选择图片成功!")
         },
         fail(res) {
-          console.log("选择图片失败!", res)
+          console.log("选择图片失败!")
         }
       })
     }
@@ -91,42 +89,17 @@ Page({
   //提交-在此处决定权限
   _handlerform: function (evt) {
 
-    if (content.length < 20) {
+    if (content.length  == 0) {
       this.setData({
-        hint: '字数需超过20字！'
+        hint: '你啥也不输入，打卡个寂寞？'
       })
     } else //若符合要求
     {
-      //检查数据
-      console.log(date)
-      console.log(topic)
-      console.log("图片最终路径：", picturesURL)
-      console.log(video)
-      console.log(content)
-      console.log(location)
-      console.log(praise)
-
-
-      // //获取OpenID
-      // var id
-      // wx.cloud.callFunction({
-      //   name:"getOpenID",
-      //   success(res){
-      //     console.log("成功获取OpenID",res)
-      //     id = res.result.openid
-      //   },
-      //   fail(res){
-      //     console.log("获取openID失败",res)
-      //   }
-      // })
-
-
       //上传图片至服务器
       var promiseArr = []
       var timestamp = Date.parse(new Date()) //生成时间戳
       for (var key in pictures) {
         promiseArr.push(new Promise((reslove, reject) => {
-        
           wx.cloud.uploadFile({
             cloudPath: "user/" + timestamp + "-" + Math.floor(Math.random() * 1000) + ".png", // 上传至云端的路径
             filePath: pictures[key], // 小程序临时文件路径
@@ -153,7 +126,7 @@ Page({
 
       Promise.all(promiseArr).then((values) => { //图片上传成功
         //导入数据库
-        DB.add({
+        _att.add({
           data: {
             date: date,
             topic: topic,
@@ -162,10 +135,7 @@ Page({
             content: content,
             location: location,
             praise: praise,
-            nickName: userInfo.nickName,
-            avatarUrl: userInfo.avatarUrl,
             comment: 0,
-
           },
           success(res) {
             console.log("数据库添加成功!", res)
@@ -180,8 +150,6 @@ Page({
       }).catch(err => {
         console.log("上传错误！", err)
       })
-
-
     }
   },
   /**
@@ -203,27 +171,16 @@ Page({
   onLoad: function (options) {
     //获取时间
     date = new Date().toLocaleDateString().concat(new Date().toLocaleTimeString());
-    // var Y = date.getFullYear(); //年
-    // var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1); //月
-    // var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(); //日
-    //时
-    // var h = date.getHours();
-    // //分
-    // var m = date.getMinutes();
-    // //秒
-    // var s = date.getSeconds();
-    // this.setData({
-    //   'year': Y,
-    //   'month': M + '.' + D,
-    //   type: options.type
-    // })
-    //赋值类型
     topic = options.type
-    console.log(options.type)
-
-    //从缓存中拿到个人信息
-    userInfo = wx.getStorageSync('userBaseInfo')
-    console.log("成功拿到个人信息！",userInfo)
+    
+    wx.cloud.callFunction({//拿到个人信息
+      name:"getOpenID",
+    })
+    .then((res)=>{
+      _user.where({_openid : res.result.openid}).get().then((res)=>{
+        userInfo = res.data[0]
+      })
+    })
   },
 
   /**

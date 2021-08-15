@@ -12,7 +12,7 @@
   width: 150rpx;
   height: 150rpx;
   border-radius: 50%;
-  background-color: hotpink;
+  /* background-color: hotpink; */
   margin-top: 50rpx;
 }
 .avator image{

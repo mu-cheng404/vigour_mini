@@ -2,33 +2,23 @@ import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 const util = require('../../common/util.js')
 const DB = wx.cloud.database()
 const _ = DB.command
-const _att = DB.collection("attendance")
-const _like = DB.collection("like")
-const _comment = DB.collection("comment")
-var comment = {
-  avatarUrl: "",
-  commented_id: "",
-  content: "",
-  likeNum: "",
-  nickName: "",
-  time: "",
-}
+const _att = DB.collection("attendance") //打卡表
+const _like = DB.collection("like") //点赞表
+const _comment = DB.collection("comment") //评论表
+const _user = DB.collection("user") //用户表
+var content //评论内容
 var att_id = "" //打卡条id
 var cur_openid //现在打卡条所属用户的openid
 var openid //当前用户的openid
 var user //用户信息
-// pages/details/details.js
 Page({
   //处理弹出框
   showPopup() {
-    console.log("click成功！")
     this.setData({
       show: true
     });
   },
   onClose() {
-    console.log("关闭成功！")
-
     this.setData({
       show: false
     });
@@ -50,7 +40,6 @@ Page({
       }
     })
   },
-  
   //处理打卡条点赞
   handleLike: function () {
     var data = this.data.attendance
@@ -59,7 +48,7 @@ Page({
         ["attendance" + "." + "praise"]: data.praise - 1,
         isLike: false
       })
-      console.log("取消点赞成功！", data.praise)
+      console.log("取消点赞成功！")
       DB.collection("like") //在like表中删除数据
         .where({
           _openid: openid,
@@ -67,10 +56,10 @@ Page({
         })
         .remove({
           success: (res) => {
-            console.log("删除like表数据成功！", res)
+            console.log("删除like表数据成功！")
           },
           fail: (res) => {
-            console.log("删除like表数据失败！", res)
+            console.log("删除like表数据失败！")
           }
         })
     } else {
@@ -85,10 +74,10 @@ Page({
             liked_id: data._id
           },
           success: (res) => {
-            console.log("添加like表数据类型成功！", res)
+            console.log("添加like表数据类型成功！")
           },
           fail: (res) => {
-            console.log("添加like表数据类型失败！", res)
+            console.log("添加like表数据类型失败！")
           }
         })
     }
@@ -103,22 +92,19 @@ Page({
       },
       fail: (res) => {
         console.log("praise修改失败！", res)
-
       }
     })
-
   },
   //处理评论点赞
   handleLike_comment: function (evt) {
     var currentID = evt.currentTarget.id
-    console.log("正在给第" + currentID + "个评论点赞")
     var data = this.data.commentList[currentID]
     if (this.data.isLike_comment[currentID]) { //处理页面显示
       this.setData({
         ["commentList[" + currentID + "]." + "likeNum"]: data.likeNum - 1,
         ['isLike_comment[' + currentID + ']']: false
       })
-      console.log("取消评论点赞成功！", data.praise)
+      console.log("取消点赞成功！", data.praise)
       DB.collection("like") //在like表中删除数据
         .where({
           _openid: openid,
@@ -126,10 +112,10 @@ Page({
         })
         .remove({
           success: (res) => {
-            console.log("删除like表数据类型成功！", res)
+            console.log("删除like表数据类型成功！")
           },
           fail: (res) => {
-            console.log("删除like表数据类型失败！", res)
+            console.log("删除like表数据类型失败！")
           }
         })
     } else {
@@ -144,10 +130,10 @@ Page({
             liked_id: data._id
           },
           success: (res) => {
-            console.log("添加like表数据类型成功！", res)
+            console.log("添加like表数据类型成功！")
           },
           fail: (res) => {
-            console.log("添加like表数据类型失败！", res)
+            console.log("添加like表数据类型失败！")
           }
         })
     }
@@ -159,14 +145,12 @@ Page({
           likeNum: _.inc(like ? 1 : -1)
         },
         success: (res) => {
-          console.log("likeNum修改成功！", res)
+          console.log("likeNum修改成功！")
         },
         fail: (res) => {
-          console.log("likeNum修改失败！", res)
-
+          console.log("likeNum修改失败！")
         }
       })
-
   },
   //点击评论图标跳转
   handleComment: function () {
@@ -176,33 +160,24 @@ Page({
   },
   //处理评论
   comment_input: function (evt) { //获取评论内容
-    let value = evt.detail.value
-    console.log(evt.detail.value)
-    comment.content = value
+    content = evt.detail.value
   },
-  commment_submit: function () { //提交
+  //提交评论
+  commment_submit: function () {
     //获取当前时间戳
     var timestamp = Date.parse(new Date())
     timestamp = timestamp / 1000
     var Time = util.formatDate((timestamp * 1000)) //转换时间格式
 
-    var att = this.data.attendance
-    comment.avatarUrl = user.avatarUrl
-    comment.commented_id = att._id
-    comment.likeNum = 0
-    comment.nickName = user.nickName
-    comment.time = Time
-    console.log("现在comment=", comment)
-
     _comment //添加评论信息到数据库
       .add({
         data: {
-          avatarUrl: comment.avatarUrl,
-          commented_id: comment.commented_id,
-          content: comment.content,
-          likeNum: comment.likeNum,
-          nickName: comment.nickName,
-          time: comment.time
+          // avatarUrl: comment.avatarUrl,
+          commented_id: att_id,
+          content: content,
+          likeNum: 0,
+          // nickName: comment.nickName,
+          time: Time
         },
       })
       .then((res) => {
@@ -212,7 +187,7 @@ Page({
           "confirm-button-color": "#04BE02"
         }).then(() => {
           // on close
-        });
+        }).catch(console.error)
         this.setData({
           show: false,
           ['attendance' + '.' + 'comment']: this.data.attendance.comment + 1
@@ -231,70 +206,39 @@ Page({
       .catch((res) => {
         console.error
       })
-
   },
   //下拉刷新
   onPullDownRefresh: function () {
     console.log("正在下拉刷新！")
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    // setTimeout(() => {
-    //   _comment //通过被评论的id寻找
-    //     .where({
-    //       commented_id: att_id
-    //     })
-    //     .get()
-    //     .then((res) => {
-    //       console.log(res)
-    //       this.setData({
-    //         commentList: res.data
-    //       })
-    //       console.log("云端更新数据成功", this.data.commentList)
-    //       wx.hideNavigationBarLoading() //完成停止加载
-    //       wx.stopPullDownRefresh() //停止下拉刷新
-    //     })
-    //     .catch((error) => {
-    //       console.log("云端更新数据失败", error)
-    //     })
-
-    // }, 2000)
     this.onLoad()
   },
-  queryisLike: function (openid, likedid) {
-    _like
-      .where({
-        _openid: openid,
-        liked_id: likedid
-      })
-      .get()
-      .then((res) => {
-        return res.data.length
-      })
-  },
-  /**
-   * 页面的初始数据
-   */
   data: {
-    show: false,
-    attendance: [],
-    isLike: false,
-    isLike_comment: [],
-    commentList: [],
-    userInfo: ""
+    show: false, //是否展示评论框
+    attendance: [], //打卡信息表
+    isLike: false, //打卡信息表是否被点赞
+    isLike_comment: [], //评论列表是否被点赞
+    commentList: [], //评论列表信息
+    avatarArr: [], //评论头像列表
+    nickNameArr: [], //评论昵称列表
+    userInfo: "" //当前用户信息
   },
   onLoad: function (options) {
-
     wx.cloud.callFunction({ //获取本用户openid
         name: "getOpenID"
       })
       .then((res) => {
-        console.log("成功执行openid云函数获取openid", res.result.openid)
         openid = res.result.openid
+        //获取用户信息
+        _user.where({
+          _openid: openid
+        }).get().then((res) => {
+          this.setData({
+            userInfo: res.data[0]
+          })
+        })
       })
 
-    user = wx.getStorageSync("userBaseInfo")
-    this.setData({
-      userInfo: user
-    })
     //获得跳转而来的打卡条id
     if (wx.getStorageSync('temp_att_id')) {
       att_id = wx.getStorageSync('temp_att_id')
@@ -324,18 +268,31 @@ Page({
               isLike: res.data.length ? true : false
             })
           })
-
-        _comment //获取该打卡条所有评论信息
-          .where({
+          .catch(console.error)
+        //获取该打卡条所有评论信息
+        _comment.where({
             commented_id: att_id
-          })
-          .get()
+          }).get()
           .then(async (res) => {
-            console.log(res)
-            this.setData({
+
+            this.setData({//评论基本信息
               commentList: res.data.reverse()
             })
-            console.log("云端获取评论信息成功", this.data.commentList)
+
+            await wx.cloud.callFunction({ //获取所有评论的头像和昵称集合
+                name: "queryName_avatar",
+                data: {
+                  dataArr: res.data
+                }
+              })
+              .then((res) => {
+                console.log("获取评论的昵称和头像成功！")
+                this.setData({
+                  avatarArr: res.result.avatarArr,
+                  nickNameArr: res.result.nickNameArr
+                })
+              })
+              .catch(console.error)
 
             await wx.cloud.callFunction({ //查询页面初始点赞状态：用云函数突破20条限制
               name: "queryCommentLikeState",
@@ -345,32 +302,21 @@ Page({
                 length: res.data.length
               },
               success: (res) => {
-                // console.log("这个云函数终于成功了！",res.result)
                 this.setData({
                   isLike_comment: res.result
                 })
-
               },
               fail: (res) => {
                 console.log("这个云函数调用失败", res)
               }
             })
-
-
           })
           .catch(console.error)
       })
       .catch((res) => {
         console.log("云端获取该用户打卡信息失败！", res)
       })
-
-
   },
-  onReady: function () {},
-  onShow: function () {
-
-  },
-  onHide: function () {},
   onUnload: function () {
     console.log("成功清除缓存！")
     wx.removeStorageSync('temp_att_id')
@@ -378,30 +324,6 @@ Page({
   onReachBottom: function () {
     console.log("正在上拉刷新！")
     wx.showNavigationBarLoading() //在标题栏中显示加载
-
-    // setTimeout(() => {
-    //   _comment
-    //     .where({
-    //       commented_id: att_id
-    //     })
-    //     .get()
-    //     .then((res) => {
-    //       console.log(res)
-    //       this.setData({
-    //         commentList: res.data
-    //       })
-    //       console.log("云端更新数据成功", this.data.commentList)
-    //       wx.hideNavigationBarLoading() //完成停止加载
-    //       wx.stopPullDownRefresh() //停止下拉刷新
-    //     })
-    //     .catch((error) => {
-    //       console.log("云端更新数据失败", error)
-    //     })
-
-    // }, 2000)
     this.onLoad()
   },
-  onShareAppMessage: function () {
-
-  }
 })
