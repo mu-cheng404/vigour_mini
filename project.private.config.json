@@ -75,13 +75,19 @@
         {
           "name": "详情",
           "pathName": "pages/details/details",
-          "query": "att_id=\"2d44d6c26115d5f904d8e924596817c9\"",
+          "query": "att_id=2d44d6c26115d5f904d8e924596817c9",
           "scene": null
         },
         {
           "name": "管理员",
           "pathName": "pages/administrator/administrator",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "个人主页",
+          "pathName": "pages/personalPage/personalPage",
+          "query": "_openid=ohRLL5C9Gk_xs3bvgiCkKTOo8pws",
           "scene": null
         }
       ]

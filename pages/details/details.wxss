@@ -47,7 +47,9 @@
   margin-bottom: 10rpx;
 }
 
-.put_attention {
+.put_attention1,
+.put_attention2
+ {
   width: 150rpx;
   height: 70rpx;
   background-color: tomato;
@@ -58,6 +60,10 @@
   line-height: 70rpx;
   text-align: center;
   border-radius: 50rpx;
+}
+.put_attention2{
+  background-color: #666666;
+  color: white;
 }
 
 .part2 {
@@ -194,4 +200,8 @@ _block {
 .van-button_comment{
   margin-left: 630rpx;
   
+}
+.jubao{
+  display: inline;
+  color: brown;
 }

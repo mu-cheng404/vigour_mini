@@ -1,3 +1,4 @@
+const util = require("../../common/util")
 var date = '' //日期和时间
 var topic = '' //主题
 var pictures = [] //图片临时路径
@@ -6,10 +7,10 @@ var video = '' //音频
 var content = '' //内容
 var location = '' //地点
 var praise = 0 //点赞数
-var userInfo//个人信息
+var userInfo //个人信息
 const DB = wx.cloud.database()
-const _att = DB.collection("attendance")//打卡表
-const _user = DB.collection("user")//用户表
+const _att = DB.collection("attendance") //打卡表
+const _user = DB.collection("user") //用户表
 Page({
   //读取正文内容
   _contentInput: function (evt) {
@@ -89,7 +90,7 @@ Page({
   //提交-在此处决定权限
   _handlerform: function (evt) {
 
-    if (content.length  == 0) {
+    if (content.length == 0) {
       this.setData({
         hint: '你啥也不输入，打卡个寂寞？'
       })
@@ -97,7 +98,8 @@ Page({
     {
       //上传图片至服务器
       var promiseArr = []
-      var timestamp = Date.parse(new Date()) //生成时间戳
+      var timestamp = Date.parse(new Date())
+      var Time = util.formatDate((timestamp)) //转换时间格式
       for (var key in pictures) {
         promiseArr.push(new Promise((reslove, reject) => {
           wx.cloud.uploadFile({
@@ -128,7 +130,7 @@ Page({
         //导入数据库
         _att.add({
           data: {
-            date: date,
+            date: Time,
             topic: topic,
             pictures: picturesURL,
             video: video,
@@ -172,15 +174,20 @@ Page({
     //获取时间
     date = new Date().toLocaleDateString().concat(new Date().toLocaleTimeString());
     topic = options.type
-    
-    wx.cloud.callFunction({//拿到个人信息
-      name:"getOpenID",
+    this.setData({
+      type: topic
     })
-    .then((res)=>{
-      _user.where({_openid : res.result.openid}).get().then((res)=>{
-        userInfo = res.data[0]
+
+    wx.cloud.callFunction({ //拿到个人信息
+        name: "getOpenID",
       })
-    })
+      .then((res) => {
+        _user.where({
+          _openid: res.result.openid
+        }).get().then((res) => {
+          userInfo = res.data[0]
+        })
+      })
   },
 
   /**

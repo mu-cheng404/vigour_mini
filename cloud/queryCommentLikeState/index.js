@@ -1,14 +1,12 @@
-// 云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init()
 const DB = cloud.database()
 const _like = DB.collection("like")
 
-// 云函数入口函数
 exports.main = async (event, context) => {
-  var comData = event.comData
+  var comData = event.comData//评论数据
   var length = event.length
-  var cur_openid = event.cur_openid
+  var cur_openid = event.cur_openid//当前用户id 
   var isLike_comment = [] //结果数组
 
   for (var i = 0; i < length; i++) {

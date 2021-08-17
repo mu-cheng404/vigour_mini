@@ -15,7 +15,8 @@
     "pages/moreSignIn/moreSignIn",
     "pages/test/test",
     "pages/details/details",
-    "pages/administrator/administrator"
+    "pages/administrator/administrator",
+    "pages/personalPage/personalPage"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

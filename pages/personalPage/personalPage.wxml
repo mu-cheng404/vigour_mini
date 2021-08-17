@@ -1,0 +1,24 @@
+<view class="page">
+  
+  
+  <view class="avator">
+    <image src="{{userInfo.avatarUrl}}"></image>
+  </view>
+  <view class="nickname">
+    <view > {{userInfo.nickName}}</view>
+    
+  </view>
+
+  <view class="part2">
+    <block wx:for="{{att_list}}" wx:for-item="Item" wx:for-index="idx" wx:key="key">
+      <navigator url="../details/details?att_id={{Item._id}}">
+        <i-card id="{{idx}}" title="{{userInfo.nickName}}" extra="{{Item.praise}}" thumb="{{userInfo.avatarUrl}}"
+          i-class="i_card">
+          <view slot="content">{{Item.content}}</view>
+          <view slot="footer">评论{{Item.comment}}</view>
+        </i-card>
+      </navigator>
+    </block>
+
+  </view>
+</view>

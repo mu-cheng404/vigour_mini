@@ -71,13 +71,14 @@
 .nickName {
   width: 565rpx;
   height: 40rpx;
-  margin-left: 15rpx;
+  margin-left: 5rpx;
   margin-top: 10rpx;
   margin-bottom: 10rpx;
   color: rgb(61, 164, 204);
   font-size: 28rpx;
   /* background-color: skyblue; */
   position: relative;
+  display: flex;
 }
 
 .nickName image {
@@ -100,14 +101,7 @@
 }
 
 .type {
-  height: 40rpx;
-  width: 80rpx;
-  padding: 5rpx;
-  font-size: 30rpx;
-  line-height: 40rpx;
-  background-color: rgb(36, 185, 190);
-  border-radius: 10rpx;
-  color: rgba(43, 39, 39, 0.925);
+  font-size: 28rpx;
 }
 
 .time {
@@ -200,4 +194,8 @@
 
 .commentContent {
   color: #666666;
+}
+
+.like_icon{
+  z-index: 99;
 }

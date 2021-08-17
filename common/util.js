@@ -9,7 +9,7 @@ function formatDate(inputTime) {
   var date = new Date(inputTime);
   var y = date.getFullYear();
   var m = date.getMonth() + 1;
-  m = m < 10 ? ('0' + m) : m;
+  m = m < 10 ? ('0' + m) : m; 
   var d = date.getDate();
   d = d < 10 ? ('0' + d) : d;
   var h = date.getHours();
@@ -51,7 +51,7 @@ function queryLogIn() { //查询是否登录？通过查询user表
             _openid: openid
           }).get()
           .then((res) => {
-            console.log(res.data[0])
+            // console.log(res.data[0])
             if (res.data.length) {
               console.log("该用户已登录！")
               resolve(true)

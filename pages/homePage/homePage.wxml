@@ -26,14 +26,15 @@
       </view>
       <view class="rightOption">
         <view class="nickName">{{nickNameArr[idx]}}
-          <view class="c_pos_right">
-            <i-icon size="25" type="{{punchItem.isLike? 'like':'like_fill'}}"></i-icon>
+          <view class="type">●{{punchItem.topic}}</view>
+
+          <view class="c_pos_right like_icon" id="{{idx}}" catchtap="_handlerLike">
+            <i-icon size="25" type="{{isLike_comment[idx]? 'like_fill':'like'}}"></i-icon>
             {{punchItem.praise}}
           </view>
         </view>
         <view>
-          <view class="time">{{datearrays[idx]}}</view>
-          <view class="type">{{punchItem.topic}}</view>
+          <view class="time">{{punchItem.date}}</view>
         </view>
         <text class="content">{{punchItem.content}}</text>
         <view class="accessImage">
@@ -41,13 +42,14 @@
             <image src="{{pItem}}"></image>
           </block>
         </view>
-        <view class="comment" bindtap="_handleTap">{{punchItem.comment}} 评论 ></view>
-        <block wx:for="{{nickNameCom[idx]}}" wx:for-item = "ncItem" wx:for-index="idx2" wx-key = "key">
+        <block wx:for="{{nickNameCom[idx]}}" wx:for-item="ncItem" wx:for-index="idx2" wx-key="key">
           <view class="commentItem">
             <view class="commentNickName">{{ncItem}}:</view>
             <view class="commentContent">{{commentList[idx][idx2].content}}</view>
           </view>
         </block>
+        <view class="comment" catchtap="_handleTap">{{punchItem.comment}} 评论 ></view>
+
       </view>
     </view>
   </block>

@@ -6,12 +6,31 @@ const _att = DB.collection("attendance") //打卡表
 const _like = DB.collection("like") //点赞表
 const _comment = DB.collection("comment") //评论表
 const _user = DB.collection("user") //用户表
+const _sup = DB.collection("supervise") //监督表
 var content //评论内容
 var att_id = "" //打卡条id
 var cur_openid //现在打卡条所属用户的openid
 var openid //当前用户的openid
 var user //用户信息
 Page({
+  jubao: function () {
+    wx.showModal({
+      content: "ta这么可爱忍心吗？？？",
+      success(res) {
+        if (!res.cancel) {
+          wx.showToast({
+            title: '举报失败！',
+            icon: "error"
+          })
+        } else {
+          wx.showToast({
+            title: '点赞!',
+            icon: "none"
+          })
+        }
+      }
+    })
+  },
   //处理弹出框
   showPopup() {
     this.setData({
@@ -22,6 +41,39 @@ Page({
     this.setData({
       show: false
     });
+  },
+  handleSupervise: async function () { //监督
+
+    var is_done = this.data.super_isDone //是否已关注
+    if (!is_done) { //若没有关注
+      await _sup.add({
+          data: {
+            superedID: cur_openid
+          }
+        })
+        .then((res) => {
+          console.log("添加关注数据成功！")
+          wx.showToast({
+            title: '已关注小可爱',
+          })
+        })
+        .catch(console.error)
+    } else {
+      await _sup.where({
+          _openid: openid,
+          superedID: cur_openid
+        }).remove()
+        .then((res) => {
+          console.log("删除关注数据成功！")
+          wx.showToast({
+            title: '已取消关注',
+          })
+        })
+        .catch(console.error)
+    }
+    this.setData({
+      super_isDone: !is_done
+    })
   },
   //预览图片
   preivewImage: function (evt) {
@@ -92,6 +144,48 @@ Page({
       },
       fail: (res) => {
         console.log("praise修改失败！", res)
+      }
+    })
+  },
+  //处理删除打卡条
+  _deletePunch: function () {
+    wx.showModal({
+      cancelColor: 'cancelColor',
+      content: "好不容易打个卡要删掉？？！",
+      success: async (res) => {
+        if (!res.cancel) {
+          await _att.doc(att_id).remove().then((res) => {
+              console.log("打卡表删除成功！")
+            })
+            .catch(console.error)
+
+          var tempComList = this.data.commentList
+          var tempComIDList = []
+          for (var i = 0; i < tempComList.length; i++) {
+            tempComIDList.push(tempComList._id)
+          }
+          tempComIDList.push(att_id)
+          await _like.where({
+              liked_id: _.or(tempComIDList)
+            }).remove().then((res) => {
+              console.log("点赞删除成功！")
+            })
+            .catch(console.error)
+          await _comment.where({
+              commented_id: att_id
+            }).remove().then((res) => {
+              console.log("评论表删除成功！")
+            })
+            .catch(console.error)
+
+          wx.showToast({
+            title: '删除成功！',
+          }).then((res) => {
+            wx.switchTab({
+              url: '../homePage/homePage',
+            })
+          })
+        }
       }
     })
   },
@@ -221,9 +315,12 @@ Page({
     commentList: [], //评论列表信息
     avatarArr: [], //评论头像列表
     nickNameArr: [], //评论昵称列表
-    userInfo: "" //当前用户信息
+    userInfo: "", //当前用户信息
+    cur_userInfo: "", //打卡条所属用户信息
+    super_isShow: true, //是否显示关注按钮
+    super_isDone: false, //是否已关注
   },
-  onLoad: function (options) {
+  onLoad: async function (options) {
     wx.cloud.callFunction({ //获取本用户openid
         name: "getOpenID"
       })
@@ -247,6 +344,8 @@ Page({
       wx.setStorageSync('temp_att_id', options.att_id)
     }
 
+
+
     //获取用户打卡信息
     _att.doc(att_id)
       .get()
@@ -255,6 +354,32 @@ Page({
         cur_openid = res.data._openid //获取本打卡条主人的openid
         this.setData({
           attendance: res.data,
+        })
+        if (cur_openid == openid) //判断关注者和被关注着是否是同一个人
+          this.setData({
+            super_isShow: false
+          })
+
+        await _sup.where({ //获取关注初态
+            _openid: openid,
+            superedID: cur_openid
+          }).get()
+          .then((res) => {
+            console.log("获取关注初态成功！", res.data.length)
+            if (res.data.length) {
+              this.setData({
+                super_isDone: true
+              })
+            }
+          })
+          .catch(console.error)
+
+        await _user.where({ //获取用户打卡信息
+          _openid: cur_openid
+        }).get().then((res) => {
+          this.setData({
+            cur_userInfo: res.data[0]
+          })
         })
 
         await _like
@@ -275,7 +400,7 @@ Page({
           }).get()
           .then(async (res) => {
 
-            this.setData({//评论基本信息
+            this.setData({ //评论基本信息
               commentList: res.data.reverse()
             })
 
