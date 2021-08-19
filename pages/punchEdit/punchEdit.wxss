@@ -39,7 +39,7 @@
     padding: 5rpx;
     font-size: 30rpx;
     line-height: 40rpx;
-    background-color: rgb(171, 245, 202);
+    background-color: rgb(61, 164, 204);
     border-radius: 10rpx;
     margin-left: 20rpx;
     color: white;
@@ -52,7 +52,7 @@
     margin: 30rpx;
     font-size: 45rpx;
     border-top: 1px solid white;
-    border-bottom: 1px solid rgb(171, 245, 202);
+    border-bottom: 1px solid rgb(61, 164, 204);
     position: relative;
     display: flex;
 }
@@ -146,7 +146,7 @@
 
 .punchButton button {
     color: white;
-    background-color: rgb(171, 245, 202);
+    background-color: rgb(61, 164, 204);
     width: 500rpx;
     margin-bottom: 30rpx;
 }

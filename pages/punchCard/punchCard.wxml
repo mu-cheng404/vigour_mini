@@ -18,12 +18,12 @@
   <view class="supervise_interact">
     <view class="text1">我监督的</view>
     <view class="text2">不显示私密小组打卡记录</view>
-    <view class="superviseIcons">
+    <!-- <view class="superviseIcons">
       <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/user.png"
         bindtap="_hander_superviseList"></image>
       <image src="{{imageURL}}share.png" bindtap="onShareAppMessage"></image>
       <image src="{{imageURL}}fangda.png" bindtap="_handlerSearch"></image>
-    </view>
+    </view> -->
   </view>
   <view class="textDisplay" wx:if="{{isNull}}">暂时没有监督任何人哦~</view>
   <block wx:for="{{att_list}}" wx:for-item="Item" wx:for-index="idx" wx:key="key">

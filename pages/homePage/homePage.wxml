@@ -16,7 +16,7 @@
       </image>
     </swiper-item>
   </swiper>
-  <view class="hander_punch c_center" bindtap="_handlerPunch">
+  <view class="hander_punch" bindtap="_handlerPunch">
     <i-icon type="add" size="50" />
   </view>
   <van-grid column-num="3" gutter="10" custom-class="van_grid">

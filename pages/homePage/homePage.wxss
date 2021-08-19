@@ -18,14 +18,15 @@
 .hander_punch {
   width: 150rpx;
   height: 150rpx;
-  border-radius: 50rpx;
-  background-color: #abf5ca;
+  border-radius: 50%;
+  background-color: rgb(61, 164, 204);
   text-align: center;
-
+  line-height: 150rpx;
   margin: 30rpx;
   position: fixed;
   right: 0rpx;
   bottom: 0rpx;
+  color: white;
 }
 
 .hander_punch image {

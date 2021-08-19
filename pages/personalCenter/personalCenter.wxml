@@ -4,7 +4,7 @@
   </view>
   <i-drawer mode="left" visible="{{showLeft1}}" bind:close="toggleLeft1">
     <view class="demo-container">
-      <i-cell title="修改信息" is-link i-class="i_cell" url="../basicsDisplay/basicsDisplay">
+      <i-cell title="个人信息" is-link i-class="i_cell" url="../basicsDisplay/basicsDisplay">
         <view slot="icon">
           <i-icon type="brush" />
         </view>
