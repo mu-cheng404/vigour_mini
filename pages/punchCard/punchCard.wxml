@@ -35,4 +35,8 @@
       </i-card>
     </navigator>
   </block>
+  <i-spin custom fix wx:if="{{isShow}}">
+    <image class="i_span_image"
+      src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png"></image>
+  </i-spin>
 </view>

@@ -19,6 +19,12 @@
   <view class="hander_punch c_center" bindtap="_handlerPunch">
     <i-icon type="add" size="50" />
   </view>
+  <van-grid column-num="3" gutter="10" custom-class="van_grid">
+    <van-grid-item content-class="van_grid_item"  icon="photo-o" text="排行榜" link-type="navigateTo"
+      url="../rank/rank" />
+    <van-grid-item icon="photo-o" text="功能2" />
+    <van-grid-item icon="photo-o" text="功能3" />
+  </van-grid>
   <block wx:for="{{punchMessageArrays}}" wx:for-index="idx" wx:for-item="punchItem" wx:key="id">
     <view id="{{idx}}" class="punchBoxDisplay" bindtap="handleNav">
       <view class="avator">
@@ -54,5 +60,8 @@
     </view>
   </block>
 
-
+  <i-spin custom fix wx:if="{{isShow}}">
+    <image class="i_span_image"
+      src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png"></image>
+  </i-spin>
 </view>

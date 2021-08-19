@@ -89,6 +89,18 @@
           "pathName": "pages/personalPage/personalPage",
           "query": "_openid=ohRLL5C9Gk_xs3bvgiCkKTOo8pws",
           "scene": null
+        },
+        {
+          "name": "更新日志",
+          "pathName": "pages/advise/advise",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "排行榜",
+          "pathName": "pages/rank/rank",
+          "query": "",
+          "scene": null
         }
       ]
     }

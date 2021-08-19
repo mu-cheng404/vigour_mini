@@ -16,7 +16,8 @@
     "pages/test/test",
     "pages/details/details",
     "pages/administrator/administrator",
-    "pages/personalPage/personalPage"
+    "pages/personalPage/personalPage",
+    "pages/rank/rank"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -53,7 +54,8 @@
     "van-popup": "@vant/weapp/popup",
     "van-cell": "@vant/weapp/cell",
     "van-dialog": "@vant/weapp/dialog",
- 
+    "van-grid": "@vant/weapp/grid",
+    "van-grid-item": "@vant/weapp/grid-item",
     "i-drawer": "dist/drawer/index",
     "i-icon": "dist/icon/index",
     "i-cell-group": "dist/cell-group/index",
@@ -61,7 +63,12 @@
     "i-card": "dist/card/index",
     "i-button":"dist/button/index",
     "i-avatar":"dist/avatar/index",
-    "i-input":"dist/input/index"
+    "i-input":"dist/input/index",
+    "i-tabs": "dist/tabs/index",
+    "i-tab": "dist/tab/index",
+    "i-spin": "dist/spin/index"
+
+
 
 
 

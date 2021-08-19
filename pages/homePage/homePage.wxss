@@ -196,6 +196,10 @@
   color: #666666;
 }
 
-.like_icon{
-  z-index: 99;
+.van_grid{
+  margin-left: -14rpx;
+  margin-right: -14rpx;
+}
+.van_grid_item{
+  background-color: teal;
 }

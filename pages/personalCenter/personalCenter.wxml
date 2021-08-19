@@ -11,7 +11,7 @@
       </i-cell>
 
 
-      <i-cell title="反馈" is-link i-class="i_cell" url="../advise/advise">
+      <i-cell title="更新信息" is-link i-class="i_cell" url="../advise/advise">
         <view slot="icon">
           <i-icon type="feedback" />
         </view>

@@ -1,0 +1,31 @@
+<view class="page">
+  <i-tabs current="{{ current_scroll }}" scroll bindchange="handleChangeScroll">
+    <block wx:for="{{barList}}" wx:for-item="item" wx:for-index="idx" wx:key="key">
+      <i-tab key="{{item}}" title="{{item}}"></i-tab>
+    </block>
+  </i-tabs>
+  <view class="body">
+
+    <block wx:for="{{infoList}}" wx:for-item="item" wx:for-index="idx" wx:key="key">
+      <view class="part">
+        <view class="sequence">
+          {{idx+1}}
+        </view>
+        <navigator url="../personalPage/personalPage?_openid={{item._id}}">
+          <view class="avatar">
+            <image src="{{item.avatarUrl}}">
+            </image>
+          </view>
+        </navigator>
+        <view class="nickName">{{item.nickName}} <icon class="iconfont {{item.gender?'icon-nansheng':'icon-nvsheng'}}">
+          </icon>
+        </view>
+        <view class="number">{{item.count}}</view>
+      </view>
+    </block>
+  </view>
+  <i-spin custom fix wx:if="{{isShow}}">
+    <image class="i_span_image"
+      src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png"></image>
+  </i-spin>
+</view>

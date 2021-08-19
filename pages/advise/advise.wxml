@@ -1,2 +1,39 @@
-<!--pages/advise/advise.wxml-->
-<text>pages/advise/advise.wxml</text>
+<view class="page">
+  <view class="8.17">
+    <view class="title">
+      8.17
+    </view>
+    <view class="text">
+      1. 评论可直接显示在主页
+    </view>
+    2. 可直接对主页的打卡条点赞
+    <view class="text">
+      3. 打卡条可删除
+    </view>
+    <view class="text">
+      4. 增加监督功能（详情页）
+    </view>
+    <view class="text">
+      5. 点击头像可进入个人主页
+    </view>
+    <view class="text">
+      6. 在"打卡"tab栏可查看已监督的打卡信息
+    </view>
+    <view class="text">
+      7. "我的"tab栏左上角 可修改个人信息
+    </view>
+  </view>
+</view>
+
+<!-- 1. 评论可直接显示在主页
+2. 可直接对主页的打卡条点赞
+3. 打卡条可删除
+4. 增加监督功能（详情页）
+5. 点击头像可进入个人主页
+6. 在"打卡"tab栏可查看已监督的打卡信息
+7. "我的"tab栏左上角 可修改个人信息 -->
+
+
+
+
+

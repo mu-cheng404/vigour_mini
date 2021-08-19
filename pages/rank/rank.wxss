@@ -1,0 +1,58 @@
+.page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.body {
+  width: 710rpx;
+  height: 100vh;
+  background-color: white;
+  margin: 20rpx 20rpx 0 20rpx;
+  box-shadow: 0px 0px 10px 5px #D0E2E9;
+  border-radius: 10rpx;
+  position: relative;
+}
+
+.part {
+  width: 100%;
+  height: 140rpx;
+  /* background-color: burlywood; */
+  display: flex;
+  position: relative;
+}
+
+.sequence {
+  width: 100rpx;
+  height: 140rpx;
+  text-align: center;
+  line-height: 140rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  /* background-color: rgb(141, 113, 76); */
+}
+
+.avatar image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin: 30rpx;
+}
+
+.nickName {
+  font-size: 14px;
+  line-height: 140rpx;
+  flex: 1;
+  height: 140rpx;
+  font-weight: 550;
+}
+
+.number {
+  position: absolute;
+  width: 140rpx;
+  height: 140rpx;
+  line-height: 140rpx;
+  text-align: center;
+  right: 0rpx;
+  /* background-color: powderblue; */
+}
