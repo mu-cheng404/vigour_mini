@@ -1,18 +1,18 @@
-<view class="page">
+<view class="page box-sizing">
   <view class="punchCategoryArray">
     <block wx:for="{{punchCategoryArray}}" wx:for-index="idx" wx:for-item="categoryItem" wx:key="id">
       <view id="{{categoryItem.categoryText}}" class="categoryBox" bindtap="_handerTap">
         <view class="box_image">
           <image src="{{categoryItem.pictureSrc}}"></image>
         </view>
-        <view class="categoryText">{{categoryItem.categoryText}}</view>
+        <view class="categoryText globalBgColor">{{categoryItem.categoryText}}</view>
       </view>
     </block>
-    <view class="categoryBox" bindtap="_handlerMore">
+    <view class="categoryBox" bindtap="">
       <view class="box_image">
         <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/more.png"></image>
       </view>
-      <view class="categoryText">更多打卡</view>
+      <view class="categoryText globalBgColor">更多打卡</view>
     </view>
   </view>
   <view class="supervise_interact">

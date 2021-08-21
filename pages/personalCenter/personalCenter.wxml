@@ -1,4 +1,4 @@
-<view class="page">
+<view class="page box-sizing">
   <view class="drawpanel">
     <i-icon type="createtask" size="30" bindtap="toggleLeft1" />
   </view>

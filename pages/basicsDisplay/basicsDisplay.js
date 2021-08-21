@@ -3,7 +3,7 @@ var openid
 const DB = wx.cloud.database()
 const _user = DB.collection("user")
 const _att = DB.collection("attendance")
-var initpath//头像初始路径、用来判断是否修改了头像
+var initpath //头像初始路径、用来判断是否修改了头像
 Page({
   data: {
     userInfo: "",
@@ -27,55 +27,51 @@ Page({
       .catch(console.error)
   },
   //处理表单
-  handleChange: function (event) {
+  handleChange: async function (event) {
     var val = event.detail.value
     console.log(val)
-    val.gender = val.gender == "男"?1:0//性别格式化
-    console.log("修改之后",val)
-    if (initpath != this.data.userInfo.avatarUrl ||val.nickName != this.data.userInfo.nickName || val.gender != this.data.userInfo.gender || val.province != this.data.userInfo.province) //控制条件，若需修改表单这里也需要修改
+    val.gender = val.gender == "男" ? 1 : 0 //性别格式化
+    console.log("修改之后", val)
+    if (initpath != this.data.userInfo.avatarUrl || val.nickName != this.data.userInfo.nickName || val.gender != this.data.userInfo.gender || val.province != this.data.userInfo.province) //控制条件，若需修改表单这里也需要修改
     {
-      // console.log("修改",val)
-
-      var timestamp = Date.parse(new Date()) //生成时间戳
-      var fileID //图片上传后的id
-      wx.cloud.uploadFile({ //上传图片
-          cloudPath: "user/" + timestamp + Math.floor(Math.random() * 1000) + ".png", // 上传至云端的路径
-          filePath: this.data.userInfo.avatarUrl, // 小程序临时文件路径
+      if (val.nickName == "" || val.nickName == " " || val.nickName.length) {
+        wx.showToast({
+          title: '昵称不能为空！',
+          icon: "error"
         })
-        .then((res) => {
-          console.log("上传图片成功", res.fileID)
-          fileID = res.fileID
-          _user.where({
-              _openid: openid
-            })
-            .update({
-              data: {
-                avatarUrl:fileID,
-                nickName: val.nickName,
-                gender: val.gender,
-                province: val.province
-              }
-            }) 
-            .then((res) => {
-              console.log("修改个人信息成功！")
-              wx.showToast({
-                title: '修改成功！',
-              })
-              _att.where({_openid:openid}).update({//更新打卡信息
-                data:{
-                  avatarUrl: fileID,
-                  nickName: val.nickName
-                }
-              })
-              .then((res)=>{
-                console.log("更新打卡信息中的头像和昵称成功")
-              })
-              .catch(console.error)
-            })
-            .catch(console.error)
-        })
-        .catch(console.error)
-
+      } else {
+        // // console.log("修改",val)
+        // if (initpath != this.data.userInfo.avatarUrl) {
+        //   var timestamp = Date.parse(new Date()) //生成时间戳
+        //   var fileID = initpath //图片上传后的id
+        //   await wx.cloud.uploadFile({ //上传图片
+        //       cloudPath: "user/" + timestamp + Math.floor(Math.random() * 1000) + ".png", // 上传至云端的路径
+        //       filePath: this.data.userInfo.avatarUrl, // 小程序临时文件路径
+        //     })
+        //     .then((res) => {
+        //       console.log("上传图片成功", res.fileID)
+        //       fileID = res.fileID
+        //     })
+        //     .catch(console.error)
+        // }
+        // await _user.where({
+        //     _openid: openid
+        //   })
+        //   .update({
+        //     data: {
+        //       avatarUrl: fileID,
+        //       nickName: val.nickName,
+        //       gender: val.gender,
+        //       province: val.province
+        //     }
+        //   })
+        //   .then((res) => {
+        //     console.log("修改个人信息成功！")
+        //     wx.showToast({
+        //       title: '修改成功！',
+        //     })
+        //   })
+      }
     } else {
       this.setData({
         is_link: !this.data.is_link,
@@ -83,10 +79,9 @@ Page({
       })
     }
 
-
   },
   onLoad: function (options) {
-    
+
 
     // wx.cloud.callFunction({
     //   name: "getOpenID",

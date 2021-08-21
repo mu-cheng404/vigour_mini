@@ -55,7 +55,7 @@
           "scene": null
         },
         {
-          "name": "basicsDisplay",
+          "name": "个人信息",
           "pathName": "pages/basicsDisplay/basicsDisplay",
           "query": "",
           "scene": null
@@ -99,6 +99,12 @@
         {
           "name": "排行榜",
           "pathName": "pages/rank/rank",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "更多打卡",
+          "pathName": "pages/moreSignIn/moreSignIn",
           "query": "",
           "scene": null
         }

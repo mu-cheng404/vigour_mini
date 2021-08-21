@@ -84,21 +84,27 @@ Page({
       var templength = res.data.length
       tempTopic = res.data[templength - 1].topic
       console.log(tempTopic)
-      wx.showModal({
-        cancelColor: 'cancelColor',
-        content: "要继续上一次：" + tempTopic + "的打卡吗",
-        success(res) {
-          if (!res.cancel) { //确定
-            wx.navigateTo({
-              url: '../punchEdit/punchEdit?type=' + tempTopic
-            })
-          } else { //取消
-            wx.switchTab({
-              url: '../punchCard/punchCard',
-            })
+      if (tempTopic) {
+        wx.showModal({
+          cancelColor: 'cancelColor',
+          content: "要继续上一次：" + tempTopic + "的打卡吗",
+          success(res) {
+            if (!res.cancel) { //确定
+              wx.navigateTo({
+                url: '../punchEdit/punchEdit?type=' + tempTopic
+              })
+            } else { //取消
+              wx.switchTab({
+                url: '../punchCard/punchCard',
+              })
+            }
           }
-        }
-      })
+        })
+      } else {
+        wx.switchTab({
+          url: '../punchCard/punchCard',
+        })
+      }
     })
   },
   data: {
@@ -112,7 +118,7 @@ Page({
     isShow: true, //是否展示加载动画
   },
   onLoad: async function (options) {
-    this.setData({//显示加载动画
+    this.setData({ //显示加载动画
       isShow: true
     })
     isLogIn = await util.queryLogIn()
@@ -159,7 +165,7 @@ Page({
         console.log("这个云函数调用失败", res)
       }
     })
-    this.setData({//结束加载
+    this.setData({ //结束加载
       isShow: false
     })
     var commentList = [] //评论数据

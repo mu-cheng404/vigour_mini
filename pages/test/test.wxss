@@ -1,1 +1,4 @@
-/* pages/test/test.wxss */
+.van_dropdown{
+  width: 300rpx;
+  
+}

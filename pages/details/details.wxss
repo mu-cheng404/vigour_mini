@@ -70,6 +70,11 @@
   width: 100%;
   /* background-color: teal;  */
 }
+.part2 text{
+  font-size: 14px;
+  display: block;
+  margin: 10rpx;  
+}
 
 _block {
   width: 100%;
@@ -82,7 +87,7 @@ _block {
 }
 
 ._image {
-  width: 100%;
+  width: 100%; 
 }
 
 .part3 {

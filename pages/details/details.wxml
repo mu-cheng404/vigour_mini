@@ -1,4 +1,4 @@
-<view class="page">
+<view class="page box-sizing">
   <view class="part1">
     <view class="avatar">
       <navigator url="../personalPage/personalPage?_openid={{cur_userInfo._openid}}">
@@ -7,7 +7,7 @@
     </view>
     <view class="nickname">
       <view class="nickname_upper">{{cur_userInfo.nickName}}
-        <view wx:if="{{super_isShow}}" class ="jubao" catchtap="jubao">←举报ta</view>
+        <view wx:if="{{super_isShow}}" class="jubao" catchtap="jubao">←举报ta</view>
       </view>
       <view class="nickname_lower">{{attendance.date}}</view>
     </view>
@@ -18,7 +18,7 @@
     <text rendonly>{{attendance.content}}</text>
     <block wx:for="{{attendance.pictures}}" wx:for-index="idx" wx:for-item="picItem" wx:key="id">
       <view class="_block" id="{{idx}}">
-        <image src="{{picItem}}" class="_image" bindtap="preivewImage"></image>
+        <image src="{{picItem}}" class="_image" mode="widthFix" bindtap="preivewImage"></image>
       </view>
     </block>
   </view>

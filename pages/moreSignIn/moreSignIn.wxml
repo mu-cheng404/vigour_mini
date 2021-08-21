@@ -5,91 +5,87 @@
   </view>
 </view>
 <view>
-  <view class="page">
-  <view class="punchCategoryArray">
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}zaoqi.png" role="img"></image>
+  <view class="page box-sizing">
+    <view class="punchCategoryArray">
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}zaoqi.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">早起</view>
       </view>
-      <view class="categoryText">早起</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}xuexi.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}xuexi.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">学习</view>
       </view>
-      <view class="categoryText">学习</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}yundong.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}yundong.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">运动</view>
       </view>
-      <view class="categoryText">运动</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}dushu.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}dushu.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">读书</view>
       </view>
-      <view class="categoryText">读书</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}zaoshui.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}zaoshui.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">早睡</view>
       </view>
-      <view class="categoryText">早睡</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}jiankang.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}jiankang.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">健康</view>
       </view>
-      <view class="categoryText">健康</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}heshui.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}heshui.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">喝水</view>
       </view>
-      <view class="categoryText">喝水</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}shopping.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}shopping.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">购物</view>
       </view>
-      <view class="categoryText">购物</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}qixing.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}qixing.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">骑行</view>
       </view>
-      <view class="categoryText">骑行</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}huabing.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}huabing.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">滑冰</view>
       </view>
-      <view class="categoryText">滑冰</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}lvyou.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}lvyou.png" role="img"></image>
+        </view>
+        <view class="categoryText globalBgColor">旅游</view>
       </view>
-      <view class="categoryText">旅游</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}kandianying.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}kandianying.png" role="img"></image>
+        </view>
+        <view class="categoryText">看电影</view>
       </view>
-      <view class="categoryText">看电影</view>
-    </view>
-    <view bindtap="_handerTap" class="categoryBox">
-      <view class="box_image">
-        <image src="{{imageURL}}jidian.png" role="img"></image>
+      <view bindtap="_handerTap" class="categoryBox">
+        <view class="box_image">
+          <image src="{{imageURL}}jidian.png" role="img"></image>
+        </view>
+        <view class="categoryText">景点</view>
       </view>
-      <view class="categoryText">景点</view>
     </view>
+
   </view>
-
 </view>
-</view>
-
-
-
-

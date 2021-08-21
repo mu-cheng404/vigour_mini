@@ -1,4 +1,4 @@
-<view class="page">
+<view class="page box-sizing">
   <i-tabs current="{{ current_scroll }}" scroll bindchange="handleChangeScroll">
     <block wx:for="{{barList}}" wx:for-item="item" wx:for-index="idx" wx:key="key">
       <i-tab key="{{item}}" title="{{item}}"></i-tab>

@@ -38,7 +38,6 @@
   /* font-weight: bold; */
   border-bottom-right-radius: 10rpx;
   border-bottom-left-radius: 10rpx;
-  background-color: rgb(61, 164, 204);
   font-size: 30rpx;
   line-height: 40rpx;
   text-align: center;
