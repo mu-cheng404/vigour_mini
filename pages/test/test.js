@@ -27,6 +27,7 @@ Page({
       for (var j = 0; j < array1[i].length; j++) {
         if (array1[i][j] != array2[i][j]) return false
       }
+   
     }
     return true
   },
@@ -51,7 +52,7 @@ Page({
       var centerPoints = []
 
       for (var i = 0; i < k; i++) { //从前面选择初始点
-        centerPoints.push(Data[i])
+        centerPoints.push(Data[i].data)
         console.log("123")
       }
       // for(var i = 0 ;i < k ; i++){//随机选取初始点
@@ -69,10 +70,10 @@ Page({
 
         //循环每个点找到与其距离最近的聚簇点，放入一个聚簇中
         for (var i = 0; i < N; i++) {
-          var dis = this.CalcuDistance(Data[i], centerPoints[0]) //与第一个初始点的距离
+          var dis = this.CalcuDistance(Data[i].data, centerPoints[0]) //与第一个初始点的距离
           var idx = 0 //聚簇下标值
           for (var j = 1; j < k; j++) {
-            var curDis = this.CalcuDistance(Data[i], centerPoints[j])
+            var curDis = this.CalcuDistance(Data[i].data, centerPoints[j])
             if (curDis < dis) { //当发现距离更短的点
               idx = j
               dis = curDis
@@ -87,7 +88,7 @@ Page({
           var tempPoint = new Array(n).fill(0) //临时中心点
           for (var j = 0; j < clusters[i].length; j++) {
             for (var t = 0; t < n; t++) {
-              tempPoint[t] += clusters[i][j][t]
+              tempPoint[t] += clusters[i][j].data[t]
             }
           }
 
@@ -120,7 +121,7 @@ Page({
       for (var j = 0; j < clusters[i].length; j++) { //簇中的每个点
         var tempA = 0 //每个点的临时凝聚度
         for (var J = 0; J < clusters[i].length; J++) { //遍历本簇中所有其他点，计算平均距离
-          tempA += this.CalcuDistance(clusters[i][j], clusters[i][J])
+          tempA += this.CalcuDistance(clusters[i][j].data, clusters[i][J].data)
         }
         tempA = parseInt(tempA / clusters[i].length)
         var tempb = 0 //每个点的临时分离度
@@ -128,22 +129,14 @@ Page({
         for (var I = 0; I < clusters.length; I++) { //遍历本簇外的其他簇，求最近平均距离
           if (I != i && clusters[I].length != 0) {
             for (var J = 0; J < clusters[I].length; J++) { //求平均距离
-              tempb += this.CalcuDistance(clusters[i][j], clusters[I][J])
+              tempb += this.CalcuDistance(clusters[i][j].data, clusters[I][J].data)
 
             }
             tempb = parseInt(tempb / clusters[I].length)
-            // console.log("clusters[I].length", clusters[I].length)
-            // if(clusters[I].length == 0){
-            //   console.log("clusters",clusters)
-            // }
-            // console.log("tempb", tempb)
             tempB = Math.min(tempB, tempb)
           }
         }
         sc.push((tempB - tempA) / Math.max(tempA, tempB))
-        // console.log("tempA", tempA)
-        // console.log("tempB", tempB)
-        // console.log("(tempB - tempA) / Math.max(tempA, tempB)", (tempB - tempA) / Math.max(tempA, tempB))
       }
     }
     console.log("轮廓系数数组=", sc)
@@ -177,23 +170,15 @@ Page({
               singleData.push(res.total)
             })
           }
-          Data.push(singleData)
+          Data.push({
+            id : openidArr[i],
+            data :singleData
+          })
         }
         console.log(Data)
         wx.setStorageSync('Data', Data)
       })
       .catch(console.error)
-    // N = 15
-    // Data = [[0,0,1,0,0,0,0],[0,1,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,2,0,0,1,0,0],[0,2,0,0,0,0,0],[0,0,0,0,0,0,0],[2,0,0,0,0,0,0],[0,0,0,0,0,1,0],[0,1,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
-
     this.k_means()
   }
-  // onLoad:function(){
-  //   wx.cloud.callFunction({
-  //     name:"recommend",
-  //   })
-  //   .then((res)=>{
-  //     console.log(res.result.clusters)
-  //   })
-  // }
 })
