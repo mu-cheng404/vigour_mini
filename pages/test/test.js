@@ -150,35 +150,10 @@ Page({
   onLoad: async function () {
     label = app.globalData.label //获取标签列表
     n = label.length //维度初始化
-    // 数据预处理
-    await _user.aggregate().group({
-        _id: "$_openid"
-      }).end().then(async (res) => {
-        openidArr = [] //所有用户openid的数组
-        for (var i = 0; i < res.list.length; i++) { //初始化_openid数组
-          openidArr.push(res.list[i]._id)
-        }
-        N = openidArr.length //N初始化
-        Data = [] //初始化数据集
-        for (var i = 0; i < openidArr.length; i++) { //处理Data
-          var singleData = [] //单个用户，单个数据
-          for (var j = 0; j < n; j++) {
-            await _att.where({
-              _openid: openidArr[i],
-              topic: label[j]
-            }).count().then((res) => {
-              singleData.push(res.total)
-            })
-          }
-          Data.push({
-            id : openidArr[i],
-            data :singleData
-          })
-        }
-        console.log(Data)
-        wx.setStorageSync('Data', Data)
-      })
-      .catch(console.error)
+    // 数据预处理 
+    Data = wx.getStorageSync('Data')
+    N = Data.length
+    console.log(Data)
     this.k_means()
   }
 })

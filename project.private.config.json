@@ -107,6 +107,12 @@
           "pathName": "pages/moreSignIn/moreSignIn",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "推荐",
+          "pathName": "pages/recommend/recommend",
+          "query": "",
+          "scene": null
         }
       ]
     }

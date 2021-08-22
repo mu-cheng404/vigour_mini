@@ -22,7 +22,8 @@
   <van-grid column-num="3" gutter="10" custom-class="van_grid">
     <van-grid-item content-class="van_grid_item"  icon="photo-o" text="排行榜" link-type="navigateTo"
       url="../rank/rank" />
-    <van-grid-item icon="photo-o" text="功能2" />
+    <van-grid-item icon="photo-o" text="好友推荐" bindtap = "recommendNav"
+       />
     <van-grid-item icon="photo-o" text="功能3" />
   </van-grid>
   <block wx:for="{{punchMessageArrays}}" wx:for-index="idx" wx:for-item="punchItem" wx:key="id">

@@ -37,7 +37,7 @@
   height: 80rpx;
   border-radius: 50%;
   margin: 30rpx;
-}
+} 
 
 .nickName {
   font-size: 14px;

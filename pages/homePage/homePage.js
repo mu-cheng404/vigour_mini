@@ -107,6 +107,21 @@ Page({
       }
     })
   },
+  recommendNav: function () {
+    wx.showModal({
+      cancelColor: 'cancelColor',
+      content:"这个功能可能要加载十几秒哦，确定跳转吗？",
+      cancelText:"算了吧",
+      confirmText:"是的确定"
+    })
+    .then((res)=>{
+      if(!res.cancel){
+        wx.navigateTo({
+          url: '../recommend/recommend',
+        })
+      }
+    }).catch(console.error)
+  },
   data: {
     punchMessageArrays: [],
     datearrays: [], //时间数组

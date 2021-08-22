@@ -1,0 +1,32 @@
+.box{
+  width: 750rpx;
+  height: 100vh;
+  /* background-color: aqua; */
+  /* display: flex; */
+}
+.part {
+  width: 160rpx;
+  height: 265rpx;
+  background-color: white;
+  margin: 45rpx;
+  border-radius: 10rpx;
+  float :left;
+}
+
+image {
+  margin: 20rpx 20rpx 0 20rpx;
+}
+
+.nickName {
+  width: 160rpx;
+  height: 21px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.button {
+  width: 160rpx;
+  text-align: center;
+  padding-bottom: 20rpx;
+}

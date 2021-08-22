@@ -1,0 +1,24 @@
+<view class="page">
+  <van-button size="normal" loading="{{isLoading}}" color="#fedfe1" loading-text="加载中..." block bindtap="changeGroup">匹配度：{{finalSC}}换一批</van-button>
+<view class="box">
+  <block wx:for="{{selectedInfo}}" wx:for-iten="item" wx:for-index="idx" wx:key="key">
+
+    <view class="part">
+
+      <image class="globalAvatarSize" src="{{item.avatar}}"></image>
+      <view class="nickName">
+        {{item.nickName}}
+      </view>
+      <view class="button">
+        <van-button id = "{{idx}}"size="small" color="{{item.isSupervise?'#999999':'#fedfe1'}}" hairline custom-style="button" bindtap = "handleSupervise" > {{item.isSupervise?"已监督":"监督ta"}}</van-button>
+      </view>
+
+    </view>
+  </block>
+  <i-toast id="toast" />
+  <i-spin custom fix wx:if="{{isShow}}">
+   
+      <image class="i_span_image"
+      src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png"></image>
+  </i-spin>
+</view></view>

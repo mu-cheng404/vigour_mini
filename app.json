@@ -17,7 +17,8 @@
     "pages/details/details",
     "pages/administrator/administrator",
     "pages/personalPage/personalPage",
-    "pages/rank/rank"
+    "pages/rank/rank",
+    "pages/recommend/recommend"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
