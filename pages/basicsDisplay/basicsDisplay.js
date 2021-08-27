@@ -34,43 +34,43 @@ Page({
     console.log("修改之后", val)
     if (initpath != this.data.userInfo.avatarUrl || val.nickName != this.data.userInfo.nickName || val.gender != this.data.userInfo.gender || val.province != this.data.userInfo.province) //控制条件，若需修改表单这里也需要修改
     {
-      if (val.nickName == "" || val.nickName == " " || val.nickName.length) {
+      if (val.nickName == "" || val.nickName == " " || val.nickName.length == 0) {
         wx.showToast({
           title: '昵称不能为空！',
           icon: "error"
         })
       } else {
-        // // console.log("修改",val)
-        // if (initpath != this.data.userInfo.avatarUrl) {
-        //   var timestamp = Date.parse(new Date()) //生成时间戳
-        //   var fileID = initpath //图片上传后的id
-        //   await wx.cloud.uploadFile({ //上传图片
-        //       cloudPath: "user/" + timestamp + Math.floor(Math.random() * 1000) + ".png", // 上传至云端的路径
-        //       filePath: this.data.userInfo.avatarUrl, // 小程序临时文件路径
-        //     })
-        //     .then((res) => {
-        //       console.log("上传图片成功", res.fileID)
-        //       fileID = res.fileID
-        //     })
-        //     .catch(console.error)
-        // }
-        // await _user.where({
-        //     _openid: openid
-        //   })
-        //   .update({
-        //     data: {
-        //       avatarUrl: fileID,
-        //       nickName: val.nickName,
-        //       gender: val.gender,
-        //       province: val.province
-        //     }
-        //   })
-        //   .then((res) => {
-        //     console.log("修改个人信息成功！")
-        //     wx.showToast({
-        //       title: '修改成功！',
-        //     })
-        //   })
+        // console.log("修改",val)
+        if (initpath != this.data.userInfo.avatarUrl) {
+          var timestamp = Date.parse(new Date()) //生成时间戳
+          var fileID = initpath //图片上传后的id
+          await wx.cloud.uploadFile({ //上传图片
+              cloudPath: "user/" + timestamp + Math.floor(Math.random() * 1000) + ".png", // 上传至云端的路径
+              filePath: this.data.userInfo.avatarUrl, // 小程序临时文件路径
+            })
+            .then((res) => {
+              console.log("上传图片成功", res.fileID)
+              fileID = res.fileID
+            })
+            .catch(console.error)
+        }
+        await _user.where({
+            _openid: openid
+          })
+          .update({
+            data: {
+              avatarUrl: fileID,
+              nickName: val.nickName,
+              gender: val.gender,
+              province: val.province
+            }
+          })
+          .then((res) => {
+            console.log("修改个人信息成功！")
+            wx.showToast({
+              title: '修改成功！',
+            })
+          })
       }
     } else {
       this.setData({

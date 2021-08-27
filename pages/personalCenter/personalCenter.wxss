@@ -1,66 +1,139 @@
-.page{
+.page {
   width: 100%;
-  height:100vh;
+  height: 100vh;
   /* background-color: gray; */
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
   position: relative;
+  margin: 0rpx;
 }
-.avator{
+
+.part1 {
+  width: 100%;
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.avator {
   width: 150rpx;
   height: 150rpx;
   border-radius: 50%;
   /* background-color: hotpink; */
-  margin-top: 50rpx;
+  margin-top: 30rpx;
 }
-.avator image{
+
+.avator image {
   width: 150rpx;
   height: 150rpx;
   border-radius: 50%;
 
 }
-.nickname image{
-  width: 25rpx;
-  height: 25rpx;
-  border-radius: 50%;
 
+.nickname {
+  width:100%;
+  height: 21px;
+  text-align: center;
+  line-height: 21px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
 }
-.baseStyle{
+
+.data {
+  width: 100%;
+  height: 100rpx;
+  /* background-color: aqua; */
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  /* background-color: aqua; */
+}
+.punchNumber{
+  height: 42rpx;
+  line-height: 42rpx;
+  min-width: 160rpx;
+  font-weight: 600;
+}
+.type {
+  height: 42rpx;
+  padding: 1rpx;
+  color: white;
+  border-radius: 20rpx;
+  font-size: 14px;
+  width: 80rpx;
+  line-height: 42rpx;
+  text-align: center;  
+  margin-bottom: 14rpx;
+}
+
+.baseStyle {
   width: 400rpx;
   height: 80rpx;
   background-color: rgb(171, 245, 202);
   border-radius: 50rpx;
-  color:rgb(255, 255, 255);
-  line-height:80rpx;
-  text-align:center;
+  color: rgb(255, 255, 255);
+  line-height: 80rpx;
+  text-align: center;
   margin: 15rpx;
-  font-size:35rpx;
+  font-size: 35rpx;
 }
-.baseStyle text{
-  color: red;
-  font-size:20rpx;
-}
-.part2{
-  width: 100%;
-  height: 100vh;
-  background-color: white;
-  border-top-left-radius: 25rpx;
-  border-top-right-radius: 25rpx;
 
+.baseStyle text {
+  /* color: red; */
+  font-size: 20rpx;
 }
-.drawpanel{
+
+.part2 {
+  width: 100%;
+  flex: 1;
+  background-color: white;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.margin {
+  width: 100%;
+  height: 50rpx;
+}
+
+.function {
+  width: 400rpx;
+  height: 80rpx;
+  margin-top: 30rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 18px;
+  /* background-color: aqua; */
+  border-radius: 20rpx;
+  box-shadow: 0 0 10rpx 5rpx #C6DBE0;
+  font-weight: 600;
+  border: 2rpx solid #C6DBE0;
+}
+
+.drawpanel {
   position: fixed;
   left: 20rpx;
   top: 20rpx;
 }
-.demo-container{
+
+.demo-container {
   width: 300rpx;
   height: 100vh;
   background-color: white;
 }
-.i_cell{
+
+.i_cell {
   margin: 0rpx 20rpx 10rpx 20rpx;
-  
+
 }

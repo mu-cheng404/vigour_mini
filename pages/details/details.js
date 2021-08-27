@@ -1,5 +1,5 @@
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
-const util = require('../../common/util.js')
+const util = require('../../common/util')
 const DB = wx.cloud.database()
 const _ = DB.command
 const _att = DB.collection("attendance") //打卡表
@@ -249,7 +249,7 @@ Page({
   //点击评论图标跳转
   handleComment: function () {
     this.setData({
-      show: true
+      isFocus: true
     })
   },
   //处理评论
@@ -262,7 +262,6 @@ Page({
     var timestamp = Date.parse(new Date())
     timestamp = timestamp / 1000
     var Time = util.formatDate((timestamp * 1000)) //转换时间格式
-
     _comment //添加评论信息到数据库
       .add({
         data: {
@@ -307,6 +306,10 @@ Page({
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.onLoad()
   },
+  //处理分享
+  handleShare: function () {
+    this.onShareAppMessage()
+  },
   data: {
     show: false, //是否展示评论框
     attendance: [], //打卡信息表
@@ -319,6 +322,7 @@ Page({
     cur_userInfo: "", //打卡条所属用户信息
     super_isShow: true, //是否显示关注按钮
     super_isDone: false, //是否已关注
+    isFocus:false,//是否获得焦点
   },
   onLoad: async function (options) {
     wx.cloud.callFunction({ //获取本用户openid
@@ -451,4 +455,26 @@ Page({
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.onLoad()
   },
+  onShareAppMessage: function () {
+    const {
+      info,
+      code
+    } = that.data;
+    return {
+      title: info.name,
+      path: `/pages/share/index?code=${code}&uid=${wx.getStorageSync('uid')}`,
+      imageUrl: info.thumbnail_url
+    }
+  },
+  onShareTimeline: function () {
+    const {
+      info,
+      code
+    } = that.data;
+    return {
+      title: info.name,
+      query: `code=${code}&uid=${wx.getStorageSync('uid')}`,
+      imageUrl: info.thumbnail_url
+    }
+  }
 })

@@ -18,7 +18,8 @@
     "pages/administrator/administrator",
     "pages/personalPage/personalPage",
     "pages/rank/rank",
-    "pages/recommend/recommend"
+    "pages/recommend/recommend",
+    "pages/about/about"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -29,24 +30,26 @@
     "enablePullDownRefresh": true
   },
   "tabBar": {
+    
+    "selectedColor": "#437C87",
     "list": [
       {
         "pagePath": "pages/homePage/homePage",
         "text": "主页",
         "iconPath": "image/home-page.png",
-        "selectedIconPath": "image/homepage-selected.png"
+        "selectedIconPath": "image/select-home-page.png"
       },
       {
         "pagePath": "pages/punchCard/punchCard",
         "text": "打卡",
         "iconPath": "image/punchCard.png",
-        "selectedIconPath": "image/punchCard-Selected.png"
+        "selectedIconPath": "image/select-punchCard.png"
       },
       {
         "pagePath": "pages/personalCenter/personalCenter",
         "text": "我的",
-        "iconPath": "image/personal.png",
-        "selectedIconPath": "image/personal-selected.png"
+        "iconPath": "image/person.png",
+        "selectedIconPath": "image/select-person.png"
       }
     ]
   },
@@ -72,8 +75,11 @@
     "i-spin": "dist/spin/index",
     "i-radio-group": "dist/radio-group/index",
     "i-radio": "dist/radio/index",
-    "i-toast": "dist/toast/index"
-
+    "i-toast": "dist/toast/index",
+    "wux-popover": "wux-weapp/popover/index",
+    "wux-fab-button": "wux-weapp/fab-button/index",
+    "wux-upload": "wux-weapp/upload/index"
+    
   },
   "sitemapLocation": "sitemap.json"
 }

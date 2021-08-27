@@ -1,43 +1,28 @@
-<view class="page box-sizing">
-  <view class="drawpanel">
-    <i-icon type="createtask" size="30" bindtap="toggleLeft1" />
-  </view>
-  <i-drawer mode="left" visible="{{showLeft1}}" bind:close="toggleLeft1">
-    <view class="demo-container">
-      <i-cell title="个人信息" is-link i-class="i_cell" url="../basicsDisplay/basicsDisplay">
-        <view slot="icon">
-          <i-icon type="brush" />
-        </view>
-      </i-cell>
+<view class="page Bgcolor1">
 
-
-      <i-cell title="更新信息" is-link i-class="i_cell" url="../advise/advise">
-        <view slot="icon">
-          <i-icon type="feedback" />
-        </view>
-      </i-cell>
+  <view class="part1">
+    <view class="avator">
+      <image src="{{userInfo.avatarUrl}}" wx:if="{{hasUserInfo}}"></image>
+      <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png"
+        wx:else="{{hasUserInfo}}" bindtap="_getUserProfile"></image>
     </view>
-  </i-drawer>
-  <view class="avator">
-    <image src="{{userInfo.avatarUrl}}" wx:if="{{hasUserInfo}}"></image>
-    <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png"
-      wx:else="{{hasUserInfo}}"></image>
-  </view>
-  <view class="nickname">
-    <view wx:if="{{hasUserInfo}}"> {{userInfo.nickName}}</view>
-    <i-button wx:else="{{hasUserInfo}}" bind:click="_getUserProfile" type="ghost"> 点击登录</i-button>
+    <view class="nickname">
+       {{hasUserInfo?userInfo.nickName:'点击头像登录'}}
+    </view>
+    <view class="data" wx:if="{{hasUserInfo}}">
+      <view class="punchNumber">
+    总打卡数 {{Pcount}}
+    </view>
+      <block wx:for="{{label}}" wx:key = "key"><view class="type Bgcolor4">{{item}}</view></block>
+
+    
+    </view>
   </view>
 
   <view class="part2">
-    <block wx:for="{{att_list}}" wx:for-item="Item" wx:for-index="idx" wx:key="key">
-      <navigator url="../details/details?att_id={{Item._id}}">
-        <i-card id="{{idx}}" title="{{userInfo.nickName}}" extra="{{Item.praise}}" thumb="{{userInfo.avatarUrl}}"
-          i-class="i_card">
-          <view slot="content">{{Item.content}}</view>
-          <view slot="footer">评论{{Item.comment}}</view>
-        </i-card>
-      </navigator>
+    <view class="margin"></view>
+    <block wx:for="{{functionList}}" wx:key="key">
+      <view id = "{{index}}"class="function color4" bindtap="handleNavi">{{item}}</view>
     </block>
-
   </view>
 </view>

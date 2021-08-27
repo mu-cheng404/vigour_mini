@@ -25,7 +25,15 @@
     </block>
   </view>
   <i-spin custom fix wx:if="{{isShow}}">
-    <image class="i_span_image"
-      src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png"></image>
+    <view class="loading">
+      <view class="image ">
+        <image class="i_span_image Bgcolor4"
+          src="../../image/logo.jpg">
+        </image>
+      </view>
+      <view class="loadText color4">
+      数据加载中...
+      </view>
+    </view>
   </i-spin>
 </view>

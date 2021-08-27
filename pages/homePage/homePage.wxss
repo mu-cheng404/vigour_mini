@@ -1,206 +1,77 @@
 .page {
   width: 750rpx;
-  height: 100vh;
-  /* position: relative; */
+  height: 80vh;
 }
-
-.swip {
-  width: 710rpx;
-  margin: 20rpx;
+.themes{
+  width: 100%;
+  height: 80vh;
+}
+.theme{
+  width: 375rpx;
+  height: 45vh;
+  float: left;
+  font-weight: bold;
+  /* border: 1rpx solid black; */
+}
+.part{
+  width: 300rpx;
   height: 300rpx;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20rpx;
+  box-shadow: 0 0 10rpx 5rpx #C6DBE0;
 }
-
-.swip image {
-  width: 710rpx;
-  height: 300rpx;
+#study{margin: 250rpx 20rpx 0 50rpx;}
+#life{margin: 250rpx 20rpx 0 30rpx;}
+#sports{margin: 20rpx 20rpx 0 50rpx;}
+#others{margin: 20rpx 20rpx 0 30rpx;}
+.popover{
+  width: 100rpx;
+  height: 140rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-
+.theme image{
+  width: 100rpx;
+  height: 100rpx;
+}
 .hander_punch {
   width: 150rpx;
   height: 150rpx;
   border-radius: 50%;
-  background-color: rgb(61, 164, 204);
   text-align: center;
   line-height: 150rpx;
   margin: 30rpx;
   position: fixed;
   right: 0rpx;
-  bottom: 0rpx;
+  bottom: 70rpx;
   color: white;
+  z-index: 1;
 }
-
 .hander_punch image {
   width: 80rpx;
   height: 80rpx;
   border-radius: inherit;
   margin-top: 35rpx;
-
 }
-
-.punchBoxDisplay {
-  width: 710rpx;
-  /* height: 500rpx; */
-  background-color: white;
-  border-radius: 30rpx;
-  margin: 20rpx;
-  display: flex;
-  /* flex-direction: column; */
-  box-shadow: 4rpx 2rpx 5rpx rgb(170, 168, 168);
+.label{
+  height: 200rpx;
 }
-
-.avator {
-  width: 130rpx;
-  height: 100%;
-  /* background-color: rgb(171, 245, 202); */
-
-}
-
-.avator image {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 20%;
-  margin: 15rpx;
-
-}
-
-.rightOption {
-  width: 580rpx;
-  height: 100%;
-  /* background-color: rgb(171, 200, 202); */
-}
-
-.nickName {
-  width: 565rpx;
-  height: 40rpx;
-  margin-left: 5rpx;
-  margin-top: 10rpx;
-  margin-bottom: 10rpx;
-  color: rgb(61, 164, 204);
-  font-size: 28rpx;
-  /* background-color: skyblue; */
-  position: relative;
-  display: flex;
-}
-
-.nickName image {
-  width: 40rpx;
-  margin-top: 10rpx;
-  height: 40rpx;
-  position: absolute;
-  right: 20rpx;
-}
-
-.comment {
-  width: 565rpx;
-  height: 40rpx;
-  margin-left: -2rpx;
-  margin-top: 10rpx;
-  margin-bottom: 10rpx;
-  color: rgb(61, 164, 204);
-  font-size: 14px;
-  /* background-color: skyblue; */
-}
-
-.type {
-  font-size: 28rpx;
-}
-
-.time {
-  font-size: small;
-}
-
-.date {
-  width: 300rpx;
-  height: 50rpx;
-  margin-left: 13rpx;
-  margin-top: 10rpx;
-  margin-bottom: 10rpx;
-  /* background-color: rgb(61, 164, 204); */
-  display: flex;
-  flex-direction: row;
-}
-
-.date-year {
-  width: 100rpx;
-  font-size: 30rpx;
-  background-color: #abf5ca;
-  color: white;
-  line-height: 50rpx;
+.lableList{
   text-align: center;
-  border-top-left-radius: 25rpx;
-  border-bottom-left-radius: 25rpx;
-  border: 1rpx solid rgb(171, 245, 202);
-}
-
-.date-month {
-  width: 100rpx;
-  font-size: 30rpx;
-  background-color: white;
-  border: 1rpx solid rgb(171, 245, 202);
-  color: rgb(171, 245, 202);
-  line-height: 50rpx;
-  text-align: center;
-  border-top-right-radius: 25rpx;
-  border-bottom-right-radius: 25rpx;
-}
-
-.title,
-.content {
-  width: 565rpx;
-  font-size: 30rpx;
-  /* margin-left: 15rpx; */
-  margin-top: 25rpx;
-  margin-bottom: 10rpx;
-  text-align: left;
-}
-
-.title {
-  font-weight: bold;
-  font-size: 35rpx;
-}
-
-
-
-.accessImage image {
-  width: 150rpx;
-  height: 150rpx;
-  margin-top: 20rpx;
-  margin-right: 10rpx;
-  border-radius: 10rpx;
-
-  /* border-radius: 50rpx; */
-  /* overflow: hidden; */
-  /* margin: 0rpx 20rpx 20rpx 20rpx; */
-}
-
-.accessImageNone {
-  display: none;
-}
-
-.commentItem {
-  margin-bottom: 10rpx;
-  height: 18px;
-  line-height: 18px;
-  width: 95%;
-  /* background-color: rgb(185, 185, 22); */
-  font-size: 12px;
-  display: flex;
-}
-
-.commentNickName {
-  margin-right: 10rpx;
-  /* margin-left: 10rpx; */
-  color: rgb(88, 147, 223);
-}
-
-.commentContent {
-  color: #666666;
-}
-
-.van_grid{
-  margin-left: -14rpx;
-  margin-right: -14rpx;
-}
-.van_grid_item{
-  background-color: teal;
+  /* width: 200rpx; */
+  height: 34px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  padding: 5px;
+  /* margin-left: 0rpx; */
+  z-index: 2;
+  border: 1rpx solid #C6DBE0;
+  margin: 5rpx;
 }

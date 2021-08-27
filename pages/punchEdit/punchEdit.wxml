@@ -1,64 +1,45 @@
-<view class="page box-sizing">
+<view class="page box-sizing Bgcolor1">
   <form action="" bindsubmit="_handlerform">
-    <view class="punchTips">打卡要求：打卡文字至少20字</view>
-    <view class="punchDayNumber">
-      <image src="{{imageURL}}punchCard.png"></image>
-
-      <text>{{year}}.{{month}} 打卡第1天</text>
-      <view class="type">{{type}}</view>
+    <view class="punchText">
+      {{Pcount?'你在这个标签下已经打卡{{Pcount}}天！继续加油喔~':'欢迎开启新的打卡之旅~'}}
     </view>
-    <!-- <view class="punchTitle">
-      <input type="text" name="title" placeholder="填写标题会收获更多点赞哦~ " />
-      <text>20</text>
-    </view> -->
-    <view class="punchSubtitle"></view>
     <view class="punchContent">
-      <textarea name="content" id="" cols="30" rows="10" placeholder="请输入正文" auto-focus="true"
-        bindinput="_contentInput"></textarea>
-    </view>
-    <!-- <wux-cell-group title="">
-      <wux-cell hover-class="none">
-        <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="请输入正文" bind:change="_contentInput" />
-      </wux-cell>
-    </wux-cell-group> -->
-    {{hint}}
-    <view class="selectPShow">
-      <!-- <video src="{{videoSrc}}"></video> -->
-      <block wx:for="{{pictures}}" wx:for-item="sItem" wx:for-index="idx" wx:key="id">
-        <view id="{{idx}}" class="pShow">
-          <image src="{{sItem}}" alt="" class="" bindtap="preivewImage" />
-          <image id="deleteIcon" src="{{imageURL}}delete.png" bindtap="deleteImage"></image>
-        </view>
-      </block>
-    </view>
-    <view class="punchAccessory">
-      <!-- <view class="Accessory_image">
-        <image class="" src="{{imageURL}}shipin.png" mode="aspectFit" lazy-load="false" binderror="" bindload="" bindtap="_selectVideo"/>
-      </view> -->
-      <view class="Accessory_image">
-        <image class="" src="{{imageURL}}tupian.png" mode="aspectFit" lazy-load="false" binderror="" bindload=""
-          bindtap="_selectImage" />
+      <textarea name="content" id="" cols="30" rows="10" placeholder="请输入正文" auto-focus bindinput="_contentInput"
+        show-confirm-bar="false" placeholder-style="textarea">
+        <view class="selectPicture">
+        <wux-upload listType="picture-card" defaultFileList="{{ fileList }}" max="4" url="../../image/home-page"
+          prefixCls="wux-upload" bind:change="onChange" bind:success="onSuccess" bind:fail="onFail"
+          bind:complete="onComplete" bind:preview="onPreview">
+          <i-icon type="picture" size="50" color="#999999" />
+        </wux-upload>
       </view>
-      <!-- <view class="Accessory_image">
-        <image class="" src="{{imageURL}}yuyin.png" mode="aspectFit" lazy-load="false" binderror="" bindload="" bindtap="_selectVideo"/>
-      </view> -->
-
+ </textarea>
     </view>
-
-    <view class="punchLocation" bindtap="_chooseLocation">
+    <view class="punchLocation Bgcolor1" bindtap="_chooseLocation">
       <view class="Location_image">
         <image src="{{imageURL}}location.png" mode="aspectFit"></image>
       </view>
-      {{location?location:"地点"}}<text>></text>
-    </view>
-    <view class="punchViewPermission">
-      <view class="permission_image">
-        <image src="{{imageURL}}right.png" mode="aspectFit"></image>
+      {{location?location:"地点（选填）"}}
+      <view class="enter">
+        <i-icon type="enter" />
       </view>
-      公开 其他成员可见<text>></text>
     </view>
     <view class="punchButton">
-      <button form-type="submit">发表</button>
+      <button form-type="submit" class="Bgcolor4">发表</button>
     </view>
   </form>
 </view>
+
+<i-toast id="toast" />
+<i-spin custom fix wx:if="{{isShow}}">
+  <view class="loading">
+    <view class="image ">
+      <image class="i_span_image Bgcolor4"
+        src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png">
+      </image>
+    </view>
+    <view class="loadText color4">
+      数据上传中...
+    </view>
+  </view>
+</i-spin>

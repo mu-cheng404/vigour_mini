@@ -1,104 +1,138 @@
+page{
+  background-color: #C6DBE0;
+}
 .page {
-  margin: 20rpx;
-  padding: 0rpx;
-  border: 1rpx white solid;
-  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1rpx solid #C6DBE0;
 }
 
 .part1 {
-  width: 100%;
-  height: 150rpx;
-  /* background-color: khaki; */
-  border: 1px white solid;
+  width: 710rpx;
+  margin: 20rpx 20rpx 0rpx 20rpx;
+  height: 140rpx;
+  background-color: white;
   display: flex;
   position: relative;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
 }
 
 .avatar {
-  width: 130rpx;
-  height: 130rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
-  /* background-color: lawngreen; */
-  margin: 10rpx;
+  margin: 30rpx;
 }
 
 .avatar image {
-  width: 130rpx;
-  height: 130rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
 }
 
 .nickname {
-  width: 300rpx;
-  height: 130rpx;
-  /* background-color: yellowgreen; */
-  margin-top: 10rpx;
+  height: 140rpx;
+
 }
 
 .nickname_upper,
 .nickname_lower {
-  height: 60rpx;
-  /* background-color:turquoise; */
-  font-size: 28rpx;
-  line-height: 60rpx;
+  height: 70rpx;
+  font-size: 14px;
+  line-height: 21px;
 }
 
 .nickname_upper {
-  margin-bottom: 10rpx;
+  padding-top: 30rpx;
+  font-weight: 600;
+}
+
+.nickname_lower {
+  padding-bottom: 30rpx;
 }
 
 .put_attention1,
-.put_attention2
- {
-  width: 150rpx;
+.put_attention2 {
+  width: 130rpx;
   height: 70rpx;
-  background-color: tomato;
+  background-color: #437C87;
   position: absolute;
-  right: 20rpx;
-  top: 20rpx;
+  right: 30rpx;
+  top: 30rpx;
   font-size: 25rpx;
   line-height: 70rpx;
   text-align: center;
-  border-radius: 50rpx;
+  border-radius: 70rpx;
+  color: white;
 }
-.put_attention2{
+
+.put_attention2 {
   background-color: #666666;
   color: white;
 }
 
 .part2 {
-  width: 100%;
-  /* background-color: teal;  */
-}
-.part2 text{
-  font-size: 14px;
-  display: block;
-  margin: 10rpx;  
+  width: 710rpx;
+  margin: 0 20rpx 0rpx 20rpx;
+  background-color: white;
+  border: 0 solid white;
+  padding-bottom: 20rpx;
 }
 
-_block {
-  width: 100%;
-  height: 500rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* background-color: wheat; */
-  margin-top: 20rpx;
+.content {
+  font-size: 14px;
+  line-height: 21px;
+  padding: 0rpx 30rpx 0rpx 30rpx;
+}
+
+.imageMargin {
+  margin-bottom: 20rpx;
+}
+
+.imageList {
+  width: 670;
+  margin: 20rpx 30rpx 0 30rpx;
+}
+
+.imageList image {
+  border-radius: 10rpx;
+
 }
 
 ._image {
-  width: 100%; 
+  width: 100%;
 }
 
 .part3 {
-  width: 100%;
+  width: 710rpx;
   height: 80rpx;
-  /* background-color: violet; */
-  margin-top: 20rpx;
+  background-color: white;
+  margin: 0 20rpx 20rpx 20rpx;
   position: relative;
+  border-bottom-left-radius: 40rpx;
+  border-bottom-right-radius: 40rpx;
+  display: flex;
 }
 
-.icon-comment {
+.likeIcon,
+.commentIcon,
+.shareIcon {
+  width: 236rpx;
+  height: 80rpx;
+  /* background-color: teal; */
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 20px;
+}
+.likeIcon{
+
+}
+.commentIcon {}
+
+.shareIcon {}
+
+/* .icon-comment {
   position: absolute;
   right: 350rpx;
 }
@@ -106,14 +140,14 @@ _block {
 .icon-share {
   position: absolute;
   right: 0rpx;
-}
+} */
 
 .title {
-  width: 100%;
-  height: 30rpx;
-  line-height: 30rpx;
-  font-size: 24rpx;
-  /* background-color:wheat; */
+  width: 710rpx;
+  margin: 20rpx;
+  height: 24px;
+  line-height: 24px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -124,7 +158,7 @@ _block {
   display: flex;
   position: fixed;
   bottom: 0rpx;
-  margin-left: -20rpx;
+  /* margin-left: -20rpx; */
 }
 
 .input image {
@@ -132,9 +166,10 @@ _block {
   height: 80rpx;
   border-radius: 75%;
   margin: 20rpx;
-  
+
 }
-.input input{
+
+.input input {
   width: 600rpx;
   height: 80rpx;
   margin-top: 20rpx;
@@ -144,69 +179,70 @@ _block {
   font-size: 24rpx;
   padding-left: 10rpx;
 }
-.placeholder{
-}
-.buttom{
+
+.placeholder {}
+
+.buttom {
   height: 50rpx;
   width: 100%;
 }
 
-.comment{
-  width: 100%;
-  
-  background-color: white;
-  border: 1px white solid;
-  
-  
+.comment {
+  width: 710rpx;
+  margin: 20rpx 20rpx 40rpx 20rpx;
+  border-radius: 50rpx;
+  background-color: rgb(220, 225, 225);
 }
-.comment_part1{
+
+.comment_part1 {
   display: flex;
   position: relative;
   height: 100rpx;
 }
-.comment_part2{
-  margin-left: 100rpx;
-  margin-bottom: 100rpx;
-  width: 590rpx;
-  
-  /* background-color: lawngreen; */
-}
 .comment_avatar image {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 75%;
-  margin: 10rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin: 20rpx;
 }
-.comment_nickName{
-  width: 400rpx;
+
+.comment_nickName {
   height: 100rpx;
-  margin-left: 20rpx;
 }
 
 .comment_nickname_upper,
 .comment_nickname_lower {
-  height: 45rpx;
-  /* background-color:turquoise; */
-  font-size: 24rpx;
-  line-height: 45rpx;
+  height: 50rpx;
+  line-height: 21px;
 }
+
 .comment_nickname_upper {
-  margin-bottom: 10rpx;
+  font-size: 14px;
+  padding-top: 20rpx;
+  font-weight: 600;
 }
-.comment_like{
+.comment_nickname_lower{
+  font-size: 12px;
+}
+.comment_like {
   position: absolute;
-  right: 10rpx;
+  right: 15rpx;
+  top: 10rpx;
+}
+.comment_part2 {
+  width: 610rpx;
+  margin-left: 100rpx;
+  /* background-color: lawngreen; */
 }
 .comment_content{
-  width: 100%;
-  /* background-color: khaki; */
-  padding: 20rpx;
+  width: 610rpx;
+  padding:0 10rpx 10rpx 0rpx;
+  font-size: 14px;
+  line-height: 21px;
+  word-break: break-all;  
 }
-.van-button_comment{
+
+.van-button_comment {
   margin-left: 630rpx;
-  
-}
-.jubao{
-  display: inline;
-  color: brown;
+
 }

@@ -1,4 +1,4 @@
-<view class="page box-sizing">
+<view class="page box-sizing Bgcolor1">
   <view class="part1">
     <view class="avatar">
       <navigator url="../personalPage/personalPage?_openid={{cur_userInfo._openid}}">
@@ -6,41 +6,44 @@
       </navigator>
     </view>
     <view class="nickname">
-      <view class="nickname_upper">{{cur_userInfo.nickName}}
-        <view wx:if="{{super_isShow}}" class="jubao" catchtap="jubao">←举报ta</view>
+      <view class="nickname_upper color2">{{cur_userInfo.nickName}}
       </view>
-      <view class="nickname_lower">{{attendance.date}}</view>
+      <view class="nickname_lower color1">{{attendance.date}}</view>
     </view>
     <view wx:if="{{super_isShow}}" class="{{super_isDone?'put_attention2':'put_attention1'}}" bindtap="handleSupervise">
       {{super_isDone?'已监督':'监督ta'}}</view>
   </view>
   <view class="part2">
-    <text rendonly>{{attendance.content}}</text>
+    <view class="content">{{attendance.content}}</view>
     <block wx:for="{{attendance.pictures}}" wx:for-index="idx" wx:for-item="picItem" wx:key="id">
-      <view class="_block" id="{{idx}}">
+      <view class="imageList" id="{{idx}}">
         <image src="{{picItem}}" class="_image" mode="widthFix" bindtap="preivewImage"></image>
       </view>
     </block>
   </view>
   <view class="part3">
-    <block wx:if="{{isLike}}">
-      <icon class="iconfont icon-like" bindtap="handleLike">{{attendance.praise}}</icon>
-    </block>
-    <block wx:else>
-      <icon class=" iconfont icon-like1" bindtap="handleLike">{{attendance.praise}}</icon>
-    </block>
-    <icon class=" iconfont icon-comment" bindtap="handleComment"></icon>
-    <icon class="iconfont icon-share">
-      <block wx:if="{{!super_isShow}}">
-        <i-icon type="delete" size="25" color="#666666" catchtap="_deletePunch" />
+    <view class="likeIcon">
+      <block wx:if="{{isLike}}">
+        <icon class="iconfont icon-like color4" bindtap="handleLike">{{attendance.praise}}</icon>
       </block>
-    </icon>
-
+      <block wx:else>
+        <icon class=" iconfont icon-like1 color4" bindtap="handleLike">{{attendance.praise}}</icon>
+      </block>
+    </view>
+    <view class="commentIcon">
+      <icon class=" iconfont icon-comment color4" bindtap="handleComment"></icon>
+    </view>
+    <view class="shareIcon">
+      <icon class="iconfont icon-share color4" bindtap="handleShare"></icon>
+    </view>
+    <!-- <block wx:if="{{!super_isShow}}">
+        <i-icon type="delete" size="25" color="#666666" catchtap="_deletePunch" />
+      </block> -->
   </view>
   <view class="part4">
     <view class="title">评论 {{attendance.comment}}</view>
     <block wx:for="{{commentList}}" wx:for-index="idx" wx:for-item="commentItem">
-      <view class="comment">
+      <view class="comment ">
         <view class="comment_part1">
           <view class="comment_avatar">
             <image src="{{avatarArr[idx]}}">
@@ -50,7 +53,7 @@
             <view class="comment_nickname_upper">{{nickNameArr[idx]}}</view>
             <view class="comment_nickname_lower">{{commentItem.time}}</view>
           </view>
-          <view class="comment_like">
+          <view class="comment_like color4">
 
             <block wx:if="{{isLike_comment[idx]}}">
               <icon id="{{idx}}" class="iconfont icon-like" bindtap="handleLike_comment">{{commentItem.likeNum}}</icon>
@@ -72,15 +75,22 @@
       <input type="text" bindtap="showPopup" placeholder="发表评论" placeholder-class="placeholder"
         disabled="true">sdasd</input>
     </view>
-    <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
+    <!-- <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
       <view class="punchContent">
         <textarea name="content" id="" cols="30" rows="10" placeholder="请输入评论" auto-focus="true"
           bindinput="comment_input"></textarea>
       </view>
       <van-button class="van-button_comment" size="small" type="primary" bindtap="commment_submit">评论</van-button>
       <view round class="buttom"></view>
-    </van-popup>
+    </van-popup> -->
     <view round class="buttom"></view>
   </view>
   <van-dialog id="van-dialog" />
+</view>
+<view class="cu-bar input">
+  <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}});"></view>
+  
+  <input class="solid-bottom" maxlength="300" cursor-spacing="10" bindinput="comment_input" focus="{{isFocus}}" adjust-position="fasle"></input>
+  
+  <button bindtap="commment_submit" class="cu-btn bg-green shadow-blur Bgcolor4">发送</button>
 </view>

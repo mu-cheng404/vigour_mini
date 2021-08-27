@@ -1,5 +1,29 @@
 <view class="page box-sizing">
-  <swiper class="swip" indicator-color="black" autoplay="true" interval="2000" circular="true">
+  <view class="themes">
+  <block wx:for="{{label}}" wx:key="key" wx:for-index="idx">
+    <view class="theme">
+      <view class="part" id="{{item.main[1]}}">
+        <wux-popover placement="{{item.placement}}" title="{{item.main[0]}}" content="" mask>
+          <view class="popover">
+            <image src="{{item.iconSrc}}"></image>
+            <view class="theme_text">{{item.main[0]}}</view>
+          </view>
+          <view slot="content">
+            <scroll-view scroll-y class="label">
+              <view>
+              <block wx:for="{{item.second}}" wx:for-item="Sitem" wx:for-index="Sidx"wx:key = "key">
+                <view class="lableList" bindtap="_handleDetail" id = "{{idx}}{{Sidx}}"><view class="text">{{Sitem}}</view></view>
+              </block>
+              </view>
+            </scroll-view>
+          </view>
+        </wux-popover>
+      </view>
+    </view>
+  </block>
+    
+  </view>
+  <!-- <swiper class="swip" indicator-color="black" autoplay="true" interval="2000" circular="true">
     <swiper-item>
       <image bindtap="preivewImage"
         src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_1.jpg">
@@ -15,54 +39,9 @@
         src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_3.jpg">
       </image>
     </swiper-item>
-  </swiper>
-  <view class="hander_punch" bindtap="_handlerPunch">
+  </swiper> -->
+  <view class="hander_punch Bgcolor4" bindtap="_handlerPunch">
     <i-icon type="add" size="50" />
   </view>
-  <van-grid column-num="3" gutter="10" custom-class="van_grid">
-    <van-grid-item content-class="van_grid_item"  icon="photo-o" text="排行榜" link-type="navigateTo"
-      url="../rank/rank" />
-    <van-grid-item icon="photo-o" text="好友推荐" bindtap = "recommendNav"
-       />
-    <van-grid-item icon="photo-o" text="功能3" />
-  </van-grid>
-  <block wx:for="{{punchMessageArrays}}" wx:for-index="idx" wx:for-item="punchItem" wx:key="id">
-    <view id="{{idx}}" class="punchBoxDisplay" bindtap="handleNav">
-      <view class="avator">
-        <image src="{{avatarArr[idx]}}"></image>
-      </view>
-      <view class="rightOption">
-        <view class="nickName">{{nickNameArr[idx]}}
-          <view class="type">●{{punchItem.topic}}</view>
 
-          <view class="c_pos_right like_icon" id="{{idx}}" catchtap="_handlerLike">
-            <i-icon size="25" type="{{isLike_comment[idx]? 'like_fill':'like'}}"></i-icon>
-            {{punchItem.praise}}
-          </view>
-        </view>
-        <view>
-          <view class="time">{{punchItem.date}}</view>
-        </view>
-        <text class="content">{{punchItem.content}}</text>
-        <view class="accessImage">
-          <block wx:for="{{punchItem.pictures}}" wx:for-item="pItem" wx:for-index="idx2" wx:key="key2">
-            <image src="{{pItem}}"></image>
-          </block>
-        </view>
-        <block wx:for="{{nickNameCom[idx]}}" wx:for-item="ncItem" wx:for-index="idx2" wx-key="key">
-          <view class="commentItem">
-            <view class="commentNickName">{{ncItem}}:</view>
-            <view class="commentContent">{{commentList[idx][idx2].content}}</view>
-          </view>
-        </block>
-        <view class="comment" catchtap="_handleTap">{{punchItem.comment}} 评论 ></view>
-
-      </view>
-    </view>
-  </block>
-
-  <i-spin custom fix wx:if="{{isShow}}">
-    <image class="i_span_image"
-      src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png"></image>
-  </i-spin>
 </view>

@@ -2,8 +2,18 @@ const DB = wx.cloud.database()
 const _user = DB.collection("user")
 const util = require('../../common/util.js')
 const _att = DB.collection("attendance")
-var openID //用户openid
+var userInfo //用户信息
+var _openid //用户openid
+var Pcount //打卡总数
+var label = [] //标签
 Page({
+  //处理功能跳转
+  handleNavi: function (evt) {
+    var curId = evt.currentTarget.id //获取功能id
+    wx.navigateTo({
+      url: this.data.navigateUrl[curId],
+    })
+  },
   //遮罩层
   toggleLeft1: function () {
     this.setData({
@@ -40,6 +50,10 @@ Page({
     hasUserInfo: false, //是否登录
     showLeft1: false,
     att_list: [],
+    label: [], //标签
+    Pcount: "", //打卡总数
+    functionList: ["个人信息", "排行榜", "推荐好友", "关于我们"],
+    navigateUrl: ["../basicsDisplay/basicsDisplay", "../rank/rank", "../recommend/recommend", "../about/about"]
   },
 
   /**
@@ -47,7 +61,47 @@ Page({
    */
   onLoad: async function (options) {
 
+    //获取openid
+    _openid = await wx.cloud.callFunction({
+      name: "getOpenID"
+    })
+    _openid = _openid.result.openid
+    //获取用户信息
+    userInfo = await _user.where({
+      _openid: _openid
+    }).get()
+    userInfo = userInfo.data[0]
+    //判断是否以登录
+    if (userInfo) {
+      this.setData({
+        hasUserInfo: true
+      })
+    }
+    //获取打卡总数
+    Pcount = await _att.where({
+      _openid: _openid
+    }).count()
+    Pcount = Pcount.total
+    //获取标签信息
+    var initLabel = await _att.where({
+      _openid: _openid
+    }).field({
+      topic: true
+    }).get()
+    initLabel = initLabel.data
+    //标签去重
+    for (var i = 0; i < initLabel.length; i++) {
+      if (label.indexOf(initLabel[i].topic) === -1) {
+        label.push(initLabel[i].topic)
+      }
 
+    }
+
+    this.setData({
+      label: label,
+      Pcount: Pcount,
+      userInfo: userInfo
+    })
   },
 
   /**
@@ -59,38 +113,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: async function () {
-    //云函数获取openid
-    wx.cloud.callFunction({
-        name: "getOpenID"
-      })
-      .then((res) => {
-        openID = res.result.openid //获取openid
-        _user.where({
-            _openid: openID
-          }).get()
-          .then((res) => {
-            this.setData({
-              userInfo: res.data[0],
-              hasUserInfo: res.data.length ? true : false
-            })
-            //获取该用户所有打卡信息并展示
-            _att.where({
-                _openid: openID
-              })
-              .get()
-              .then((res) => {
-                console.log("获取本用户打卡数据成功！", res.data)
-                this.setData({
-                  att_list: res.data.reverse()
-                })
-              })
-              .catch(console.error)
-          })
-          .catch(console.error)
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
 
+      this.getTabBar().setData({
+        isShow_me: true,
+        isShow_playing: false,
+        isShow_index: false
       })
-      .catch(console.error)
-
+    }
   },
 
   /**

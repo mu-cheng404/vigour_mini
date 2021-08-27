@@ -33,7 +33,7 @@
         {
           "name": "punchEdit",
           "pathName": "pages/punchEdit/punchEdit",
-          "query": "",
+          "query": "topic=练字",
           "scene": null
         },
         {

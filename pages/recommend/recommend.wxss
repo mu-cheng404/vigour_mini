@@ -1,32 +1,106 @@
-.box{
+.box {
   width: 750rpx;
   height: 100vh;
-  /* background-color: aqua; */
-  /* display: flex; */
-}
-.part {
-  width: 160rpx;
-  height: 265rpx;
-  background-color: white;
-  margin: 45rpx;
-  border-radius: 10rpx;
-  float :left;
+
 }
 
-image {
-  margin: 20rpx 20rpx 0 20rpx;
+.part {
+  width: 710rpx;
+  height: 140rpx;
+  background-color: white;
+  /* margin: 45rpx; */
+  border-radius: 10rpx;
+  /* float :left; */
+  display: flex;
+  position: relative;
+  margin: 20rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 0 5rpx 5rpx #c6dbe080;
+}
+
+.partImage {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin: 30rpx 30rpx 30rpx 30rpx;
 }
 
 .nickName {
-  width: 160rpx;
-  height: 21px;
+  /* width: 160rpx; */
+  height: 140rpx;
+  line-height: 140rpx;
   text-align: center;
   font-size: 14px;
   font-weight: 600;
 }
 
 .button {
+  position: absolute;
+  right: 15rpx;
+  bottom: 25rpx;
   width: 160rpx;
   text-align: center;
   padding-bottom: 20rpx;
+}
+
+.details {
+  width: 300rpx;
+  height: 140rpx;
+  position: absolute;
+  right: 150rpx;
+  /* background-color: aqua; */
+}
+
+.singleDetail {
+  width: 150rpx;
+  height: 70rpx;
+  /* line-height: 70rpx; */
+  font-size: 14px;
+  /* text-align: center; */
+  color: #666666;
+  position: relative;
+  float: left;
+}
+
+.type {
+  height: 42rpx;
+  padding: 1rpx;
+  color: white;
+  border-radius: 20rpx;
+  font-size: 14px;
+  width: 90rpx;
+  line-height: 42rpx;
+  text-align: center;
+  margin-top: 10rpx;
+}
+
+.Dtext1 {
+  position: absolute;
+  left: 40rpx;
+  top: 20rpx;
+}
+
+.Dtext2 {
+  position: absolute;
+  /* left: 20rpx; */
+  top: 20rpx;
+}
+
+.Dtext3 {
+  position: absolute;
+  left: 40rpx;
+  bottom: 20rpx;
+}
+
+.Dtext4 {
+  position: absolute;
+  /* left: 20rpx; */
+  bottom: 20rpx;
+}
+
+.changeButton {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 100rpx;
 }

@@ -20,8 +20,8 @@ var openidArr = [] //用户openID列表
 var Data = [] //数据向量化结果
 var N //数据量
 var clusters //聚簇数组
-var kmin = 3 //k的最大值
-var kmax = 3 //k的最小值
+var kmin = 4 //k的最大值
+var kmax = 4 //k的最小值
 var count = 5 //
 var finalClusters = [] //最终的聚簇
 var finalSC = Min //最终的最大轮廓系数
@@ -58,7 +58,7 @@ Page({
 
       for (var i = 0; i < k; i++) { //从前面选择初始点
         centerPoints.push(Data[i].data)
-        console.log("123")
+        // console.log("123")
       }
       // for(var i = 0 ;i < k ; i++){//随机选取初始点
       //     centerPoints.push(Data[Math.round(Math.random() * (N-1))])
@@ -114,7 +114,7 @@ Page({
         finalK = k
       }
       this.setData({
-        finalSC:(tempSC*100).toFixed(1)+"%"
+        finalSC: (tempSC * 100).toFixed(1) + "%"
       })
     }
 
@@ -192,7 +192,7 @@ Page({
     }
   },
   data: {
-    finalSC:"",//匹配度
+    finalSC: "", //匹配度
     isShow: false, //是否显示加载动画
     isloading: false, //是否显示加载中
     selectedInfo: [
@@ -219,27 +219,27 @@ Page({
       // }, 
     ], //最终的openID、头像和昵称列表
   },
-  changeGroup:function(){
+  changeGroup: function () {
     wx.showModal({
-      cancelColor: 'cancelColor',
-      content:"这个功能还不支持，因为肝不动了...",
-      confirmText:"体谅ta",
-      cancelText:"体谅ta"
-    })
-    .then((res)=>{
-      $Toast({ //请提示
-        content: '谢谢你你真好'
+        cancelColor: 'cancelColor',
+        content: "这个功能还不支持，因为肝不动了...",
+        confirmText: "体谅ta",
+        cancelText: "体谅ta"
       })
-    })
+      .then((res) => {
+        $Toast({ //请提示
+          content: '谢谢你你真好'
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  // onLoad: function () { //测试用的onload避免太长加载时间
-  //   this.setData({ //显示加载动画
-  //     isShow: true
-  //   })
-  // },
+  onLoad: function () { //测试用的onload避免太长加载时间
+    this.setData({ //显示加载动画
+      isShow: false
+    })
+  },
   onLoad: async function (options) { //正常使用的onload
     this.setData({ //显示加载动画
       isShow: true
@@ -254,39 +254,85 @@ Page({
     // /*
     //数据预处理
     var start = new Date().getTime(); //起始时间
+    //获取标签
     await _label.get().then((res) => {
-      label = res.data[0].label
+      label = res.data
       n = label.length
     })
+    //获取所有用户openid
     await _user.aggregate().group({
         _id: "$_openid"
       }).end().then(async (res) => {
-        openidArr = [] //所有用户openid的数组
-        for (var i = 0; i < res.list.length; i++) { //初始化_openid数组
+        //数据初始化
+        openidArr = [] //openid数组
+        for (var i = 0; i < res.list.length; i++) {
           openidArr.push(res.list[i]._id)
         }
-        N = openidArr.length //N初始化
-        Data = [] //初始化数据集
-        for (var i = 0; i < openidArr.length; i++) { //处理Data
-          var singleData = [] //单个用户，单个数据
+        N = openidArr.length //数据长度
+        Data = [] //数据集（final）
+
+        var singleData = new Array(N)
+        for (var i = 0; i < N; i++) {
+          singleData[i] = new Array()
           for (var j = 0; j < n; j++) {
-            await _att.where({
-              _openid: openidArr[i],
-              topic: label[j]
-            }).count().then((res) => {
-              singleData.push(res.total)
+            singleData[i][j] = 0
+          }
+        }
+
+        //数据处理
+        var promiseArr = []
+        var index = 0
+        for (var i = 0; i < N; i++) { //循环openid数组
+          //获取单个用户的打卡记录
+          promiseArr.push(new Promise((resolve, reject) => {
+            _att.where({
+              _openid: openidArr[i]
+            }).get().then((res) => {
+              // console.log(index)
+              // console.log("找到用户打卡信息！", res.data)
+              for (var j = 0; j < res.data.length; j++) { //遍历res.data
+                for (var p = 0; p < n; p++) { //遍历维数，填充数据
+                  // console.log("当前标签为：", res.data[j].topic)
+                  // console.log("当前标签集=", label[p].second)
+                  if (label[p].second.indexOf(res.data[j].topic) > -1) {
+                    // console.log("我进来了")
+                    // console.log("singleData[i][p]=",singleData)
+                    singleData[index][p]++
+                    // console.log("找到啦！")
+                    break
+                  }
+                }
+              }
+              index++
+              resolve()
+            }).catch(console.error)
+          }))
+        }
+        await Promise.all(promiseArr)
+        // console.log("singleData=", singleData)
+
+        //数据清洗
+        for (var i = 0; i < N; i++) {
+          var tempSum = 0
+          for (var p = 0; p < n; p++) {
+            tempSum += singleData[i][p]
+          }
+          // console.log(tempSum)
+          if (tempSum != 0) { //筛去没有打卡记录的数据
+            // console.log("符合要求！")
+            Data.push({
+              id: openidArr[i],
+              data: singleData[i]
             })
           }
-          Data.push({
-            id: openidArr[i],
-            data: singleData
-          })
         }
+        N = Data.length //清洗后的数据量
       })
       .catch(console.error)
+
+
     console.log(Data)
-    var end = new Date().getTime(); //接受时间
-    console.log((end - start) + "ms")
+
     this.k_means()
     console.log("当k= " + finalK + "时,轮廓系数=" + finalSC)
     console.log(finalClusters)
@@ -310,11 +356,13 @@ Page({
         var tempAvatar
         var tempNickName
         var tempisSupervise = false
+        var tempGender = ""
         await _user.where({
           _openid: tempID
         }).get().then((res) => {
           tempNickName = res.data[0].nickName
           tempAvatar = res.data[0].avatarUrl
+          tempGender = res.data[0].gender
         })
         await _sup.where({
           _openid: _openid,
@@ -328,7 +376,9 @@ Page({
           _openid: tempID,
           avatar: tempAvatar,
           nickName: tempNickName,
-          isSupervise:tempisSupervise
+          isSupervise: tempisSupervise,
+          gender: tempGender,
+          details: finalClusters[idx][i].data
         })
       }
     }
@@ -340,5 +390,8 @@ Page({
     this.setData({ //显示加载动画
       isShow: false
     })
+
+    var end = new Date().getTime(); //接受时间
+    console.log((end - start) + "ms")
   }
 })
