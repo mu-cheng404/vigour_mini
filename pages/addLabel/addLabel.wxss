@@ -1,0 +1,11 @@
+.punchButton button {
+  color: white;
+  width: 712rpx;
+  margin: 19rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  
+}
+.margin-top{
+  margin-top: 10rpx;
+}

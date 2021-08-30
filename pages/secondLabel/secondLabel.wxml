@@ -1,0 +1,20 @@
+
+<view class="tips Bgcolor1">{{isDelete?'再次点击删除图标即消失':'长按后1秒后松手出现删除图标，点击可删除标签'}}</view>
+<block wx:for="{{S_label}}" wx:key="key">
+  <view id="{{index}}" class="box box-shadow-color1" bindtap="_handleDetail" bindtouchstart="_handleTouchStart" bindtouchend="_handleTouchEnd">
+    {{item}}
+    <i-icon wx:if="{{isDelete}}" id = "{{index}}" type="delete_fill" class="delete-icon-position color2" size="20" catchtap="handerDelete"/>
+  </view>
+</block>
+<view class="box box-shadow-color1" bindtap="_handleAdd">自定义+</view>
+<i-spin custom fix wx:if="{{isShow}}">
+  <view class="loading">
+    <view class="image ">
+      <image class="i_span_image Bgcolor4" src="../../image/logo.jpg">
+      </image>
+    </view>
+    <view class="loadText color4">
+      数据加载中...
+    </view>
+  </view>
+</i-spin>

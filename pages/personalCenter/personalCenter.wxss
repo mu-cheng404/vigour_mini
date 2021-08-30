@@ -61,17 +61,7 @@
   min-width: 160rpx;
   font-weight: 600;
 }
-.type {
-  height: 42rpx;
-  padding: 1rpx;
-  color: white;
-  border-radius: 20rpx;
-  font-size: 14px;
-  width: 80rpx;
-  line-height: 42rpx;
-  text-align: center;  
-  margin-bottom: 14rpx;
-}
+
 
 .baseStyle {
   width: 400rpx;

@@ -126,7 +126,7 @@
 .box-sizing {
   box-sizing: border-box;
 }
-
+.box-shadow-color1{box-shadow: 0 0 5rpx 5rpx #C6DBE0;}
 .display-Flex {
   display: flex;
 }
@@ -174,12 +174,12 @@ page {
 }
 .type {
   height: 42rpx;
-  padding: 1rpx;
   color: white;
   border-radius: 20rpx;
   font-size: 14px;
-  width: 80rpx;
   line-height: 42rpx;
-  text-align: center;
   margin-top: 10rpx;
+  box-sizing:border-box;
+  padding: 0rpx 10rpx 0rpx 10rpx; 
+  margin-right: 5rpx;
 }

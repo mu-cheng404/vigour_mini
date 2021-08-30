@@ -128,10 +128,10 @@ Page({
     fileList: [],
     Pcount: "", //该主题下的总打卡次数
     isShow: false
-
   },
   onLoad: async function (options) {
-
+    picturesURL = []
+    console.log("onLoad", picturesURL)
     //获取时间
     date = new Date().toLocaleDateString().concat(new Date().toLocaleTimeString());
     //获取主题渲染导航栏
@@ -159,6 +159,9 @@ Page({
 
 
 
+  },
+  onShow:function() {
+    console.log("onshow")
   },
   onChange(e) {
     // console.log('onChange', e)

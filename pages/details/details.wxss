@@ -71,7 +71,11 @@ page{
   background-color: #666666;
   color: white;
 }
-
+.delete{
+  position: absolute;
+  right: 30rpx;
+  top: 20rpx;
+}
 .part2 {
   width: 710rpx;
   margin: 0 20rpx 0rpx 20rpx;
@@ -125,6 +129,7 @@ page{
   line-height: 80rpx;
   font-size: 20px;
 }
+
 .likeIcon{
 
 }

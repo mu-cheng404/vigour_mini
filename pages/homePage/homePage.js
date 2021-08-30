@@ -8,6 +8,12 @@ const _user = DB.collection("user")
 const _comment = DB.collection("comment")
 var _openid //本用户openid
 Page({
+  _handelNavi:function(evt) {
+    var id = evt.currentTarget.id
+    wx.navigateTo({
+      url: '../secondLabel/secondLabel?main='+id,
+    })
+  },
   _handleDetail: function (evt) {
     var id = evt.currentTarget.id
     var main = id[0]
@@ -50,28 +56,7 @@ Page({
   data: {
     visible: true,
     placement: ["topRight", "topLeft", "bottomRight", "bottomLeft"], //气泡框的位置
-    label: [{
-      main: ["学习", "study"],
-      iconSrc: "../../image/theme-study.png",
-      placement: "topRight",
-      second: ["专修", "读书", "练字", "考研", "考证", "考级"]
-    }, {
-      main: ["生活", "life"],
-      iconSrc: "../../image/theme-life.png",
-      placement: "topLeft",
-      second: ["早睡", "早起", "健身", "考研", "护肤", "心情", "喝水"]
-    }, {
-      main: ["运动", "sports"],
-      placement: "bottomRight",
-      iconSrc: "../../image/theme-sports.png",
-      second: ["跑步", "行走", "骑行", "瑜伽", "冥想", "动作"]
-    }, {
-      main: ["其它", "others"],
-      placement: "bottomLeft",
-      iconSrc: "../../image/theme-others.png",
-      second: ["写作", "成长", "工作", "手工", "手账", "其它"]
-    }]
-
+    label: []
   },
   hide() {
     this.setData({
@@ -84,4 +69,11 @@ Page({
       visible: e.detail.visible,
     })
   },
+  onLoad: async function(){
+    //获取标签数据
+    var label = await wx.cloud.database().collection("label").get()
+    label = label.data
+    //渲染页面
+    this.setData({label:label})
+  }
 })

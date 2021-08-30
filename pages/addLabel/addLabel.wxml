@@ -1,0 +1,4 @@
+<i-input placeholder="创建新的打卡标签~" maxlength="5" bind:change="_getContent" class="margin-top" autofocus/>
+<view class="punchButton">
+  <button class="Bgcolor4" bindtap="_handleAdd">创建</button>
+</view>

@@ -12,6 +12,9 @@
     </view>
     <view wx:if="{{super_isShow}}" class="{{super_isDone?'put_attention2':'put_attention1'}}" bindtap="handleSupervise">
       {{super_isDone?'已监督':'监督ta'}}</view>
+    <view wx:else class="delete" bindtap="_handerDelete">
+      <i-icon type="delete_fill" class="color4" size="50" />
+    </view>
   </view>
   <view class="part2">
     <view class="content">{{attendance.content}}</view>
@@ -34,7 +37,7 @@
       <icon class=" iconfont icon-comment color4" bindtap="handleComment"></icon>
     </view>
     <view class="shareIcon">
-      <icon class="iconfont icon-share color4" bindtap="handleShare"></icon>
+      <icon class="iconfont icon-share color4 " bindtap="handleShare"></icon>
     </view>
     <!-- <block wx:if="{{!super_isShow}}">
         <i-icon type="delete" size="25" color="#666666" catchtap="_deletePunch" />
@@ -89,8 +92,9 @@
 </view>
 <view class="cu-bar input">
   <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}});"></view>
-  
-  <input class="solid-bottom" maxlength="300" cursor-spacing="10" bindinput="comment_input" focus="{{isFocus}}" adjust-position="fasle"></input>
-  
+
+  <input class="solid-bottom" maxlength="300" cursor-spacing="10" bindinput="comment_input" focus="{{isFocus}}"
+    adjust-position="fasle"></input>
+
   <button bindtap="commment_submit" class="cu-btn bg-green shadow-blur Bgcolor4">发送</button>
 </view>

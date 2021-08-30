@@ -19,7 +19,9 @@
     "pages/personalPage/personalPage",
     "pages/rank/rank",
     "pages/recommend/recommend",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/secondLabel/secondLabel",
+    "pages/addLabel/addLabel"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -76,6 +78,7 @@
     "i-radio-group": "dist/radio-group/index",
     "i-radio": "dist/radio/index",
     "i-toast": "dist/toast/index",
+    "i-load-more": "dist/load-more/index",
     "wux-popover": "wux-weapp/popover/index",
     "wux-fab-button": "wux-weapp/fab-button/index",
     "wux-upload": "wux-weapp/upload/index"

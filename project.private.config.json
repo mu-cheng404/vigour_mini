@@ -113,6 +113,12 @@
           "pathName": "pages/recommend/recommend",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "二标签选择",
+          "pathName": "pages/secondLabel/secondLabel",
+          "query": "main=0",
+          "scene": null
         }
       ]
     }

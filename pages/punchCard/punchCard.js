@@ -14,6 +14,56 @@ Page({
     })
     console.log(this.data.isSwitch)
   },
+  switchTo1: function () {
+    this.setData({
+      is1:false,
+      is2:false,
+      is3: false,
+      is4:false,
+      is5: false
+    })
+    console.log(this.data.isSwitch)
+  },
+  switchTo2: function () {
+    this.setData({
+      is1:true,
+      is2: true,
+      is3: false,
+      is4:false,
+      is5:false
+    })
+    console.log(this.data.isSwitch)
+  },
+  switchTo3: function () {
+    this.setData({
+      is1: true,
+      is2:false,
+      is3:true,
+      is4:false,
+      is5:false
+    })
+    console.log(this.data.isSwitch)
+  },
+  switchTo4: function () {
+    this.setData({
+      is1:true,
+      is2: false,
+      is3: false,
+      is4:true,
+      is5: false
+    })
+    console.log(this.data.isSwitch)
+  },
+  switchTo5: function () {
+    this.setData({
+      is1: true,
+      is2:false,
+      is3: false,
+      is4:false,
+      is5:true
+    })
+    console.log(this.data.isSwitch)
+  },
   handleNav: async function (evt) {
     var idx = evt.currentTarget.id
     var att_id = this.data.punchMessageArrays[idx]._id
@@ -140,6 +190,12 @@ Page({
     isShow: false, //是否展示加载动画
     isSwitch: false, //是否展示监督
     isSup :[],//监督状态
+    is1:false,
+    is2:false, 
+    is3:false, 
+    is4:false, 
+    is5:false,  
+    isAll:true
   },
   onLoad: async function (options) {
 
@@ -218,34 +274,17 @@ Page({
     this.setData({
       isShow: false
     })
-    // //查询监督状态 wxml第七行
-    // for (var i = 0; i < Data.length; i++) {
-    //   var Scount = await _sup.where({
-    //     _openid: _openid,
-    //     superedID: Data[i]._openid
-    //   }).count()
-    //   Scount = Scount.total
-    //   Data[i].isSupervise = Scount
-    // }
-    // console.log(Data)
-
-    //查询监督状态 wxml第七行
-    var promiseArr =[]
-    var isSup = []
-    var index = 0
-    for(var i = 0;i < Data.length;i++){
-      promiseArr.push(new Promise(async (resolve,reject)=>{
-        var Scount = await _sup.where({
-          _openid: _openid,
-          superedID: Data[i]._openid
-        }).count()
-        Scount = Scount.total
-        isSup[index] = Scount
-        index++
-        resolve()
-      }))
-    }
-    await Promise.all(promiseArr).then((res)=>{console.log("isSup",isSup)}).catch(console.error)
+     //查询监督状态 wxml第七行
+     var isSup = []
+     for(var i = 0;i < Data.length;i++){
+         var Scount = await _sup.where({
+           _openid: _openid,
+           superedID: Data[i]._openid
+         }).count()
+         Scount = Scount.total
+         console.log(Scount)
+         isSup[i] = Scount
+     }
     //渲染数据
     this.setData({isSup:isSup})
     //结束时间

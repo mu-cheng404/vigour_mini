@@ -68,17 +68,7 @@
 
 }
 
-.type {
-  height: 42rpx;
-  padding: 1rpx;
-  color: white;
-  border-radius: 20rpx;
-  font-size: 14px;
-  width: 80rpx;
-  line-height: 42rpx;
-  text-align: center;
-  margin-top: 10rpx;
-}
+
 
 .icon_like {
   position: absolute;

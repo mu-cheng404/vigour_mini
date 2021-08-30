@@ -1,7 +1,7 @@
 <view class="page box-sizing Bgcolor1">
   <form action="" bindsubmit="_handlerform">
     <view class="punchText">
-      {{Pcount?'你在这个标签下已经打卡{{Pcount}}天！继续加油喔~':'欢迎开启新的打卡之旅~'}}
+      {{Pcount?'你在这个标签下已经打卡'+Pcount+'天！继续加油喔~':'欢迎开启新的打卡之旅~'}}
     </view>
     <view class="punchContent">
       <textarea name="content" id="" cols="30" rows="10" placeholder="请输入正文" auto-focus bindinput="_contentInput"
@@ -25,7 +25,7 @@
       </view>
     </view>
     <view class="punchButton">
-      <button form-type="submit" class="Bgcolor4">发表</button>
+      <button form-type="submit" class="Bgcolor4">添加</button>
     </view>
   </form>
 </view>

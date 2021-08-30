@@ -148,7 +148,7 @@ Page({
     })
   },
   //处理删除打卡条
-  _deletePunch: function () {
+  _handerDelete: function () {
     wx.showModal({
       cancelColor: 'cancelColor',
       content: "好不容易打个卡要删掉？？！",
@@ -182,7 +182,7 @@ Page({
             title: '删除成功！',
           }).then((res) => {
             wx.switchTab({
-              url: '../homePage/homePage',
+              url: '../punchCard/punchCard',
             })
           })
         }

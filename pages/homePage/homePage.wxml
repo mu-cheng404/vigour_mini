@@ -1,27 +1,18 @@
 <view class="page box-sizing">
   <view class="themes">
-  <block wx:for="{{label}}" wx:key="key" wx:for-index="idx">
-    <view class="theme">
-      <view class="part" id="{{item.main[1]}}">
-        <wux-popover placement="{{item.placement}}" title="{{item.main[0]}}" content="" mask>
-          <view class="popover">
-            <image src="{{item.iconSrc}}"></image>
-            <view class="theme_text">{{item.main[0]}}</view>
+    <block wx:for="{{label}}" wx:key="key" wx:for-index="idx">
+      <view class="theme" id = "{{idx}}" bindtap="_handelNavi">
+        
+          <view class="part" id="{{item.mainE}}">
+            <view class="popover">
+              <image src="{{item.iconSrc}}"></image>
+              <view class="theme_text">{{item.main}}</view>
+            </view>
           </view>
-          <view slot="content">
-            <scroll-view scroll-y class="label">
-              <view>
-              <block wx:for="{{item.second}}" wx:for-item="Sitem" wx:for-index="Sidx"wx:key = "key">
-                <view class="lableList" bindtap="_handleDetail" id = "{{idx}}{{Sidx}}"><view class="text">{{Sitem}}</view></view>
-              </block>
-              </view>
-            </scroll-view>
-          </view>
-        </wux-popover>
+        
       </view>
-    </view>
-  </block>
-    
+    </block>
+
   </view>
   <!-- <swiper class="swip" indicator-color="black" autoplay="true" interval="2000" circular="true">
     <swiper-item>
