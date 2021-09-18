@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "好友推荐"
+  "navigationBarTitleText": "相似兴趣",
+  "disableScroll": true
 }

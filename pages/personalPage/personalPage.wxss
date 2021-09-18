@@ -1,71 +1,174 @@
-.page {
+.page{
   width: 750rpx;
   height: 100vh;
-  /* position: relative; */
-  border: 1rpx solid rgb(247, 247, 247);
+  background-color: white;
+}
+.top {
+  width: 707rpx;
+  height: 80rpx;
+  background-color: white;
+  display: flex;
+  margin: 20rpx 20rpx 40rpx 20rpx;
+  border: 1rpx solid white;
+  box-shadow: 0 0 10rpx 1rpx #bebcbc;
+  border-radius: 20rpx;
+}
+.topText1,
+.topText2{
+  width:353rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 18px;
+  font-weight: bold;
+}
+.topText1{
+  border-right: 1rpx solid #dbdbdb;
+}
+.after{
+  border-bottom:2rpx solid #437C87;
+}
+.punchBoxDisplay {
+  width: 710rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  margin: 20rpx;
+  display: flex;
+  box-shadow: 0px 0px 5px 2px #C6DBE0;
 }
 
 .avator {
+  width: 130rpx;
+  height: 100%;
+}
+
+.avator image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin: 10rpx 25rpx 25rpx 25rpx;
+}
+
+.rightOption {
+  width: 580rpx;
+  height: 100%;
+}
+
+.upper {
+  position: relative;
+  width: 565rpx;
+  height: 42rpx;
+  display: flex;
+}
+
+.nickName {
+
+  font-size: 14px;
+  line-height: 42rpx;
+  margin: 10rpx 10rpx 0 0;
+
+}
+
+
+
+.icon_like {
+  position: absolute;
+  right: 0rpx;
+  top: 10rpx;
+}
+
+.time {
+  margin: 15rpx 0 0 5rpx;
+  width: 565rpx;
+  height: 40rpx;
+  font-size: 14px;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.comment {
+  width: 565rpx;
+  height: 40rpx;
+  margin-left: -2rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  font-size: 14px;
+}
+
+.content {
+  width: 565rpx;
+  font-size: 14px;
+  padding: 10rpx 10rpx 10rpx 0;
+  text-align: left;
+  line-height: 21px;
+  font-weight: 500;
+}
+
+.accessImage image {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 20rpx 10rpx 10rpx 0rpx;
+  border-radius: 10rpx;
+}
+
+.accessImageNone {
+  display: none;
+}
+
+.commentItem {
+  margin-bottom: 10rpx;
+  height: 18px;
+  line-height: 18px;
+  width: 95%;
+  /* background-color: rgb(185, 185, 22); */
+  font-size: 12px;
+  display: flex;
+}
+
+.commentNickName {
+  margin-right: 10rpx;
+  /* margin-left: 10rpx; */
+  color: rgb(88, 147, 223);
+}
+
+.commentContent {
+  color: #666666;
+}
+
+
+.van_grid_item {
+  background-color: teal;
+}
+.part1 {
+  width: 100%;
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar_personal {
   width: 150rpx;
   height: 150rpx;
   border-radius: 50%;
   /* background-color: hotpink; */
-  margin-top: 50rpx;
+  margin-top: 30rpx;
 }
 
-.avator image {
+.avatar_personal image {
   width: 150rpx;
   height: 150rpx;
   border-radius: 50%;
 
 }
 
-.nickname image {
-  width: 25rpx;
-  height: 25rpx;
-  border-radius: 50%;
-
-}
-
-.baseStyle {
-  width: 400rpx;
-  height: 80rpx;
-  background-color: rgb(171, 245, 202);
-  border-radius: 50rpx;
-  color: rgb(255, 255, 255);
-  line-height: 80rpx;
+.nickname_personal {
+  width:100%;
+  height: 21px;
   text-align: center;
-  margin: 15rpx;
-  font-size: 35rpx;
-}
-
-.baseStyle text {
-  color: red;
-  font-size: 20rpx;
-}
-
-.part2 {
-  width: 100%;
-  height: 100vh;
-  background-color: white;
-  border-top-left-radius: 25rpx;
-  border-top-right-radius: 25rpx;
-
-}
-
-.drawpanel {
-  position: fixed;
-  left: 20rpx;
-  top: 20rpx;
-}
-
-.demo-container {
-  width: 300rpx;
-  height: 100vh;
-  background-color: white;
-}
-
-.i_cell {
-  margin: 0rpx 20rpx 10rpx 20rpx;
-
+  line-height: 21px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
 }

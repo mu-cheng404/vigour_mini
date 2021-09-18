@@ -1,15 +1,13 @@
 const DB = wx.cloud.database()
 const _att = DB.collection("attendance")
 const _user = DB.collection("user")
-var allUserID = [] //所有用户的ID
 Page({
-
   data: {
     isShow:true,
     current: '所有',
     current_scroll: '所有',
     infoList: [],
-    barList: ["所有", "早起", "学习", "运动", "读书", "早睡", "健康"], //导航栏列表
+    barList: ["所有", "学习", "生活", "运动", "其他"], //导航栏列表
   },
 
   handleChange({
@@ -20,20 +18,18 @@ Page({
     });
   },
 
-  handleChangeScroll: async function ({
-    detail
-  }) {
+  handleChangeScroll: async function ({detail}){
     console.log(detail)
     await this.getPunchNumber(detail.key)
     this.setData({
       current_scroll: detail.key
     });
   },
-  getPunchNumber: async function (topic) {
+  getPunchNumber: async function (main) {
     this.setData({
       isShow:true
     })
-    var tempInfoList = wx.getStorageSync(topic)
+    var tempInfoList = wx.getStorageSync(main)
     if (tempInfoList) {
       console.log("调用了缓存！")
       this.setData({
@@ -43,13 +39,13 @@ Page({
       await wx.cloud.callFunction({
           name: "getPunchNumber",
           data: {
-            topic: topic == "所有" ? undefined : topic
+            main: main == "所有" ? undefined : main
           }
         }).then((res) => {
           this.setData({
             infoList: res.result.Res
           })
-          wx.setStorageSync(topic, res.result.Res)
+          wx.setStorageSync(main, res.result.Res)
         })
         .catch(console.error)
     }
@@ -68,22 +64,4 @@ Page({
       },
     })
   },
-
-  onPullDownRefresh: async function () {
-    
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

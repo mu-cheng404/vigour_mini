@@ -8,6 +8,7 @@ var doc //个人信息ID
 var S_label //二级标签
 var _openid //openid
 Page({
+  //处理删除
   handerDelete: function (evt) {
     var id = evt.currentTarget.id
     S_label.splice(id, 1)
@@ -26,17 +27,20 @@ Page({
         })
       })
   },
+  //处理开始点击
   _handleTouchStart: function (evt) {
     console.log(evt.timeStamp)
     this.setData({
       start_time: evt.timeStamp
     })
   },
+  //处理结束点击
   _handleTouchEnd: function (evt) {
     this.setData({
       end_time: evt.timeStamp
     })
   },
+  //处理点击跳转
   _handleDetail: function (evt) {
     var id = evt.currentTarget.id
     var touchTime = this.data.end_time - this.data.start_time
@@ -46,8 +50,8 @@ Page({
           isDelete: false
         })
       } else {
-        wx.navigateTo({
-          url: '../punchEdit/punchEdit?topic=' + S_label[id],
+        wx.navigateTo({ 
+          url: '../punchEdit/punchEdit?topic=' + S_label[id]+'&mainText='+mainText,
         })
       }
     } else {
@@ -56,6 +60,7 @@ Page({
       })
     }
   },
+  //处理自定义标签
   _handleAdd: function (evt) {
     wx.navigateTo({
       url: '../addLabel/addLabel?doc=' + doc + '&mainText=' + mainText + '&main=' + main,

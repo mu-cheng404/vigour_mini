@@ -1,6 +1,0 @@
-<wux-upload listType="picture-card" defaultFileList="{{ fileList }}" max="4" url="../../image/home-page"
-
-    prefixCls="wux-upload" bind:change="onChange" bind:success="onSuccess" bind:fail="onFail" bind:complete="onComplete"
-    bind:preview="onPreview">
-    <i-icon type="add" size="50" color="#999999"/>
-</wux-upload>

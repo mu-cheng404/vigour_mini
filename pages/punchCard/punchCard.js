@@ -7,6 +7,7 @@ const _user = DB.collection("user")
 const _comment = DB.collection("comment")
 const _sup = DB.collection("supervise")
 var _openid //本用户openid
+var app = getApp()
 Page({
   switchTo: function () {
     this.setData({
@@ -190,6 +191,7 @@ Page({
     isShow: false, //是否展示加载动画
     isSwitch: false, //是否展示监督
     isSup :[],//监督状态
+    hasUserInfo:false,
     is1:false,
     is2:false, 
     is3:false, 
@@ -198,7 +200,7 @@ Page({
     isAll:true
   },
   onLoad: async function (options) {
-
+    
     //显示加载动画
     this.setData({
       isShow: true
@@ -293,6 +295,10 @@ Page({
 
   },
   onShow: function () {
+    //初始化
+    this.setData({
+      hasUserInfo:app.globalData.hasUserInfo
+    })
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
         isShow_playing: true,
@@ -300,6 +306,7 @@ Page({
         isShow_me: false
       })
     }
+    this.onLoad()
   },
   onReady: function () {
     // console.log("onready")

@@ -11,26 +11,7 @@ var content //评论内容
 var att_id = "" //打卡条id
 var cur_openid //现在打卡条所属用户的openid
 var openid //当前用户的openid
-var user //用户信息
 Page({
-  jubao: function () {
-    wx.showModal({
-      content: "ta这么可爱忍心吗？？？",
-      success(res) {
-        if (!res.cancel) {
-          wx.showToast({
-            title: '举报失败！',
-            icon: "error"
-          })
-        } else {
-          wx.showToast({
-            title: '点赞!',
-            icon: "none"
-          })
-        }
-      }
-    })
-  },
   //处理弹出框
   showPopup() {
     this.setData({
@@ -42,7 +23,8 @@ Page({
       show: false
     });
   },
-  handleSupervise: async function () { //监督
+  //处理监督按钮
+  handleSupervise: async function () { 
 
     var is_done = this.data.super_isDone //是否已关注
     if (!is_done) { //若没有关注
@@ -151,7 +133,7 @@ Page({
   _handerDelete: function () {
     wx.showModal({
       cancelColor: 'cancelColor',
-      content: "好不容易打个卡要删掉？？！",
+      content: "你确定要删掉吗",
       success: async (res) => {
         if (!res.cancel) {
           await _att.doc(att_id).remove().then((res) => {
@@ -293,6 +275,7 @@ Page({
           })
           .then((res) => {
             console.log("该打卡条评论数量修改成功！")
+            this.onLoad()
           })
           .catch(console.error)
       })
@@ -316,13 +299,14 @@ Page({
     isLike: false, //打卡信息表是否被点赞
     isLike_comment: [], //评论列表是否被点赞
     commentList: [], //评论列表信息
+    hasComment: "", //是否有评论
     avatarArr: [], //评论头像列表
     nickNameArr: [], //评论昵称列表
     userInfo: "", //当前用户信息
     cur_userInfo: "", //打卡条所属用户信息
-    super_isShow: true, //是否显示关注按钮
+    super_isShow: "", //是否显示关注按钮
     super_isDone: false, //是否已关注
-    isFocus:false,//是否获得焦点
+    isFocus: false, //是否获得焦点
   },
   onLoad: async function (options) {
     wx.cloud.callFunction({ //获取本用户openid
@@ -340,16 +324,13 @@ Page({
         })
       })
 
-    //获得跳转而来的打卡条id
+    //获得跳转而来的打卡条id 
     if (wx.getStorageSync('temp_att_id')) {
       att_id = wx.getStorageSync('temp_att_id')
     } else {
       att_id = options.att_id
       wx.setStorageSync('temp_att_id', options.att_id)
     }
-
-
-
     //获取用户打卡信息
     _att.doc(att_id)
       .get()
@@ -363,6 +344,11 @@ Page({
           this.setData({
             super_isShow: false
           })
+        else {
+          this.setData({
+            super_isShow: true
+          })
+        }
 
         await _sup.where({ //获取关注初态
             _openid: openid,
@@ -403,42 +389,49 @@ Page({
             commented_id: att_id
           }).get()
           .then(async (res) => {
+            if (res.data.length) {
+              this.setData({ //评论基本信息
+                hasComment: true,
+                commentList: res.data.reverse()
+              })
 
-            this.setData({ //评论基本信息
-              commentList: res.data.reverse()
-            })
+              await wx.cloud.callFunction({ //获取所有评论的头像和昵称集合
+                  name: "queryName_avatar",
+                  data: {
+                    dataArr: res.data
+                  }
+                })
+                .then((res) => {
+                  console.log("获取评论的昵称和头像成功！")
+                  this.setData({
+                    avatarArr: res.result.avatarArr,
+                    nickNameArr: res.result.nickNameArr
+                  })
+                })
+                .catch(console.error)
 
-            await wx.cloud.callFunction({ //获取所有评论的头像和昵称集合
-                name: "queryName_avatar",
+              await wx.cloud.callFunction({ //查询页面初始点赞状态：用云函数突破20条限制
+                name: "queryCommentLikeState",
                 data: {
-                  dataArr: res.data
+                  comData: res.data,
+                  cur_openid: openid,
+                  length: res.data.length
+                },
+                success: (res) => {
+                  this.setData({
+                    isLike_comment: res.result
+                  })
+                },
+                fail: (res) => {
+                  console.log("这个云函数调用失败", res)
                 }
               })
-              .then((res) => {
-                console.log("获取评论的昵称和头像成功！")
-                this.setData({
-                  avatarArr: res.result.avatarArr,
-                  nickNameArr: res.result.nickNameArr
-                })
+            } else { //若没有评论
+              this.setData({
+                hasComment: false
               })
-              .catch(console.error)
+            }
 
-            await wx.cloud.callFunction({ //查询页面初始点赞状态：用云函数突破20条限制
-              name: "queryCommentLikeState",
-              data: {
-                comData: res.data,
-                cur_openid: openid,
-                length: res.data.length
-              },
-              success: (res) => {
-                this.setData({
-                  isLike_comment: res.result
-                })
-              },
-              fail: (res) => {
-                console.log("这个云函数调用失败", res)
-              }
-            })
           })
           .catch(console.error)
       })

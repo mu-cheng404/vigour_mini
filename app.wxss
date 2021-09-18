@@ -106,7 +106,7 @@
   width: 200rpx;
   height: 300rpx;
 
-}
+} 
 
 .i_span_image {
   width: 150rpx;

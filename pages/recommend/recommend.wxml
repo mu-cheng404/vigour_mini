@@ -1,26 +1,27 @@
 <view class="page">
-  <van-button size="normal" loading="{{isLoading}}" color="#C6DBE0" loading-text="加载中..." block bindtap="changeGroup">
-    匹配度：{{finalSC}}</van-button>
+  <van-button size="normal" loading="{{isLoading}}" color="#C6DBE0" loading-text="加载中..." block>
+    <view>{{selectedInfo.length?'以下是与您兴趣相似的同学~':'你打卡数据太少，没有相似兴趣的同学哦~为你推荐以下同学'}}
+    </view>
+  </van-button>
   <view class="box">
     <block wx:for="{{selectedInfo}}" wx:for-iten="item" wx:for-index="idx" wx:key="key">
-
       <view class="part">
-        <image class="partImage" src="{{item.avatar}}"></image>
+        <image class="partImage" src="{{item.avatarUrl}}"></image>
         <view class="nickName">
           {{item.nickName}}<icon class="iconfont {{item.gender?'icon-nansheng':'icon-nvsheng'}}"></icon>
         </view>
         <view class="details">
           <view class="singleDetail">
-            <view class="Dtext1 type Bgcolor1"> 学习*{{item.details[0]}}</view>
+            <view class="Dtext1 type Bgcolor1"> 学习*{{item.data[0]}}</view>
           </view>
           <view class="singleDetail">
-            <view class="Dtext2 type Bgcolor1"> 生活*{{item.details[0]}}</view>
+            <view class="Dtext2 type Bgcolor1"> 生活*{{item.data[1]}}</view>
           </view>
           <view class="singleDetail">
-            <view class="Dtext3 type Bgcolor1"> 运动*{{item.details[0]}}</view>
+            <view class="Dtext3 type Bgcolor1"> 运动*{{item.data[2]}}</view>
           </view>
           <view class="singleDetail">
-            <view class="Dtext4 type Bgcolor1"> 其他*{{item.details[0]}}</view>
+            <view class="Dtext4 type Bgcolor1"> 其他*{{item.data[3]}}</view>
           </view>
         </view>
         <view class="button">
@@ -30,15 +31,39 @@
 
       </view>
     </block>
-    <view class="changeButton">
-      <van-button size="normal" color="#437C87" type="info" custom-style="changeButton">换一批</van-button>
+    <view wx:if="{{!selectedInfo.length}}">
+      <block wx:for="{{recommendInfo}}" wx:for-iten="item" wx:for-index="idx" wx:key="key">
+        <view class="part">
+          <image class="partImage" src="{{item.avatarUrl}}"></image>
+          <view class="nickName">
+            {{item.nickName}}<icon class="iconfont {{item.gender?'icon-nansheng':'icon-nvsheng'}}"></icon>
+          </view>
+          <view class="details">
+            <view class="singleDetail">
+              <view class="Dtext1 type Bgcolor1"> 学习*{{item.data[0]}}</view>
+            </view>
+            <view class="singleDetail">
+              <view class="Dtext2 type Bgcolor1"> 生活*{{item.data[1]}}</view>
+            </view>
+            <view class="singleDetail">
+              <view class="Dtext3 type Bgcolor1"> 运动*{{item.data[2]}}</view>
+            </view>
+            <view class="singleDetail">
+              <view class="Dtext4 type Bgcolor1"> 其他*{{item.data[3]}}</view>
+            </view>
+          </view>
+          <view class="button">
+            <van-button id="{{idx}}" size="small" color="{{item.isSupervise?'#999999':'#629FAD'}}" hairline
+              custom-style="button" bindtap="handleSupervise"> {{item.isSupervise?"已监督":"监督ta"}}</van-button>
+          </view>
+        </view>
+      </block>
     </view>
     <i-toast id="toast" />
     <i-spin custom fix wx:if="{{isShow}}">
       <view class="loading">
         <view class="image ">
-          <image class="i_span_image Bgcolor4"
-            src="../../image/logo.jpg">
+          <image class="i_span_image Bgcolor4" src="../../image/logo.jpg">
           </image>
         </view>
         <view class="loadText color4">

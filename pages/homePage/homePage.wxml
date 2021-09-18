@@ -1,38 +1,28 @@
 <view class="page box-sizing">
   <view class="themes">
     <block wx:for="{{label}}" wx:key="key" wx:for-index="idx">
-      <view class="theme" id = "{{idx}}" bindtap="_handelNavi">
-        
+      <view class="theme" id = "{{idx}}" bindtap="{{hasUserInfo?'_handelNavi':''}}">
           <view class="part" id="{{item.mainE}}">
             <view class="popover">
               <image src="{{item.iconSrc}}"></image>
               <view class="theme_text">{{item.main}}</view>
             </view>
           </view>
-        
       </view>
     </block>
-
   </view>
-  <!-- <swiper class="swip" indicator-color="black" autoplay="true" interval="2000" circular="true">
-    <swiper-item>
-      <image bindtap="preivewImage"
-        src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_1.jpg">
-      </image>
-    </swiper-item>
-    <swiper-item>
-      <image bindtap="preivewImage"
-        src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_2.jpg">
-      </image>
-    </swiper-item>
-    <swiper-item>
-      <image bindtap="preivewImage"
-        src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/swipper28_3.jpg">
-      </image>
-    </swiper-item>
-  </swiper> -->
-  <view class="hander_punch Bgcolor4" bindtap="_handlerPunch">
+  <view class="hander_punch Bgcolor4" bindtap="{{hasUserInfo?'_handlerPunch':''}}">
     <i-icon type="add" size="50" />
   </view>
-
 </view>
+<i-spin custom fix wx:if="{{isShow}}">
+  <view class="loading">
+    <view class="image ">
+      <image class="i_span_image Bgcolor4" src="../../image/logo.jpg">
+      </image>
+    </view>
+    <view class="loadText color4">
+      初始化ing
+    </view>
+  </view>
+</i-spin>

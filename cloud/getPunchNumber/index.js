@@ -5,10 +5,10 @@
   const _user = DB.collection("user")
   exports.main = async (event, context) => {
     const $ = DB.command.aggregate
-    var topic = event.topic //查询的类型
+    var main = event.main //查询的类型
     var Res = [] //最后的输出结果
     await _att.aggregate().match({
-        topic: topic
+        main: main
       }).group({
         _id: '$_openid',
         count: {

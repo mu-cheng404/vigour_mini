@@ -104,7 +104,7 @@
 }
 
 .accessImage image {
-  width: 150rpx;
+  width: 150rpx; 
   height: 150rpx;
   margin: 20rpx 10rpx 10rpx 0rpx;
   border-radius: 10rpx;

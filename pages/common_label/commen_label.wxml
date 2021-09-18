@@ -1,0 +1,18 @@
+
+
+<block wx:for="{{S_label}}" wx:key="key">
+  <view id="{{index}}" class="box box-shadow-color1" bindtap="_handleDetail">
+    {{item.label}}x{{item.number}}
+  </view>
+</block>
+<i-spin custom fix wx:if="{{isShow}}">
+  <view class="loading">
+    <view class="image ">
+      <image class="i_span_image Bgcolor4" src="../../image/logo.jpg">
+      </image>
+    </view>
+    <view class="loadText color4">
+      数据加载中...
+    </view>
+  </view>
+</i-spin>

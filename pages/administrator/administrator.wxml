@@ -1,4 +1,0 @@
-<button style="margin: 20rpx" type="primary" bindtap="deleteLike">添加打卡表数据</button>
-<button style="margin: 20rpx" type="primary" bindtap="deleteTest">清除测试数据</button>
-<button style="margin: 20rpx" type="primary" bindtap="deleteAttendance">删除打卡表数据</button>
-<button style="margin: 20rpx" type="primary" bindtap="deleteAll">删除所有表数据！</button>

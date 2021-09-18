@@ -1,0 +1,33 @@
+
+.tips{
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  padding-left: 10rpx;
+  color: white;
+  margin-bottom: 30rpx;
+}
+.box {
+  width: 200rpx;
+  height: 50rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  line-height: 50rpx;
+  font-size: 14px;
+  float: left;
+  margin: 25rpx;
+  font-weight: 600;
+  position: relative;
+}
+
+.delete-icon-position {
+  position: absolute;
+  top: -20rpx;
+  right: -10rpx;
+  z-index: 2;
+}
+.delete{
+  position: absolute;
+  right: 20rpx;
+}

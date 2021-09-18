@@ -1,21 +1,15 @@
 const util = require("../../common/util")
-const {
-  $Toast
-} = require('../../dist/base/index');
-var date = '' //日期和时间
+const {$Toast} = require('../../dist/base/index');
 var topic = '' //主题
-var pictures = [] //图片临时路径
 var picturesURL = [] //图片最终路径
 var video = '' //音频
 var content = '' //内容
 var location = '' //地点
-var praise = 0 //点赞数
-var userInfo //个人信息
 const DB = wx.cloud.database()
 const _att = DB.collection("attendance") //打卡表
-const _user = DB.collection("user") //用户表
 var _openid //
 var Pcount //
+var mainText//打卡主标签
 Page({
   //读取正文内容
   _contentInput: function (evt) {
@@ -89,6 +83,7 @@ Page({
       _att.add({
         data: {
           date: Time,
+          parseDate:timestamp,
           topic: topic,
           pictures: picturesURL,
           video: video,
@@ -96,6 +91,7 @@ Page({
           location: location,
           praise: 0,
           comment: 0,
+          main:mainText
         },
         success(res) {
           console.log("数据库添加成功!", res)
@@ -114,9 +110,6 @@ Page({
       console.log((end - start) + "ms")
     }
   },
-  /**
-   * 页面的初始数据
-   */
   data: {
     pictures: [],
     hint: "",
@@ -132,8 +125,10 @@ Page({
   onLoad: async function (options) {
     picturesURL = []
     console.log("onLoad", picturesURL)
+    mainText = options.mainText
+    console.log("main",mainText)
     //获取时间
-    date = new Date().toLocaleDateString().concat(new Date().toLocaleTimeString());
+    var date = new Date().toLocaleDateString().concat(new Date().toLocaleTimeString());
     //获取主题渲染导航栏
     topic = options.topic
     wx.setNavigationBarTitle({
@@ -156,15 +151,10 @@ Page({
     this.setData({
       Pcount: Pcount
     })
-
-
-
   },
   onShow:function() {
-    console.log("onshow")
   },
   onChange(e) {
-    // console.log('onChange', e)
     const {
       file,
       fileList
@@ -186,23 +176,18 @@ Page({
     })
   },
   onSuccess(e) {
-    // console.log('onSuccess', e)
   },
   onFail(e) {
-    // console.log('onFail', e)
   },
   onComplete(e) {
-    // console.log('onComplete', e)
     wx.hideLoading()
   },
   onProgress(e) {
-    // console.log('onProgress', e)
     this.setData({
       progress: e.detail.file.progress,
     })
   },
   onPreview(e) {
-    // console.log('onPreview', e)
     const {
       file,
       fileList
@@ -228,52 +213,4 @@ Page({
       },
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

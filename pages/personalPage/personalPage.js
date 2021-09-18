@@ -1,100 +1,296 @@
+const util = require("../../common/util")
+var isLogIn
 const DB = wx.cloud.database()
-const _user = DB.collection("user")
-const util = require('../../common/util.js')
+var _ = DB.command
 const _att = DB.collection("attendance")
-var openID //用户openid
+const _user = DB.collection("user")
+const _comment = DB.collection("comment")
+const _sup = DB.collection("supervise")
+var _openid //本用户openid
+var cur_openid //访问的用户的openid
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    userCode: '', //用户唯一标识符
-    userInfo: '', //用户个人信息
-    hasUserInfo: false, //是否登录
-    showLeft1: false,
-    att_list: [],
+  //处理小标签跳转
+  switchTo1: function () {
+    this.setData({
+      is1: false,
+      is2: false,
+      is3: false,
+      is4: false,
+      is5: false
+    })
+    console.log(this.data.isSwitch)
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: async function (options) {
-
-    openID = options._openid //获取openid
-    _user.where({
-        _openid: openID
-      }).get()
-      .then((res) => {
-        console.log("获取用户信息成功！", res)
-        this.setData({
-          userInfo: res.data[0],
-        })
-        //获取该用户所有打卡信息并展示
-        _att.where({
-            _openid: openID
-          })
-          .get()
-          .then((res) => {
-            console.log("获取该用户打卡数据成功！", res.data)
-            this.setData({
-              att_list: res.data.reverse()
-            })
-          })
-          .catch(console.error)
+  switchTo2: function () {
+    this.setData({
+      is1: true,
+      is2: true,
+      is3: false,
+      is4: false,
+      is5: false
+    })
+    console.log(this.data.isSwitch)
+  },
+  switchTo3: function () {
+    this.setData({
+      is1: true,
+      is2: false,
+      is3: true,
+      is4: false,
+      is5: false
+    })
+    console.log(this.data.isSwitch)
+  },
+  switchTo4: function () {
+    this.setData({
+      is1: true,
+      is2: false,
+      is3: false,
+      is4: true,
+      is5: false
+    })
+    console.log(this.data.isSwitch)
+  },
+  switchTo5: function () {
+    this.setData({
+      is1: true,
+      is2: false,
+      is3: false,
+      is4: false,
+      is5: true
+    })
+    console.log(this.data.isSwitch)
+  },
+  handleNav: async function (evt) {
+    var idx = evt.currentTarget.id
+    var att_id = this.data.punchMessageArrays[idx]._id
+    if (!isLogIn) {
+      const v2 = await util.getUserInfo()
+      this.onLoad()
+    } else {
+      // console.log("跳转啦阿拉啦啦啦")
+      wx.navigateTo({
+        url: '../details/details?att_id=' + att_id,
       })
-      .catch(console.error)
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: async function () {
-    //云函数获取openid
-
-
-
-
+    }
 
   },
+  _handlerLike: function (evt) {
+    var cur_id = evt.currentTarget.id
+    var data = this.data.punchMessageArrays[cur_id]
+    if (this.data.isLike_comment[cur_id]) { //处理页面显示
+      this.setData({
+        ["punchMessageArrays[" + cur_id + "]" + ".praise"]: data.praise - 1,
+        ['isLike_comment[' + cur_id + ']']: false
+      })
+      console.log("取消点赞成功！")
+      DB.collection("like") //在like表中删除数据
+        .where({
+          _openid: _openid,
+          liked_id: data._id
+        })
+        .remove({
+          success: (res) => {
+            console.log("删除like表数据成功！")
+          },
+          fail: (res) => {
+            console.log("删除like表数据失败！")
+          }
+        })
+    } else {
+      this.setData({
+        ["punchMessageArrays[" + cur_id + "]" + ".praise"]: data.praise + 1,
+        ['isLike_comment[' + cur_id + ']']: true
+      })
+      console.log("点赞成功！", data.praise)
+      DB.collection("like") //在like表中添加数据
+        .add({
+          data: {
+            liked_id: data._id
+          },
+          success: (res) => {
+            console.log("添加like表数据类型成功！")
+          },
+          fail: (res) => {
+            console.log("添加like表数据类型失败！")
+          }
+        })
+    }
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+    var like = this.data.isLike_comment[cur_id]
+    _att.doc(data._id).update({ //打卡信息表中点赞数修改
+      data: {
+        praise: _.inc(like ? 1 : -1)
+      },
+      success: (res) => {
+        console.log("praise修改成功！", att_id)
+      },
+      fail: (res) => {
+        console.log("praise修改失败！", res)
+      }
+    })
+  },
+  _handlerPunch: async function () {
+    var tempTopic
+    _att.where({
+      _openid: _openid
+    }).get().then((res) => {
+      var templength = res.data.length
+      tempTopic = res.data[templength - 1].topic
+      console.log(tempTopic)
+      if (tempTopic) {
+        wx.showModal({
+          cancelColor: 'cancelColor',
+          content: "要继续上一次：" + tempTopic + "的打卡吗",
+          success(res) {
+            if (!res.cancel) { //确定
+              wx.navigateTo({
+                url: '../punchEdit/punchEdit?type=' + tempTopic
+              })
+            } else { //取消
+              wx.switchTab({
+                url: '../punchCard/punchCard',
+              })
+            }
+          }
+        })
+      } else {
+        wx.switchTab({
+          url: '../punchCard/punchCard',
+        })
+      }
+    })
+  },
+  recommendNav: function () {
+    wx.showModal({
+        cancelColor: 'cancelColor',
+        content: "这个功能可能要加载十几秒哦，确定跳转吗？",
+        cancelText: "算了吧",
+        confirmText: "是的确定"
+      })
+      .then((res) => {
+        if (!res.cancel) {
+          wx.navigateTo({
+            url: '../recommend/recommend',
+          })
+        }
+      }).catch(console.error)
+  },
+  //排序函数
+  sort: function (a, b) {
+    return a.parseDate - b.parseDate
+  },
+  data: {
+    punchMessageArrays: [],
+    datearrays: [], //时间数组
+    nickNameCom: [], //评论的昵称列表
+    commentList: [], //评论列表
+    isLike_comment: [], //打卡条点赞初态
+    isShow: false, //是否展示加载动画
+    isSwitch: false, //是否展示监督
+    userInfo: "", //访问的用户的openid
+    isSup: [], //监督状态
+    is1: false,
+    is2: false,
+    is3: false,
+    is4: false,
+    is5: false,
+    isAll: true
+  },
+  onLoad: async function (options) {
+    //获取访问用户的openid
+    cur_openid = options._openid
+    //获取头像和昵称
+    var userInfo = await _user.where({
+      _openid: cur_openid
+    }).get()
+    userInfo = userInfo.data[0]
+    console.log(userInfo)
+    this.setData({
+      userInfo: userInfo
+    })
+    //显示加载动画
+    this.setData({
+      isShow: true
+    })
+    //计时
+    var start = new Date().getTime();
+
+    //获取openid
+    await wx.cloud.callFunction({
+      name: "getOpenID",
+      success(res) {
+        _openid = res.result.openid
+      }
+    })
+
+    //检查是否已登录
+    isLogIn = util.queryLogIn()
+    console.log(isLogIn)
+
+    //获取总打卡数量
+    var count = _att.where({
+      _openid: cur_openid
+    }).count()
+    count = (await count).total
+
+    //查询所有打卡信息
+    var Data = [] //存储查询结果(顺序)
+    for (var i = 0; i < count; i += 20) {
+      let list = await _att.where({
+        _openid: cur_openid
+      }).skip(i).get()
+      Data = Data.concat(list.data)
+    }
+    Data.sort(this.sort)
+    var VData = [].concat(Data).reverse() //存储查询结果(逆序)
+    console.log("获取所有用户打卡数据成功", Data)
+
+    //修改页面数据
+    this.setData({
+      punchMessageArrays: Data.reverse()
+    })
+
+    //查询页面初始点赞状态：用云函数突破20条限制
+    wx.cloud.callFunction({
+      name: "queryCommentLikeState",
+      data: {
+        comData: VData, //被点赞的对象ID（数组）
+        cur_openid: _openid, //点赞人ID 
+        length: Data.length //数组长度
+      },
+      success: (res) => {
+        console.log("查询点赞初始状态成功")
+        this.setData({
+          isLike_comment: res.result
+        })
+      },
+      fail: (res) => {
+        console.log("这个云函数调用失败", res)
+      }
+    })
+    //结束加载提示
+    this.setData({
+      isShow: false
+    })
+    //查询监督状态 wxml第七行
+    var isSup = []
+    for (var i = 0; i < Data.length; i++) {
+      var Scount = await _sup.where({
+        _openid: _openid,
+        superedID: Data[i]._openid
+      }).count()
+      Scount = Scount.total
+      console.log(Scount)
+      isSup[i] = Scount
+    }
+    //渲染数据
+    this.setData({
+      isSup: isSup
+    })
+    //结束时间
+    var end = new Date().getTime();
+    console.log((end - start) + "ms")
 
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+  
 })

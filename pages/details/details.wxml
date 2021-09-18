@@ -6,7 +6,7 @@
       </navigator>
     </view>
     <view class="nickname">
-      <view class="nickname_upper color2">{{cur_userInfo.nickName}}
+      <view class="nickname_upper color2">{{cur_userInfo.nickName}}{{attendance.location?'*'+attendance.location:''}}
       </view>
       <view class="nickname_lower color1">{{attendance.date}}</view>
     </view>
@@ -44,7 +44,12 @@
       </block> -->
   </view>
   <view class="part4">
-    <view class="title">评论 {{attendance.comment}}</view>
+    <block wx:if="{{hasComment}}">
+      <view class="title">评论 {{attendance.comment}}</view>
+    </block>
+    <block wx:else>
+      <view class="noData">暂无评论</view>
+    </block>
     <block wx:for="{{commentList}}" wx:for-index="idx" wx:for-item="commentItem">
       <view class="comment ">
         <view class="comment_part1">
@@ -73,6 +78,7 @@
         </view>
       </view>
     </block>
+    <view class="margin_bottom"></view>
     <view class="input">
       <image src="{{userInfo.avatarUrl}}"></image>
       <input type="text" bindtap="showPopup" placeholder="发表评论" placeholder-class="placeholder"

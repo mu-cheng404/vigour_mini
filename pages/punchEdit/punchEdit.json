@@ -3,5 +3,6 @@
   },
   "navigationBarTitleText": "",
   "navigationBarBackgroundColor": "#C6DBE0",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": false,
+  "disableScroll": true
 }

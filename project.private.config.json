@@ -33,7 +33,7 @@
         {
           "name": "punchEdit",
           "pathName": "pages/punchEdit/punchEdit",
-          "query": "topic=练字",
+          "query": "topic=练字&mainText=学习",
           "scene": null
         },
         {
@@ -118,6 +118,12 @@
           "name": "二标签选择",
           "pathName": "pages/secondLabel/secondLabel",
           "query": "main=0",
+          "scene": null
+        },
+        {
+          "name": "常用",
+          "pathName": "pages/common_label/commen_label",
+          "query": "",
           "scene": null
         }
       ]

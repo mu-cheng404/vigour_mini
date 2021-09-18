@@ -3,13 +3,25 @@ const _att = DB.collection("attendance")
 const _user = DB.collection("user")
 const _comment = DB.collection("comment")
 const _like = DB.collection("like")
-
+var label = [{
+  main: "学习",
+  second: ["读书", "练字", "考研", "考证", "考级", "背单词"]
+}, {
+  main: "生活",
+  second: ["早睡", "早起", "健身", "护肤", "心情"]
+}, {
+  main: "运动",
+  second: ["跑步", "行走", "骑行", "瑜伽", "冥想", "动作"]
+}, {
+  main: "其他",
+  second: ["写作", "成长", "工作", "手工", "手账"]
+}]
 
 function formatDate(inputTime) {
   var date = new Date(inputTime);
   var y = date.getFullYear();
   var m = date.getMonth() + 1;
-  m = m < 10 ? ('0' + m) : m; 
+  m = m < 10 ? ('0' + m) : m;
   var d = date.getDate();
   d = d < 10 ? ('0' + d) : d;
   var h = date.getHours();
@@ -86,6 +98,7 @@ function getUserInfo() {
             province: data.province,
             city: data.city,
             language: data.language,
+            label :label
           },
           success(res) {
             console.log("成功获取用户信息并存入！", res)

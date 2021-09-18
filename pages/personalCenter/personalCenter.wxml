@@ -1,5 +1,4 @@
 <view class="page Bgcolor1">
-
   <view class="part1">
     <view class="avator">
       <image src="{{userInfo.avatarUrl}}" wx:if="{{hasUserInfo}}"></image>
@@ -14,15 +13,12 @@
     总打卡数 {{Pcount}}
     </view>
       <block wx:for="{{label}}" wx:key = "key"><view class="type Bgcolor4">{{item}}</view></block>
-
-    
     </view>
   </view>
-
   <view class="part2">
     <view class="margin"></view>
     <block wx:for="{{functionList}}" wx:key="key">
-      <view id = "{{index}}"class="function color4" bindtap="handleNavi">{{item}}</view>
+      <view id = "{{index}}"class="function color4" bindtap="{{hasUserInfo?'handleNavi':''}}">{{item}}</view>
     </block>
   </view>
 </view>

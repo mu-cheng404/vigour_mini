@@ -18,6 +18,7 @@ page {
 	--yellow: #fbbd08;
 	--olive: #8dc63f;
 	--green: #39b54a;
+	--green2:#C6DBE0;
 	--cyan: #1cbbb4;
 	--blue: #0081ff;
 	--purple: #6739b6;
@@ -3877,7 +3878,7 @@ scroll-view.cu-steps .cu-item {
 .text-green,
 .line-green,
 .lines-green {
-	color: var(--green);
+	color: var(--green2);
 }
 
 .text-cyan,
