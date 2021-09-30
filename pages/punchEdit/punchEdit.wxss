@@ -55,19 +55,40 @@
 .punchContent {
     width: 710rpx;
     margin: 20rpx;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .punchContent textarea {
     width: 710rpx;
     height: 300rpx;
     background-color: white;
-    border-radius: 10rpx;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
     padding: 20rpx;
     font-size: 14px;
     line-height: 21px;
     position: relative;
 }
-
+.fushu{
+    width: 710rpx;
+    height: 80rpx;
+    border-bottom-left-radius: 10rpx;
+    border-bottom-right-radius: 10rpx;
+    background-color: white;
+    font-size: 14px;
+    padding-left: 20rpx;
+    display: flex;
+    padding-top: 20rpx;
+}
+.fushu input{
+    background-color: rgb(238, 243, 241);
+    flex: 1;
+    margin:0rpx 20rpx 0rpx 20rpx;
+    padding-left: 2rpx;
+    padding-bottom: 2rpx;
+}
 .punchAccessory {
     width: 690rpx;
     height: 180rpx;

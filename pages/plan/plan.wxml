@@ -1,0 +1,10 @@
+<view class="header Bgcolor1 display-center color-white">一键打卡</view>
+
+<block wx:for="{{label_info}}" wx:key="key">
+  <view class="planBox  g-border-shadow">
+    <view class="label  font-14px font-bold">{{item.second}}</view>
+    <view class="plan  font-14px">{{item.plan}}</view>
+    <view class="model display-center" ><button bindtap="setModel" id="{{index}}" type="default" size="mini">模板</button></view>
+    <view class="punch_button display-center"><button type="primary" size="mini">打卡</button></view>
+  </view>
+</block>

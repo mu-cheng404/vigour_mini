@@ -1,0 +1,34 @@
+.header{
+  width: 100%;
+  height: 100rpx;
+}
+.planBox{
+  width: 710rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  display: flex;
+  border-radius: 20rpx;
+}
+.label{
+  width: 100rpx;
+  height: inherit;
+  line-height: 100rpx;
+  text-align: center;
+}
+
+.plan{
+  height: inherit;
+  width: 300rpx;
+  line-height: 100rpx;
+  padding-left: 20rpx;
+}
+.model{
+  width: 150rpx;
+  height: inherit;
+  line-height: 100rpx;
+}
+.punch_button{
+  flex: 1;
+  height: inherit;
+  line-height: inherit;
+}

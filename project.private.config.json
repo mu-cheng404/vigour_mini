@@ -125,6 +125,36 @@
           "pathName": "pages/common_label/commen_label",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "test",
+          "pathName": "pages/test/test",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "日历显示",
+          "pathName": "pages/record/record",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "加载页面",
+          "pathName": "pages/loading/loading",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "计划",
+          "pathName": "pages/plan/plan",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "分享海报",
+          "pathName": "pages/share/share",
+          "query": "",
+          "scene": null
         }
       ]
     }

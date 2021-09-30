@@ -76,6 +76,7 @@ page{
   right: 30rpx;
   top: 20rpx;
 }
+
 .part2 {
   width: 710rpx;
   margin: 0 20rpx 0rpx 20rpx;
@@ -83,7 +84,14 @@ page{
   border: 0 solid white;
   padding-bottom: 20rpx;
 }
-
+.fushu{
+  width: fit-content;
+  color: white;
+  margin-left: 20rpx;
+  padding: 10rpx;
+  border-radius: 40rpx;
+  margin-bottom: 10rpx;
+}
 .content {
   font-size: 14px;
   line-height: 21px;
@@ -96,7 +104,8 @@ page{
 
 .imageList {
   width: 670;
-  margin: 20rpx 30rpx 0 30rpx;
+  padding-top: 20rpx;
+  margin: 0rpx 30rpx 0 30rpx;
 }
 
 .imageList image {
@@ -204,7 +213,7 @@ page{
   width: 710rpx;
   margin: 20rpx 20rpx 40rpx 20rpx;
   border-radius: 50rpx;
-  background-color: rgb(226, 237, 240);
+  color: white;
 }
 
 .comment_part1 {
@@ -242,6 +251,7 @@ page{
   position: absolute;
   right: 15rpx;
   top: 10rpx;
+  color: white;
 }
 .comment_part2 {
   width: 610rpx;

@@ -12,7 +12,7 @@
       <view class="punchNumber">
     总打卡数 {{Pcount}}
     </view>
-      <block wx:for="{{label}}" wx:key = "key"><view class="type Bgcolor4">{{item}}</view></block>
+      <!-- <block wx:for="{{label}}" wx:key = "key"><view class="type Bgcolor4">{{item}}</view></block> -->
     </view>
   </view>
   <view class="part2">

@@ -1,4 +1,11 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "打卡记录"
+  "usingComponents": {
+    "wux-cell-group": "../../miniprogram_npm/wux-weapp/cell-group/index",
+    "wux-cell": "../../miniprogram_npm/wux-weapp/cell/index",
+    "wux-calendar": "../../miniprogram_npm/wux-weapp/calendar/index",
+    "wux-icon": "../../miniprogram_npm/wux-weapp/icon/index",
+    "wux-timeline": "../../miniprogram_npm/wux-weapp/timeline/index",
+    "wux-timeline-item": "../../miniprogram_npm/wux-weapp/timeline-item/index"
+  },
+  "enablePullDownRefresh": false
 }

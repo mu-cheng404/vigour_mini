@@ -11,7 +11,12 @@
     "pages/recommend/recommend",
     "pages/secondLabel/secondLabel",
     "pages/addLabel/addLabel",
-    "pages/common_label/commen_label"
+    "pages/test/test",
+    "pages/record/record",
+    "pages/loading/loading",
+    "pages/plan/plan",
+    "pages/setModel/setModel",
+    "pages/share/share"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

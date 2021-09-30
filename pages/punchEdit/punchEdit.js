@@ -4,16 +4,25 @@ var topic = '' //主题
 var picturesURL = [] //图片最终路径
 var video = '' //音频
 var content = '' //内容
+var fushu_content = ''//附属内容
+var fushu_title=''//附属标题
 var location = '' //地点
 const DB = wx.cloud.database()
 const _att = DB.collection("attendance") //打卡表
+const app = getApp()
 var _openid //
 var Pcount //
 var mainText//打卡主标签
+
+var userInfo //用户信息
 Page({
   //读取正文内容
   _contentInput: function (evt) {
     content = evt.detail.value
+  },
+  //读取附属内容
+  _inputFushu:function(evt) {
+    fushu_content = evt.detail.value
   },
   //选择地点
   _chooseLocation: function () {
@@ -88,10 +97,18 @@ Page({
           pictures: picturesURL,
           video: video,
           content: content,
+          fushu_content:fushu_content,
+          fushu_title:fushu_title,
           location: location,
           praise: 0,
+          like_list:[],
           comment: 0,
-          main:mainText
+          comment_list:[],
+          main:mainText,
+          avatarUrl:userInfo.avatarUrl,
+          nickName:userInfo.nickName,
+          gender:userInfo.gender,
+
         },
         success(res) {
           console.log("数据库添加成功!", res)
@@ -119,6 +136,7 @@ Page({
     location: "",
     imageURL: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/",
     fileList: [],
+    fushu_title: '',//附属内容标题
     Pcount: "", //该主题下的总打卡次数
     isShow: false
   },
@@ -129,17 +147,21 @@ Page({
     console.log("main",mainText)
     //获取时间
     var date = new Date().toLocaleDateString().concat(new Date().toLocaleTimeString());
-    //获取主题渲染导航栏
+    //获取主题渲染导航栏和附属标题
     topic = options.topic
+    fushu_title = options.fushu_title
+    console.log("fushu_title=",fushu_title)
+    this.setData({
+      fushu_title:fushu_title
+    })
     wx.setNavigationBarTitle({
       title: topic,
     })
 
-    //获取openid
-    _openid = await wx.cloud.callFunction({
-      name: "getOpenID"
-    })
-    _openid = _openid.result.openid
+    //全局获取用户信息
+    userInfo = app.globalData.userInfo
+    console.log("userInfo=",userInfo)
+    _openid = userInfo._openid
 
     //获取该主题下的打卡次数
     Pcount = await _att.where({
@@ -153,6 +175,7 @@ Page({
     })
   },
   onShow:function() {
+    this.onLoad()
   },
   onChange(e) {
     const {

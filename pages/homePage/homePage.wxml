@@ -11,18 +11,7 @@
       </view>
     </block>
   </view>
-  <view class="hander_punch Bgcolor4" bindtap="{{hasUserInfo?'_handlerPunch':''}}">
+  <view class="hander_punch Bgcolor4" bindtap="{{hasUserInfo?'navigativeToPlan':''}}">
     <i-icon type="add" size="50" />
   </view>
 </view>
-<i-spin custom fix wx:if="{{isShow}}">
-  <view class="loading">
-    <view class="image ">
-      <image class="i_span_image Bgcolor4" src="../../image/logo.jpg">
-      </image>
-    </view>
-    <view class="loadText color4">
-      初始化ing
-    </view>
-  </view>
-</i-spin>

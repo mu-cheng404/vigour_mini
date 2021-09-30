@@ -12,10 +12,15 @@ Page({
   },
   _handleAdd: function (evt) {
     //标签表中添加二级标签
-    _user.where({
+    _user.where({ 
       _id: doc,
       'label.main': mainText
-    }).update({data:{'label.$.second':_.push(add_label)}})
+    }).update({data:{
+      'label.$.second':_.push(add_label),
+      'label.$.title':_.push('计划'),
+      'label.$.plan':_.push("")
+
+    }})
     .then((res) => {
       console.log("添加成功！", res)
       wx.navigateTo({

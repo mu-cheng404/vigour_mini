@@ -3,6 +3,7 @@ const util = require('../../common/util.js')
 const _att = DB.collection("attendance")
 const _user = DB.collection("user")
 var userInfo //用户信息
+var hasUserInfo//用户是否登录
 var Pcount //打卡总数
 var label = [] //标签
 var app = getApp()
@@ -41,14 +42,18 @@ Page({
     navigateUrl: ["../basicsDisplay/basicsDisplay", "", "../rank/rank", "../recommend/recommend"]
   },
   _getLabel:async function () {
-    app.globalData.userInfo = userInfo
-    app.globalData.hasUserInfo = true
+    
+  },
+  onLoad: async function (options) {
+    //全局变量获取userInfo和登录标识hasUserInfo
+    userInfo = app.globalData.userInfo
+    hasUserInfo = app.globalData.hasUserInfo
     
     this.setData({
       hasUserInfo: true,
       ['navigateUrl[' + 1 + ']']: "../personalPage/personalPage?_openid=" + userInfo._openid
     })
-
+    
     //获取打卡总数
     Pcount = await _att.where({
       _openid: userInfo._openid
@@ -72,14 +77,6 @@ Page({
       Pcount: Pcount,
       userInfo: userInfo
     })
-  },
-  onLoad: async function (options) {
-    //全局变量获取userInfo和登录标识hasUserInfo
-    if (app.globalData.userInfo) {
-      userInfo = JSON.parse(JSON.stringify(app.globalData.userInfo))
-      this._getLabel()
-    }
-
   },
   onShow: async function () {
     this.onLoad()

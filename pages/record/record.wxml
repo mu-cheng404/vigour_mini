@@ -1,0 +1,9 @@
+<wux-calendar id="wux-calendar" />
+<wux-timeline>
+  <block wx:for="{{show_info}}" wx:key="key">
+    <wux-timeline-item>
+      <view>{{item.topic}}</view>
+      <view>{{item.date}}</view>
+    </wux-timeline-item>
+  </block>
+</wux-timeline>

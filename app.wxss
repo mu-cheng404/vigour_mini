@@ -127,46 +127,30 @@
   box-sizing: border-box;
 }
 .box-shadow-color1{box-shadow: 0 0 5rpx 5rpx #C6DBE0;}
-.display-Flex {
-  display: flex;
-}
+
 
 page {
   background-color: #f8f8f9;
 }
-
-.Bgcolor1 {
-  background-color: #C6DBE0;
-}
-
-.Bgcolor2 {
-  background-color: #88B2C0;
-}
-
-.Bgcolor3 {
-  background-color: #629FAD;
-}
-
-.Bgcolor4 {
-  background-color: #437C87;
-}
-
-.color1 {
-  color: #C6DBE0;
-}
-
-.color2 {
-  color: #88B2C0;
-}
-
-.color3 {
-  color: #629FAD;
-}
-
-.color4 {
-  color: #437C87;
-}
-
+/* 颜色 */
+.Bgcolor1 {background-color: #C6DBE0;}
+.Bgcolor2 {background-color: #88B2C0;}
+.Bgcolor3 {background-color: #629FAD;}
+.Bgcolor4 {background-color: #437C87;}
+.color1 {color: #C6DBE0;}
+.color2 { color: #88B2C0;}
+.color3 {color: #629FAD;}
+.color4 {color: #437C87;}
+.color-white{color: white;}
+/* 字体 */
+.font-14px{font-size: 14px;}
+.font-16px{font-size: 16px;}
+.font-18px{font-size: 18px;}
+.font-bold{font-weight: bold;}
+/* 布局 */
+.display-center{display: flex;align-items: center;justify-content: center;}
+/* 边框 */
+.g-border-shadow{box-shadow: 0 0 10rpx 1rpx #bebcbc;}
 .globalAvatarSize {
   width: 120rpx;
   height: 120rpx;
@@ -182,4 +166,17 @@ page {
   box-sizing:border-box;
   padding: 0rpx 10rpx 0rpx 10rpx; 
   margin-right: 5rpx;
+}
+
+@keyframes image_frame{
+  0% {width: 150rpx;height: 150rpx;}
+  50% {width: 120rpx;height: 120rpx;}
+  100% {width: 150rpx;height: 150rpx;}
+}
+
+.using_frames{
+  animation-name: image_frame;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }

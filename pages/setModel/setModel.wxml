@@ -1,0 +1,43 @@
+<view class="page box-sizing Bgcolor1">
+  <form action="" bindsubmit="_handlerform">
+    <view class="punchContent">
+      <textarea name="content" id="" cols="30" rows="10" placeholder="请输入正文" auto-focus bindinput="_contentInput"
+        show-confirm-bar="false" placeholder-style="textarea">
+        <view class="selectPicture">
+        <wux-upload listType="picture-card" defaultFileList="{{ fileList }}" max="4" url="../../image/home-page"
+          prefixCls="wux-upload" bind:change="onChange" bind:success="onSuccess" bind:fail="onFail"
+          bind:complete="onComplete" bind:preview="onPreview">
+          <i-icon type="picture" size="50" color="#999999" />
+        </wux-upload>
+      </view>
+ </textarea>
+ <view class="fushu">{{fushu_title}}:<input bindinput="_inputFushu" type="text"/></view>
+    </view>
+    <view class="punchLocation Bgcolor1" bindtap="_chooseLocation">
+      <view class="Location_image">
+        <image src="{{imageURL}}location.png" mode="aspectFit"></image>
+      </view>
+      {{location?location:"地点（选填）"}}
+      <view class="enter">
+        <i-icon type="enter" />
+      </view>
+    </view>
+    <view class="punchButton">
+      <button form-type="submit" class="Bgcolor4">添加</button>
+    </view>
+  </form>
+</view>
+
+<i-toast id="toast" />
+<i-spin custom fix wx:if="{{isShow}}">
+  <view class="loading">
+    <view class="image ">
+      <image class="i_span_image Bgcolor4"
+        src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png">
+      </image>
+    </view>
+    <view class="loadText color4">
+      数据上传中...
+    </view>
+  </view>
+</i-spin>

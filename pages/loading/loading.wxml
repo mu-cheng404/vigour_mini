@@ -1,0 +1,3 @@
+<image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png" wx:if="{{isShow}}" class="using_frames">
+</image>
+<button type="primary" wx:else bindtap="_getUserInfo">授权登录</button>

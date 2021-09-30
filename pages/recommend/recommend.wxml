@@ -6,7 +6,10 @@
   <view class="box">
     <block wx:for="{{selectedInfo}}" wx:for-iten="item" wx:for-index="idx" wx:key="key">
       <view class="part">
+        <navigator url="../personalPage/personalPage?_openid={{item._openid}}">
+
         <image class="partImage" src="{{item.avatarUrl}}"></image>
+        </navigator>
         <view class="nickName">
           {{item.nickName}}<icon class="iconfont {{item.gender?'icon-nansheng':'icon-nvsheng'}}"></icon>
         </view>

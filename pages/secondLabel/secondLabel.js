@@ -6,6 +6,7 @@ var mainText //主标签文字
 var add_label //新增标签
 var doc //个人信息ID
 var S_label //二级标签
+var fushu_title = []//附属标题
 var _openid //openid
 Page({
   //处理删除
@@ -51,7 +52,7 @@ Page({
         })
       } else {
         wx.navigateTo({ 
-          url: '../punchEdit/punchEdit?topic=' + S_label[id]+'&mainText='+mainText,
+          url: '../punchEdit/punchEdit?topic=' + S_label[id]+'&mainText='+mainText+'&fushu_title='+fushu_title[id],
         })
       }
     } else {
@@ -74,7 +75,7 @@ Page({
     end_time: 0, //触摸结束时间
   },
   onLoad: async function (options) {
-
+    
     console.log("secondLabel的onLoad")
     //获取传递来的主标签
     main = options.main
@@ -90,6 +91,8 @@ Page({
     }).get()
     console.log(Data)
     S_label = Data.data[0].label[main].second
+    fushu_title = Data.data[0].label[main].title
+    console.log("fushu =",fushu_title)
     doc = Data.data[0]._id
     //设置导航栏文字
     mainText = Data.data[0].label[main].main

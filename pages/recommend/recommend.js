@@ -235,6 +235,8 @@ Page({
     N = Data.length
     //调用k_means算法
     this.k_means()
+    console.log("这是最后的："+ JSON.stringify(finalClusters))
+    
     //寻找本用户匹配聚簇索引
     var idx 
     for (var i = 0; i < kmin; i++) {
@@ -247,9 +249,10 @@ Page({
       }
     }
     //渲染数据
+    console.log("idx="+idx)
     this.setData({
-      selectedInfo: finalClusters[idx],
-      recommendInfo: finalClusters[2]
+      selectedInfo: finalClusters[1],
+      recommendInfo: finalClusters[1]
     })
     this.setData({ //显示加载动画
       isShow: false

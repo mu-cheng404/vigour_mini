@@ -8,8 +8,8 @@
     </view>
   </view>
   <scroll-view scroll-x class="bg-white nav">
-  <view class="flex text-center">
-    <view class="cu-item flex-sub {{!is1?'text-green cur':''}}" bindtap="switchTo1">
+  <view class="flex text-center" bindtap="reloading">
+    <view class="cu-item flex-sub {{is1?'text-green cur':''}}" bindtap="switchTo1">
     全部
     </view>
     <view class="cu-item flex-sub {{is2?'text-green cur':''}}" bindtap="switchTo2">
@@ -27,17 +27,17 @@
   </view>
 </scroll-view>
   <block wx:for="{{punchMessageArrays}}" wx:for-index="idx" wx:for-item="punchItem" wx:key="id">
-    <view id="{{idx}}" class="punchBoxDisplay" bindtap="{{hasUserInfo?'handleNav':''}}" wx:if="{{(!isSwitch&&!is1)||(!isSwitch&&is2&&(punchItem.topic=='专修'||punchItem.topic=='读书'||punchItem.topic=='练字'||punchItem.topic=='考研'||punchItem.topic=='考证'||punchItem.topic=='考级'))||(!isSwitch&&is3&&(punchItem.topic=='早睡'||punchItem.topic=='早起'||punchItem.topic=='健身'||punchItem.topic=='考研'||punchItem.topic=='护肤'||punchItem.topic=='心情'||punchItem.topic=='喝水'))||(!isSwitch&&is4&&(punchItem.topic=='跑步'||punchItem.topic=='行走'||punchItem.topic=='骑行'||punchItem.topic=='瑜伽'||punchItem.topic=='冥想'||punchItem.topic=='动作'))||(!isSwitch&&is5&&(punchItem.topic=='写作'||punchItem.topic=='成长'||punchItem.topic=='工作'))||(isSup[idx]&&!is1)||(isSup[idx]&&is2&&(punchItem.topic=='专修'||punchItem.topic=='读书'||punchItem.topic=='练字'||punchItem.topic=='考研'||punchItem.topic=='考证'||punchItem.topic=='考级'))||(isSup[idx]&&is3&&(punchItem.topic=='早睡'||punchItem.topic=='早起'||punchItem.topic=='健身'||punchItem.topic=='考研'||punchItem.topic=='护肤'||punchItem.topic=='心情'||punchItem.topic=='喝水'))||(isSup[idx]&&is4&&(punchItem.topic=='跑步'||punchItem.topic=='行走'||punchItem.topic=='骑行'||punchItem.topic=='瑜伽'||punchItem.topic=='冥想'||punchItem.topic=='动作'))||(isSup[idx]&&is5&&(punchItem.topic=='写作'||punchItem.topic=='成长'||punchItem.topic=='工作'))}}">
+    <view id="{{idx}}" class="punchBoxDisplay" bindtap="handleNav" wx:if="{{(is1&& !isSwitch)||(punchItem.main == '学习'&& is2&& !isSwitch)||(punchItem.main == '生活'&& is3&& !isSwitch)||(punchItem.main == '运动'&& is4&& !isSwitch)||(punchItem.main == '其他'&& is5&& !isSwitch)||(is1 && isSwitch && punchItem.isSup)||(punchItem.main == '学习'&& is2 && isSwitch && punchItem.isSup)||(punchItem.main == '生活'&& is3&& isSwitch && punchItem.isSup)||(punchItem.main == '运动'&& is4&& isSwitch && punchItem.isSup)||(punchItem.main == '其他'&& is5&& isSwitch && punchItem.isSup)}}">
       <view class="avator">
-        <image src="{{avatarArr[idx]}}"></image>
+        <image src="{{punchItem.avatarUrl}}"></image>
       </view>
       <view class="rightOption">
         <view class="upper">
 
-          <view class="nickName color4">{{nickNameArr[idx]}}</view>
+          <view class="nickName color4">{{punchItem.nickName}}{{punchItem.fushu_content?'·':''}}{{punchItem.fushu_content}}</view>
           <view class="type Bgcolor1 ">{{punchItem.topic}}</view>
           <view class="icon_like like_icon color4" id="{{idx}}" catchtap="_handlerLike">
-            <i-icon size="25" type="{{isLike_comment[idx]? 'like_fill':'like'}}"></i-icon>
+            <i-icon size="25" type="{{punchItem.islike? 'like_fill':'like'}}"></i-icon>
             {{punchItem.praise}}
           </view>
         </view>
@@ -54,22 +54,10 @@
             <view class="commentContent">{{commentList[idx][idx2].content}}</view>
           </view>
         </block>-->
-        <view class="comment color4" catchtap="_handleTap">{{punchItem.comment}} 评论 ></view>
+        <view class="comment color4" catchtap="_handleTap">{{punchItem.comment}} 留言 ></view>
 
       </view>
     </view>
   </block>
-  <i-load-more tip="已经到底了哦~" loading="{{ false }}" />
-  <i-spin custom fix wx:if="{{isShow}}">
-    <view class="loading">
-      <view class="image "> 
-        <image class="i_span_image Bgcolor4"
-          src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1628910751000443.png">
-        </image>
-      </view>
-      <view class="loadText color4">
-      数据加载中...
-      </view>
-    </view>
-  </i-spin>
+  <i-load-more tip="{{isLoadMoreText}}" loading="{{ isLoadMore }}" />
 </view>
