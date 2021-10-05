@@ -1,39 +1,37 @@
 const util = require("../../common/util")
 const {$Toast} = require('../../dist/base/index');
-var topic = '' //主题
+// var topic = '' //主题
 var picturesURL = [] //图片最终路径
-var video = '' //音频
-var content = '' //内容
-var fushu_content = ''//附属内容
-var fushu_title=''//附属标题
-var location = '' //地点
+// var video = '' //音频
+// var content = '' //内容
+// var fushu_content = ''//附属内容
+// var fushu_title=''//附属标题
+// var location = '' //地点
 const DB = wx.cloud.database()
 const _att = DB.collection("attendance") //打卡表
 const _user = DB.collection("user") //打卡表
 const app = getApp()
-var _openid //
-var Pcount //
-var mainText//打卡主标签
-
-var userInfo //用户信息
 
 var data//传递过来的信息
+var model//最后的模型数据
+
+var userInfo//用户信息
 Page({
   //读取正文内容
   _contentInput: function (evt) {
-    content = evt.detail.value
+    model.content = evt.detail.value
   },
   //读取附属内容
   _inputFushu:function(evt) {
-    fushu_content = evt.detail.value
+    model.fushu_content = evt.detail.value
   },
   //选择地点
   _chooseLocation: function () {
     wx.chooseLocation({
       success: res => {
-        location = res.name, //赋值
+        model.location = res.name, //赋值
           this.setData({
-            location: location
+            location: model.location
           })
         console.log("成功获取地点信息!")
       },
@@ -89,37 +87,25 @@ Page({
         }
         //图片上传成功
         await Promise.all(promiseArr)
+        
       }
-      var model = {
-        // date: Time,
-        // parseDate:timestamp,
-        // praise: 0,
-        // like_list:[],
-        // comment: 0,
-        // comment_list:[],
-        // avatarUrl:userInfo.avatarUrl,
-        // nickName:userInfo.nickName,
-        // gender:userInfo.gender,
+      model.picturesURL = picturesURL//图片路径
+      model.praise = 0//点赞个数
+      model.like_list = []//点赞列表
+      model.comment = 0//评论个数
+      model.comment_list = []//评论列表
+      avatarUrl:userInfo.avatarUrl//头像
+      nickName:userInfo.nickName//昵称
+      gender:userInfo.gender//性别
+      //在计划页面只需要再添加时间字段就可以
+      console.log("model终极版本：",model)
 
-        topic: topic,
-        pictures: picturesURL,
-        video: video,
-        content: content,
-        fushu_content:fushu_content,
-        fushu_title:fushu_title,
-        location: location,
-        main:mainText,
-      }
       var temp_label = await _user.doc(userInfo._id).get()
       temp_label = temp_label.data[0].label[data.mainIndex]
       temp_label.model[data.secondIndex] = model
 
       console.log("temp=",temp_label)
-      // await _user.doc(userInfo._id).update({
-      //   data:{
-      //   'label.$.second':_.push(add_label);
-      //   }
-      // })
+      
       this.setData({
         isShow: true
       })
@@ -129,54 +115,40 @@ Page({
     }
   },
   data: {
-    pictures: [],
-    hint: "",
-    topic: "",
-    year: "",
-    month: "",
-    location: "",
-    imageURL: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/",
-    fileList: [],
-    fushu_title: '',//附属内容标题
-    Pcount: "", //该主题下的总打卡次数
+    model:"",//模型数据
     isShow: false
   },
   onLoad: async function (options) {
+    //获取跳转数据
+    data = JSON.parse(options.data)
+    model = data//给模型赋值
+    console.log("model=",model)
     
-    data = options.data
-    console.log("data",data)
-    picturesURL = []
-    console.log("onLoad", picturesURL)
-    mainText = data.main
-    console.log("main",mainText)
-    //获取时间
-    var date = new Date().toLocaleDateString().concat(new Date().toLocaleTimeString());
     //获取主题渲染导航栏和附属标题
-    topic = data.topic
-    fushu_title = data.title
-    console.log("fushu_title=",fushu_title)
     this.setData({
-      fushu_title:fushu_title
+      model:model
     })
     wx.setNavigationBarTitle({
-      title: topic,
+      title: model.topic,
     })
 
     //全局获取用户信息
     userInfo = app.globalData.userInfo
     console.log("userInfo=",userInfo)
-    _openid = userInfo._openid
+    
 
     //获取该主题下的打卡次数
-    Pcount = await _att.where({
-      _openid: _openid,
-      topic: topic
+    var Pcount = await _att.where({
+      _openid: userInfo._openid,
+      topic: model.topic
     }).count()
     Pcount = Pcount.total
     //渲染页面数据
     this.setData({
-      Pcount: Pcount
+      [model.Pcount]: Pcount
     })
+
+
   },
   onShow:function() {
     this.onLoad()

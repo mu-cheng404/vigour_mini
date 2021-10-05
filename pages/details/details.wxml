@@ -11,7 +11,7 @@
       <view class="nickname_lower color1">{{att_info.date}}</view>
     </view>
     <view wx:if="{{super_isShow}}" class="{{att_info.isSup?'put_attention2':'put_attention1'}}" bindtap="handleSupervise">
-      {{att_info.isSup?'已监督':'监督ta'}}</view>
+      {{att_info.isSup?'已监督':'一起学习'}}</view>
     <view wx:else class="delete" bindtap="_handerDelete">
       <i-icon type="delete_fill" class="color4" size="50" />
     </view>

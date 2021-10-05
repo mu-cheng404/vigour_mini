@@ -71,6 +71,12 @@ Page({
     //发模板消息
     await wx.cloud.callFunction({
       name: "sendTemplateMessage_yiqixuexi",
+      data:{
+        data:{
+          
+
+        }
+      }
     }).then(console.log)
   },
   sendMessage_dianzan: function (evt) {

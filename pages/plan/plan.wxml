@@ -1,5 +1,5 @@
 <view class="header Bgcolor1 display-center color-white">一键打卡</view>
-
+<view class="add" bindtap="addPlan">+</view>
 <block wx:for="{{label_info}}" wx:key="key">
   <view class="planBox  g-border-shadow">
     <view class="label  font-14px font-bold">{{item.second}}</view>

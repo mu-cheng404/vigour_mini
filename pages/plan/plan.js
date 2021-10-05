@@ -68,7 +68,7 @@ Page({
     label = userInfo.label
     //获取标签信息
     var index = 0
-    console.log("label=",label[0])
+    console.log("label=",label)
     for(var i = 0; i < label.length;i++){
       for(var j = 0; j < label[i].plan.length;j++){
         //筛选出设置了计划的那部分

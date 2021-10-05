@@ -29,35 +29,57 @@ Page({
   handleSupervise: async function () { 
 
     var is_done = this.data.att_info.isSup //是否已关注
-    if (!is_done) { //若没有关注
-      await _sup.add({
-          data: {
-            superedID: att_info._openid
-          }
+    await wx.requestSubscribeMessage({
+      tmplIds: ['mnsEh9CZLNqarLbeZZJ94RQxXh6rCriQo_gFRuXWmM8'],
+      success(res) {
+        wx.getSetting({
+          withSubscriptions: true,
+        }).then(res => {
+          console.log(res)
         })
-        .then((res) => {
-          console.log("添加关注数据成功！")
-          wx.showToast({
-            title: '已关注小可爱',
-          })
-        })
-        .catch(console.error)
-    } else {
-      await _sup.where({
-          _openid: openid,
-          superedID: att_info._openid
-        }).remove()
-        .then((res) => {
-          console.log("删除关注数据成功！")
-          wx.showToast({
-            title: '已取消关注',
-          })
-        })
-        .catch(console.error)
-    }
-    this.setData({
-      ['att_info'+'.isSup']: !is_done
+      }
     })
+    //发模板消息
+    await wx.cloud.callFunction({
+      name: "sendTemplateMessage_yiqixuexi",
+      data:{
+        info:{
+          nickname:att_info.nickName,
+          openid:att_info._openid,
+          time:util.formatDate(new Date())
+        }
+      }
+    }).then(console.log)
+    // if (!is_done) { //若没有关注
+      
+    //   await _sup.add({
+    //       data: {
+    //         superedID: att_info._openid
+    //       }
+    //     })
+    //     .then((res) => {
+    //       console.log("添加关注数据成功！")
+    //       wx.showToast({
+    //         title: '已关注小可爱',
+    //       })
+    //     })
+    //     .catch(console.error)
+    // } else {
+    //   await _sup.where({
+    //       _openid: openid,
+    //       superedID: att_info._openid
+    //     }).remove()
+    //     .then((res) => {
+    //       console.log("删除关注数据成功！")
+    //       wx.showToast({
+    //         title: '已取消关注',
+    //       })
+    //     })
+    //     .catch(console.error)
+    // }
+    // this.setData({
+    //   ['att_info'+'.isSup']: !is_done
+    // })
   },
   //预览图片
   preivewImage: function (evt) {
