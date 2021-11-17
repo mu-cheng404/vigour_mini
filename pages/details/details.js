@@ -46,7 +46,9 @@ Page({
         info:{
           nickname:att_info.nickName,
           openid:att_info._openid,
-          time:util.formatDate(new Date())
+          name:userInfo.nickName,
+          time:util.formatDate(new Date()),
+          id:userInfo._openid
         }
       }
     }).then(console.log)

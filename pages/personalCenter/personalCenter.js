@@ -39,7 +39,7 @@ Page({
     label: [], //标签
     Pcount: "", //打卡总数
     functionList: ["个人信息", "打卡记录", "排行榜", "兴趣探索"],
-    navigateUrl: ["../basicsDisplay/basicsDisplay", "", "../rank/rank", "../recommend/recommend"]
+    navigateUrl: ["../basicsDisplay/basicsDisplay", "../record/record", "../rank/rank", "../recommend/recommend"]
   },
   _getLabel:async function () {
     
@@ -51,7 +51,7 @@ Page({
     
     this.setData({
       hasUserInfo: true,
-      ['navigateUrl[' + 1 + ']']: "../personalPage/personalPage?_openid=" + userInfo._openid
+      // ['navigateUrl[' + 1 + ']']: "../personalPage/personalPage?_openid=" + userInfo._openid
     })
     
     //获取打卡总数

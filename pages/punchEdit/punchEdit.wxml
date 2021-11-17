@@ -14,7 +14,7 @@
         </wux-upload>
       </view>
  </textarea>
- <view class="fushu">{{fushu_title}}:<input bindinput="_inputFushu" type="text"/></view>
+ <view class="fushu">{{fushu_title}}:<input bindinput="_inputFushu" type="text" value = "{{fushu_content}}"/></view>
     </view>
     <view class="punchLocation Bgcolor1" bindtap="_chooseLocation">
       <view class="Location_image">

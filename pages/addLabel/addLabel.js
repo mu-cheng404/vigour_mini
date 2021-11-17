@@ -18,8 +18,8 @@ Page({
     }).update({data:{
       'label.$.second':_.push(add_label),
       'label.$.title':_.push('计划'),
-      'label.$.plan':_.push("")
-
+      'label.$.plan':_.push(""),
+      'label.$.templateID':_.push("")
     }})
     .then((res) => {
       console.log("添加成功！", res)

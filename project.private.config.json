@@ -155,6 +155,18 @@
           "pathName": "pages/share/share",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "设置模板",
+          "pathName": "pages/setModel/setModel",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "编辑计划",
+          "pathName": "pages/editPlan/editPlan",
+          "query": "",
+          "scene": null
         }
       ]
     }

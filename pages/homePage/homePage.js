@@ -15,7 +15,7 @@ Page({
   //处理快捷打卡按钮
   navigativeToPlan: async function () {
     wx.navigateTo({
-      url: '../plan/plan',
+      url: '../recentlyUse/recentlyUse',
     })
     
   },
@@ -26,9 +26,6 @@ Page({
   },
   onLoad: async function () {
     userInfo = app.globalData.userInfo
-    wx.navigateTo({
-      url: '../loading/loading',
-    })
     this.setData({hasUserInfo:true})
     //获取标签数据
     var label = await wx.cloud.database().collection("label").get()

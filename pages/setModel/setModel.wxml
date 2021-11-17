@@ -2,7 +2,8 @@
   <form action="" bindsubmit="_handlerform">
     <view class="punchContent">
       <textarea name="content" id="" cols="30" rows="10" placeholder="请输入正文" auto-focus bindinput="_contentInput"
-        show-confirm-bar="false" placeholder-style="textarea">
+        show-confirm-bar="false" placeholder-style="textarea" value="{{data.content}}">
+        
         <view class="selectPicture">
         <wux-upload listType="picture-card" defaultFileList="{{ fileList }}" max="4" url="../../image/home-page"
           prefixCls="wux-upload" bind:change="onChange" bind:success="onSuccess" bind:fail="onFail"
@@ -11,13 +12,13 @@
         </wux-upload>
       </view>
  </textarea>
- <view class="fushu">{{model.fushu_title}}:<input bindinput="_inputFushu" type="text"/></view>
+ <view class="fushu">{{data.fushu_title}}:<input bindinput="_inputFushu" type="text" value="{{data.fushu_content}}"/></view>
     </view>
     <view class="punchLocation Bgcolor1" bindtap="_chooseLocation">
       <view class="Location_image">
         <image src="cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/location.png" mode="aspectFit"></image>
       </view>
-      {{model.location?model.location:"地点（选填）"}}
+      {{data.location?data.location:"地点（选填）"}}
       <view class="enter">
         <i-icon type="enter" />
       </view>

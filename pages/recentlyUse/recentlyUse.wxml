@@ -1,0 +1,9 @@
+<view class="header Bgcolor1 display-center color-white" bindtap="getRecentPlan">{{isComplated?'已':'正在'}}导入最近的计划</view>
+<block wx:for="{{label_info}}" wx:key="key">
+  <view class="planBox  g-border-shadow">
+    <view class="label  font-14px font-bold">{{item._id}}</view>
+    <view class="plan  font-14px">{{item.plan}}</view>
+    <view class="punch_button display-center"><button type="primary" id="{{index}}" size="mini"
+        bindtap="punch">打卡</button></view>
+  </view>
+</block>

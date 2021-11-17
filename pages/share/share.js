@@ -2,8 +2,10 @@ var canvas
 var data = {
   time: '2021-09-26 23:58:10',
   topic: '背单词',
-  picture: 'cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1632671447000-871.png'
+  picture: 'cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1632671447000-871.png',
+  fushu_content: '六级'
 }
+var image1
 Page({
   //保存到相册
   canvasToTempFilePath: function () {
@@ -66,25 +68,29 @@ Page({
   },
   //对画布进行操作
   changeCanvas: async function (ctx) {
-
     var width = this.data.canvas_width
     var height = this.data.canvas_height
 
+
     // 图片转为临时路径
-    var promise1 = await new Promise(function (resolve, reject) {
+    var promise = await new Promise(function (resolve, reject) {
       wx.getImageInfo({
         src: data.picture,
         success: (res) => {
           var imageWid = res.width
           var imageHei = res.height
 
-          var image1 = canvas.createImage()
+          image1 = canvas.createImage()
           image1.src = res.path
           console.log("image1=", image1)
           image1.onload = function () {
             var va = width / height
-            var suofang = 0.5
-            ctx.drawImage(image1, width * (1 - suofang) / 2, height * 0.25, width * suofang, imageHei * va * suofang)
+            var suofang = 0.4
+            ctx.save();
+            ctx.translate(-(image1.width * (height / image1.height) - width) / 2, 0);
+            ctx.drawImage(image1, 0, 0, image1.width * (height / image1.height), height)
+            console.log('图片' + image1.height)
+            ctx.restore();
           }
           resolve()
         },
@@ -97,11 +103,11 @@ Page({
       wx.getImageInfo({
         src: 'cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/important/体验版二维码.png',
         success: (res) => {
-          var image1 = canvas.createImage()
+          image1 = canvas.createImage()
           image1.src = res.path
 
           image1.onload = function () {
-            ctx.drawImage(image1, 20, height - 120, 100, 100)
+            ctx.drawImage(image1, width - 70, height - 90, 60, 60)
           }
           resolve()
         },
@@ -110,31 +116,53 @@ Page({
         }
       })
     })
-    await Promise.all([promise1, promise2])
-    //设置时间
-    ctx.fillStyle = "black"
-    ctx.font = "20px Arial"
-    ctx.fillText(data.time, 20, 20)
-    ctx.font = "25px Arial"
-    ctx.fillText('我在' + data.topic + '标签下打卡！', 20, 70)
-    ctx.fillText('扫码加入~', 120, height - 60)
+    var promise3 = await new Promise(function (resolve, reject) {
+      wx.getImageInfo({
+        src: 'cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/important/logo.png',
+        success: (res) => {
+          image1 = canvas.createImage()
+          image1.src = res.path
+          image1.border
+          image1.onload = function () {
+            ctx.drawImage(image1, 10, 7, 40, 40)
+          }
+          resolve()
+        },
+        fail: (res) => {
+          console.log(res)
+        }
+      })
+    })
+    // await Promise.all([promise, promise2])
+    //画文字
+    ctx.fillStyle = "white"
+    ctx.font = "normal bold 15px sans-serif"
+    ctx.fillText('元气打卡', 65, 30)//小程序名
+    
+    ctx.font = "normal bold 15px sans-serif"
+    ctx.fillText(data.time, 10, height - 50)//时间
+    
+    ctx.font = "normal bold 15px sans-serif"
+    ctx.fillText(data.topic + '·' + data.fushu_content, 10, height - 24)//主题+计划
 
+    ctx.font = "normal bold 10px sans-serif"
+    ctx.fillText('扫码加入打卡', width - 70, height - 20)//提示文字
   },
   data: {
     canvas_width: '', //画板宽度
     canvas_height: '', //画板高度
-
+    bg: '/image/logo.jpg'
   },
   onLoad: function (options) {
     data = JSON.parse(options.data)
-    console.log("data=",data)
+    console.log("data=", data)
     //获取系统最大屏幕高宽
     wx.getSystemInfo({
       success: (result) => {
         console.log("system=", result)
         this.setData({
           canvas_width: result.screenWidth * 0.8,
-          canvas_height: result.screenHeight * 0.8,
+          canvas_height: result.screenHeight * 0.5,
         })
       },
     })
@@ -165,52 +193,8 @@ Page({
         // 设置 canvas 坐标原点
         // ctx.translate(width / 2, height * 2 / 3);
         this.changeCanvas(ctx)
-        
+
       })
   },
-  onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

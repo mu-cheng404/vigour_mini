@@ -13,7 +13,6 @@ Page({
     await util.getUserInfo()
     userInfo = await wx.cloud.callFunction({name: "getUserInfo",})
     userInfo = userInfo.result.userInfo
-    
     app.globalData.userInfo = userInfo//赋给全局变量
     app.globalData.hasUserInfo = true,
     this._switchToHomePage()

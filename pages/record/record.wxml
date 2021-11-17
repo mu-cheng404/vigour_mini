@@ -1,5 +1,6 @@
 <wux-calendar id="wux-calendar" />
 <wux-timeline>
+  <view wx:if="{{!show_info.length}}">当天暂无数据</view>
   <block wx:for="{{show_info}}" wx:key="key">
     <wux-timeline-item>
       <view>{{item.topic}}</view>

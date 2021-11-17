@@ -1,3 +1,5 @@
 <button type="default" bindtap="deletetest">删除测试数据</button>
   <button type="default " bindtap="sendMessage_yiqixuexi" >一起学习-发送通知</button>
   <button type="default" bindtap="sendMessage_dianzan">点赞通知</button>
+  <button type="default" bindtap="user">用户表操作</button>
+  <button type="default" bindtap="ceshijuhe">测试聚合</button>

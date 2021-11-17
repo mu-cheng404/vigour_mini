@@ -5,5 +5,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+  position:relative;
+}
+.canvas{
+  background-color: #fafafa;
+  zoom: 50%; 
+  position: absolute;
+  left: -10000px; 
+  top:0;
+  background: #206949;
+  /* z-index: 1; */
+  background-image: url('cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/user/1632671447000-871.png');
+}
+.canvas_bg{
+  position: absolute;
+  top:0;
+  left: -10000px;
+  zoom:50%;
+  z-index: 0;
 }

@@ -7,5 +7,6 @@
     "wux-timeline": "../../miniprogram_npm/wux-weapp/timeline/index",
     "wux-timeline-item": "../../miniprogram_npm/wux-weapp/timeline-item/index"
   },
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "记录"
 }

@@ -14,9 +14,11 @@
     "pages/test/test",
     "pages/record/record",
     "pages/loading/loading",
-    "pages/plan/plan",
+    "pages/recentlyUse/recentlyUse",
     "pages/setModel/setModel",
-    "pages/share/share"
+    "pages/share/share",
+    "pages/editPlan/editPlan",
+    "pages/confirm/confirm"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -59,6 +61,7 @@
     "van-grid-item": "@vant/weapp/grid-item",
     "van-dropdown-menu": "@vant/weapp/dropdown-menu",
     "van-dropdown-item": "@vant/weapp/dropdown-item",
+    "van-picker": "@vant/weapp/picker/index",
     "i-drawer": "dist/drawer/index",
     "i-icon": "dist/icon/index",
     "i-cell-group": "dist/cell-group/index",

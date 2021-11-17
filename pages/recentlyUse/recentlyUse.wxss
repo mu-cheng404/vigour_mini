@@ -20,6 +20,7 @@
   margin: 20rpx;
   display: flex;
   border-radius: 20rpx;
+  position: relative;
 }
 .label{
   width: 100rpx;
@@ -33,6 +34,7 @@
   width: 300rpx;
   line-height: 100rpx;
   padding-left: 20rpx;
+  margin-left: 20px;
 }
 .model{
   width: 150rpx;
@@ -40,7 +42,9 @@
   line-height: 100rpx;
 }
 .punch_button{
-  flex: 1;
+  
+  position: absolute;
+  right: 20px;
   height: inherit;
   line-height: inherit;
 }

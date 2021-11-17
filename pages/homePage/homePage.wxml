@@ -12,6 +12,6 @@
     </block>
   </view>
   <view class="hander_punch Bgcolor4" bindtap="{{hasUserInfo?'navigativeToPlan':''}}">
-    <i-icon type="add" size="50" />
+    常用
   </view>
 </view>

@@ -1,0 +1,8 @@
+<!--多表联动式选择主标签和二级标签-->
+<van-picker columns="{{ columns }}" bind:change="onChange" />
+<button bindtap="setModel" id="{{index}}" type="default" size="mini">模板</button>
+<!--编辑计划-->
+设定计划<input type="text" value = "{{planText}}" placeholder="输入计划" style="border: 1px solid green" bindinput = "input"/>
+<!--设计模板-->
+<!--确认按钮-->
+<button type="default" bindtap="confirm" >确认</button>

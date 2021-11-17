@@ -82,17 +82,9 @@ Page({
   handleNav: async function (evt) {
     var idx = evt.currentTarget.id
     var att_id = this.data.punchMessageArrays[idx]._id
-    
-    if (!hasUserInfo) {
-      const v2 = await util.getUserInfo()
-      this.onLoad()
-    } else {
-      // console.log("跳转啦阿拉啦啦啦")
       wx.navigateTo({
         url: '../details/details?att_info=' + JSON.stringify(this.data.punchMessageArrays[idx]),
       })
-    }
-
   },
   _handlerLike: async function (evt) {
     //获取点击的id
@@ -231,13 +223,14 @@ Page({
     for (var i = 0; i < Data.length; i++) {
       //点赞
       console.log("Data[i].like_list=",Data[i].like_list)
+      console.log(Data[i]._id,Data[i].content)
       var temp_like = Data[i].like_list.indexOf(_openid)>-1?1:0
       console.log("temp=",temp_like)
       Data[i].islike = temp_like
       //监督
       Data[i].isSup = this.query_sup(Data[i]._openid)
     
-      console.log("监督duduudududdududududdududddddd=",Data[i].isSup = this.query_sup(Data[i]._openid))
+      console.log("监督=",Data[i].isSup = this.query_sup(Data[i]._openid))
       
     }
     this.setData({//渲染页面
@@ -251,7 +244,7 @@ Page({
     //结束时间
     var end = new Date().getTime();
     console.log((end - start) + "ms")
-
+    
     
   },
   onShow: function () {

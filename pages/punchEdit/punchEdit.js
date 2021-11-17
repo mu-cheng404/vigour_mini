@@ -136,6 +136,7 @@ Page({
     location: "",
     imageURL: "cloud://wu-env-5gq7w4mm483966ef.7775-wu-env-5gq7w4mm483966ef-1306826028/images/",
     fileList: [],
+    fushu_content:'',
     fushu_title: '',//附属内容标题
     Pcount: "", //该主题下的总打卡次数
     isShow: false
@@ -152,7 +153,8 @@ Page({
     fushu_title = options.fushu_title
     console.log("fushu_title=",fushu_title)
     this.setData({
-      fushu_title:fushu_title
+      fushu_title:fushu_title,
+      fushu_content:options.plan
     })
     wx.setNavigationBarTitle({
       title: topic,
